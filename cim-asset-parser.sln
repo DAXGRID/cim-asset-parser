@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{413D09A5-64D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIM.Asset.Parser", "src\CIM.Asset.Parser\CIM.Asset.Parser.csproj", "{1750C6BB-0E75-4E85-95A2-0F8A94CD87B4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{7DF08D70-F0F2-4064-921B-9B87A9B8FD99}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CIM.Asset.Parser.Tests", "test\CIM.Asset.Parser.Tests\CIM.Asset.Parser.Tests.csproj", "{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,21 @@ Global
 		{1750C6BB-0E75-4E85-95A2-0F8A94CD87B4}.Release|x64.Build.0 = Release|Any CPU
 		{1750C6BB-0E75-4E85-95A2-0F8A94CD87B4}.Release|x86.ActiveCfg = Release|Any CPU
 		{1750C6BB-0E75-4E85-95A2-0F8A94CD87B4}.Release|x86.Build.0 = Release|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Debug|x64.Build.0 = Debug|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Debug|x86.Build.0 = Debug|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Release|x64.ActiveCfg = Release|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Release|x64.Build.0 = Release|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Release|x86.ActiveCfg = Release|Any CPU
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{1750C6BB-0E75-4E85-95A2-0F8A94CD87B4} = {413D09A5-64DF-4B3D-A426-990A83573C2C}
+		{E83D31D0-AFAE-437B-A06B-8FC7787DFB49} = {7DF08D70-F0F2-4064-921B-9B87A9B8FD99}
 	EndGlobalSection
 EndGlobal
