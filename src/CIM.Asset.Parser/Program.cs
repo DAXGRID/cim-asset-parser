@@ -6,6 +6,7 @@ namespace CIM.Asset.Parser
     {
         static void Main(string[] args)
         {
+
         }
     }
 }
