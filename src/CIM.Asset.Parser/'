@@ -12,15 +12,13 @@ namespace CIM.Asset.Parser
         public static void Main(string[] args)
         {
             RegisterCodePages();
-
-            var xmlReader = CreateXmlReader("../cim-model/com.xml");
-            LoadClasses(xmlReader);
+            LoadDocument();
         }
 
         private static XmlTextReader CreateXmlReader(string path)
         {
             var reader = new StreamReader("../cim-model/cim.xml", System.Text.Encoding.GetEncoding("windows-1252"), true);
-            return new XmlTextReader(reader);
+            var xmlReader = new XmlTextReader(reader);
         }
 
         private static void RegisterCodePages()
@@ -29,7 +27,7 @@ namespace CIM.Asset.Parser
             Encoding.GetEncoding("windows-1252");
         }
 
-        private static void LoadClasses(XmlTextReader xmlReader)
+        private static void LoadDocument(XmlTextReader xmlReader)
         {
             var xElement = XElement.Load(xmlReader);
 
@@ -42,6 +40,14 @@ namespace CIM.Asset.Parser
             foreach (var cimEntity in cimEntities)
             {
                 Console.WriteLine(cimEntity.XmiId + " " + cimEntity.Name);
+            }
+
+            var i = 0;
+            foreach (var node in classes)
+            {
+                i++;
+                // Console.WriteLine(node.Attribute("name") + " " + i);
+ //               Console.WriteLine(node.Attribute("value") + " " + i);
             }
         }
     }
