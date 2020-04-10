@@ -19,7 +19,7 @@ namespace CIM.Asset.Parser
 
         private static XmlTextReader CreateXmlReader(string path)
         {
-            var reader = new StreamReader("../cim-model/cim.xml", System.Text.Encoding.GetEncoding("windows-1252"), true);
+            var reader = new StreamReader("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"), true);
             return new XmlTextReader(reader);
         }
 
@@ -37,11 +37,21 @@ namespace CIM.Asset.Parser
                 .Where(x => x.Name.LocalName == "Class");
 
             var cimEntities = classes?
-                .Select(x => new CimEntity { Name = x.Attribute("name")?.ToString(), XmiId = x.Attribute("xmi.id")?.ToString() });
+                .Select(x => new CimEntity
+                    {
+                        Name = x.Attribute("name")?.ToString(),
+                        XmiId = x.Attribute("xmi.id")?.ToString(),
+                        Tags = x.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == "TaggedValue").Select(z => new Tag { Name = z.Attribute("tag")?.ToString() })
+                    });
 
             foreach (var cimEntity in cimEntities)
             {
                 Console.WriteLine(cimEntity.XmiId + " " + cimEntity.Name);
+
+                foreach (var tag in cimEntity.Tags)
+                {
+                    Console.WriteLine("------ " + tag.Name);
+                }
             }
         }
     }
