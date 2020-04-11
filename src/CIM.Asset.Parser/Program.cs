@@ -13,13 +13,13 @@ namespace CIM.Asset.Parser
         {
             RegisterCodePages();
 
-            var xmlReader = CreateXmlReader("../cim-model/com.xml");
+            var xmlReader = CreateXmlReader("../cim-model/cim.xml");
             LoadClasses(xmlReader);
         }
 
         private static XmlTextReader CreateXmlReader(string path)
         {
-            var reader = new StreamReader("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"), true);
+            var reader = new StreamReader(path, Encoding.GetEncoding("windows-1252"), true);
             return new XmlTextReader(reader);
         }
 
@@ -41,13 +41,18 @@ namespace CIM.Asset.Parser
                     {
                         Name = x.Attribute("name").Value?.ToString(),
                         XmiId = x.Attribute("xmi.id").Value?.ToString(),
-                        Attributes = x.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == "Attribute").Select(z => new Attribute { Name = z.Attribute("name").Value?.ToString() }),
+                        Description = x.Descendants().OfType<XElement>()
+                            .Where(x => x.Name.LocalName == "TaggedValue")
+                                .FirstOrDefault(x => x.Attribute("tag")?.Value?.ToString() == "documentation")?.Attribute("value")?.Value?.ToString(),
+                        Attributes = x.Descendants().OfType<XElement>()
+                            .Where(y => y.Name.LocalName == "Attribute").Select(z => new Attribute { Name = z.Attribute("name").Value?.ToString() }),
                         Namespace = x.Attribute("namespace")?.Value?.ToString(),
                     });
 
             foreach (var cimEntity in cimEntities)
             {
                 Console.WriteLine(cimEntity.Namespace + " " + cimEntity.Name);
+                Console.WriteLine("++ " + cimEntity.Description);
 
                 foreach (var tag in cimEntity.Attributes)
                 {
@@ -56,7 +61,6 @@ namespace CIM.Asset.Parser
             }
 
             var transformerNamespace = cimEntities.Where(x => x.Namespace == "EAPK_6C99E9CA_2035_4035_B77F_9217E17D86F4").OrderBy(x => x.Name);
-
             foreach (var transformer in transformerNamespace)
             {
                 Console.WriteLine(transformer.Name);
