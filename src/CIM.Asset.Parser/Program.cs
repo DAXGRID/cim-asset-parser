@@ -36,34 +36,36 @@ namespace CIM.Asset.Parser
             var classes = xElement.Descendants().OfType<XElement>()
                 .Where(x => x.Name.LocalName == "Class");
 
+            var generalizations = xElement.Descendants().OfType<XElement>()
+                            .Where(y => y.Name.LocalName == "Generalization");
+
             var cimEntities = classes?
                 .Select(x => new CimEntity
                     {
                         Name = x.Attribute("name").Value?.ToString(),
                         XmiId = x.Attribute("xmi.id").Value?.ToString(),
                         Description = x.Descendants().OfType<XElement>()
-                            .Where(x => x.Name.LocalName == "TaggedValue")
-                                .FirstOrDefault(x => x.Attribute("tag")?.Value?.ToString() == "documentation")?.Attribute("value")?.Value?.ToString(),
+                            .Where(y => y.Name.LocalName == "TaggedValue")
+                            .FirstOrDefault(y => y.Attribute("tag")?.Value?.ToString() == "documentation")?.Attribute("value")?.Value?.ToString(),
                         Attributes = x.Descendants().OfType<XElement>()
-                            .Where(y => y.Name.LocalName == "Attribute").Select(z => new Attribute { Name = z.Attribute("name").Value?.ToString() }),
+                            .Where(y => y.Name.LocalName == "Attribute")
+                        .Select(z => new Attribute { Name = z.Attribute("name").Value?.ToString(), Description = z.Descendants().OfType<XElement>().Where(t => t.Name.LocalName == "TaggedValue")?.FirstOrDefault(n => n.Attribute("tag")?.Value?.ToString() == "description")?.Attribute("value").Value?.ToString() }),
                         Namespace = x.Attribute("namespace")?.Value?.ToString(),
+                        SuperType = generalizations.FirstOrDefault(y => y.Attribute("subtype")?.Value == x.Attribute("xmi.id").Value?.ToString())?.Attribute("supertype")?.Value.ToString()
                     });
+
 
             foreach (var cimEntity in cimEntities)
             {
                 Console.WriteLine(cimEntity.Namespace + " " + cimEntity.Name);
                 Console.WriteLine("++ " + cimEntity.Description);
+                Console.WriteLine("// Supertype: " + cimEntity.SuperType);
 
                 foreach (var tag in cimEntity.Attributes)
                 {
                     Console.WriteLine("------ " + tag.Name);
+                    Console.WriteLine("------Descrption------ " + tag.Description);
                 }
-            }
-
-            var transformerNamespace = cimEntities.Where(x => x.Namespace == "EAPK_6C99E9CA_2035_4035_B77F_9217E17D86F4").OrderBy(x => x.Name);
-            foreach (var transformer in transformerNamespace)
-            {
-                Console.WriteLine(transformer.Name);
             }
         }
     }
