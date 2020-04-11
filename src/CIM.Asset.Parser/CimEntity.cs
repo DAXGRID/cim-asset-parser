@@ -6,6 +6,6 @@ namespace CIM.Asset.Parser
     {
         public string Name { get; set; }
         public string XmiId { get; set; }
-        public IEnumerable<Tag> Tags { get; set; }
+        public IEnumerable<Attribute> Attributes { get; set; }
     }
 }

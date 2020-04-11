@@ -39,16 +39,16 @@ namespace CIM.Asset.Parser
             var cimEntities = classes?
                 .Select(x => new CimEntity
                     {
-                        Name = x.Attribute("name")?.ToString(),
-                        XmiId = x.Attribute("xmi.id")?.ToString(),
-                        Tags = x.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == "TaggedValue").Select(z => new Tag { Name = z.Attribute("tag")?.ToString() })
+                        Name = x.Attribute("name").Value?.ToString(),
+                        XmiId = x.Attribute("xmi.id").Value?.ToString(),
+                        Attributes = x.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == "Attribute").Select(z => new Attribute { Name = z.Attribute("name").Value?.ToString() })
                     });
 
             foreach (var cimEntity in cimEntities)
             {
                 Console.WriteLine(cimEntity.XmiId + " " + cimEntity.Name);
 
-                foreach (var tag in cimEntity.Tags)
+                foreach (var tag in cimEntity.Attributes)
                 {
                     Console.WriteLine("------ " + tag.Name);
                 }
