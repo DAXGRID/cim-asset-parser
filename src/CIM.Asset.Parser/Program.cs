@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Xml.Linq;
 using System.Text;
+using CIM.Asset.Parser.Internal;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace CIM.Asset.Parser
 {
@@ -11,10 +13,14 @@ namespace CIM.Asset.Parser
     {
         public static void Main(string[] args)
         {
-            RegisterCodePages();
+            var serviceProvider = Config.Configure();
+            var startup = serviceProvider.GetService<Startup>();
+            startup.Start();
 
-            var xmlReader = CreateXmlReader("../cim-model/cim.xml");
-            LoadClasses(xmlReader);
+            // RegisterCodePages();
+
+            // var xmlReader = CreateXmlReader("../cim-model/cim.xml");
+            // LoadClasses(xmlReader);
         }
 
         private static XmlTextReader CreateXmlReader(string path)
