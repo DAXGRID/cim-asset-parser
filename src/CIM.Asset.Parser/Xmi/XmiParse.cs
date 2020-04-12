@@ -1,6 +1,7 @@
 using System.Xml.Linq;
 using System.Linq;
 using System.Text;
+using System.Collections.Generic;
 
 namespace CIM.Asset.Parser.Xmi
 {
@@ -15,13 +16,9 @@ namespace CIM.Asset.Parser.Xmi
 
         public void Parse(string xmlFilePath, Encoding encoding)
         {
-            var xElement = XElement.Load(_xmlTextReaderFactory.Create(xmlFilePath, encoding));
-
-            var classes = xElement.Descendants().OfType<XElement>()
-                .Where(x => x.Name.LocalName == "Class");
-
-            var generalizations = xElement.Descendants().OfType<XElement>()
-                .Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Generalization);
+            var xElement = LoadXElement(xmlFilePath, encoding);
+            var classes = GetXElementClasses(xElement);
+            var generalizations = GetGeneralizations(xElement);
 
             var cimEntities = classes?
                 .Select(x => new CimEntity
@@ -38,6 +35,27 @@ namespace CIM.Asset.Parser.Xmi
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
                     SuperType = generalizations.FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Subtype)?.Value == x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString())?.Attribute(EnterpriseArchitectConfig.Supertype)?.Value.ToString()
                 });
+        }
+
+        private XElement LoadXElement(string xmlFilePath, Encoding encoding)
+        {
+            return XElement.Load(_xmlTextReaderFactory.Create(xmlFilePath, encoding));
+        }
+
+        private IEnumerable<XElement> GetXElementClasses(XElement xElement)
+        {
+            return GetOnLocalName(xElement, EnterpriseArchitectConfig.Class);
+        }
+
+        private IEnumerable<XElement> GetGeneralizations(XElement xElement)
+        {
+            return GetOnLocalName(xElement, EnterpriseArchitectConfig.Generalization);
+        }
+
+        private IEnumerable<XElement> GetOnLocalName(XElement xElement, string localName)
+        {
+            return xElement.Descendants().OfType<XElement>()
+                .Where(x => x.Name.LocalName == localName);
         }
     }
 }

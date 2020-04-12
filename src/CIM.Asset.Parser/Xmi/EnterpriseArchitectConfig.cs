@@ -14,5 +14,6 @@ namespace CIM.Asset.Parser.Xmi
         public const string Subtype = "subtype";
         public const string XmiId = "xmi.id";
         public const string Supertype = "supertype";
+        public const string Class = "Class";
     }
 }
