@@ -18,15 +18,8 @@ namespace CIM.Asset.Parser
             startup.Start();
 
             // RegisterCodePages();
-
             // var xmlReader = CreateXmlReader("../cim-model/cim.xml");
             // LoadClasses(xmlReader);
-        }
-
-        private static XmlTextReader CreateXmlReader(string path)
-        {
-            var reader = new StreamReader(path, Encoding.GetEncoding("windows-1252"), true);
-            return new XmlTextReader(reader);
         }
 
         private static void RegisterCodePages()
