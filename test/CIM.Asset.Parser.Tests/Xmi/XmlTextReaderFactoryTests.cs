@@ -1,11 +1,11 @@
 using Xunit;
 using FluentAssertions;
-using CIM.Asset.Parser.XmiParse;
+using CIM.Asset.Parser.Xmi;
 using System.Xml;
 using System.Text;
 using System;
 
-namespace CIM.Asset.Parser.Tests.XmiParse
+namespace CIM.Asset.Parser.Tests.Xmi
 {
     public class XmiTextReaderFactoryTests
     {

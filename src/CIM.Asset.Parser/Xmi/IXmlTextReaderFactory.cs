@@ -1,7 +1,7 @@
 using System.Xml;
 using System.Text;
 
-namespace CIM.Asset.Parser.XmiParse
+namespace CIM.Asset.Parser.Xmi
 {
     public interface IXmlTextReaderFactory
     {

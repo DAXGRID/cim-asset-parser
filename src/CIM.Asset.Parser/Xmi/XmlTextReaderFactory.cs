@@ -3,7 +3,7 @@ using System.IO;
 using System.Text;
 using System;
 
-namespace CIM.Asset.Parser.XmiParse
+namespace CIM.Asset.Parser.Xmi
 {
     public class XmlTextReaderFactory : IXmlTextReaderFactory
     {

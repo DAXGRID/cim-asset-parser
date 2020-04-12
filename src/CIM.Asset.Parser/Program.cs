@@ -16,16 +16,6 @@ namespace CIM.Asset.Parser
             var serviceProvider = Config.Configure();
             var startup = serviceProvider.GetService<Startup>();
             startup.Start();
-
-            // RegisterCodePages();
-            // var xmlReader = CreateXmlReader("../cim-model/cim.xml");
-            // LoadClasses(xmlReader);
-        }
-
-        private static void RegisterCodePages()
-        {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-            Encoding.GetEncoding("windows-1252");
         }
 
         private static void LoadClasses(XmlTextReader xmlReader)
@@ -52,7 +42,6 @@ namespace CIM.Asset.Parser
                         Namespace = x.Attribute("namespace")?.Value?.ToString(),
                         SuperType = generalizations.FirstOrDefault(y => y.Attribute("subtype")?.Value == x.Attribute("xmi.id").Value?.ToString())?.Attribute("supertype")?.Value.ToString()
                     });
-
 
             foreach (var cimEntity in cimEntities)
             {
