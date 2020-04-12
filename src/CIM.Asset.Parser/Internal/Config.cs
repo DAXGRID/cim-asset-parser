@@ -8,7 +8,6 @@ namespace CIM.Asset.Parser.Internal
         public static ServiceProvider Configure()
         {
             var serviceProvider = BuildServiceProvider();
-
             return serviceProvider;
         }
 
