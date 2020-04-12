@@ -38,19 +38,6 @@ namespace CIM.Asset.Parser.Xmi
                     Namespace = x.Attribute("namespace")?.Value?.ToString(),
                     SuperType = generalizations.FirstOrDefault(y => y.Attribute("subtype")?.Value == x.Attribute("xmi.id").Value?.ToString())?.Attribute("supertype")?.Value.ToString()
                 });
-
-            foreach (var cimEntity in cimEntities)
-            {
-                Console.WriteLine(cimEntity.Namespace + " " + cimEntity.Name);
-                Console.WriteLine("++ " + cimEntity.Description);
-                Console.WriteLine("// Supertype: " + cimEntity.SuperType);
-
-                foreach (var tag in cimEntity.Attributes)
-                {
-                    Console.WriteLine("------ " + tag.Name);
-                    Console.WriteLine("------Descrption------ " + tag.Description);
-                }
-            }
         }
     }
 }
