@@ -1,10 +1,4 @@
-﻿using System;
-using System.Xml;
-using System.IO;
-using System.Linq;
-using System.Xml.Linq;
-using System.Text;
-using CIM.Asset.Parser.Internal;
+﻿using CIM.Asset.Parser.Internal;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CIM.Asset.Parser

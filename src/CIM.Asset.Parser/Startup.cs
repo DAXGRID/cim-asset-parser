@@ -5,17 +5,17 @@ namespace CIM.Asset.Parser
 {
     public class Startup
     {
-        private readonly IXmiExtractor _xmiParse;
+        private readonly IXmiExtractor _xmiExtractor;
 
         public Startup(IXmiExtractor xmiParse)
         {
-            _xmiParse = xmiParse;
+            _xmiExtractor = xmiParse;
         }
 
         public void Start()
         {
             RegisterCodePages();
-            _xmiParse.Parse("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"));
+            _xmiExtractor.Parse("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"));
         }
 
         private static void RegisterCodePages()
