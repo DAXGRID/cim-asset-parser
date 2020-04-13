@@ -16,7 +16,7 @@ namespace CIM.Asset.Parser.Internal
             var serviceProvider = new ServiceCollection()
                 .AddSingleton<Startup>()
                 .AddTransient<IXmlTextReaderFactory, XmlTextReaderFactory>()
-                .AddTransient<IXmiParse, XmiParse>()
+                .AddTransient<IXmiExtractor, XmiParse>()
                 .BuildServiceProvider();
 
             return serviceProvider;

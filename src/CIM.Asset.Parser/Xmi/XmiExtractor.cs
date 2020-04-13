@@ -5,11 +5,11 @@ using System.Collections.Generic;
 
 namespace CIM.Asset.Parser.Xmi
 {
-    public class XmiParse : IXmiParse
+    public class XmiExtractor : IXmiExtractor
     {
         private readonly IXmlTextReaderFactory _xmlTextReaderFactory;
 
-        public XmiParse(IXmlTextReaderFactory xmlTextReaderFactory)
+        public XmiExtractor(IXmlTextReaderFactory xmlTextReaderFactory)
         {
             _xmlTextReaderFactory = xmlTextReaderFactory;
         }

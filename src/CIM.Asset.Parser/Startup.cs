@@ -5,9 +5,9 @@ namespace CIM.Asset.Parser
 {
     public class Startup
     {
-        private readonly IXmiParse _xmiParse;
+        private readonly IXmiExtractor _xmiParse;
 
-        public Startup(IXmiParse xmiParse)
+        public Startup(IXmiExtractor xmiParse)
         {
             _xmiParse = xmiParse;
         }
