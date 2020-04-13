@@ -1,3 +1,4 @@
+using System;
 using System.Xml.Linq;
 using System.Linq;
 using System.Text;
@@ -39,6 +40,9 @@ namespace CIM.Asset.Parser.Xmi
 
         public XElement LoadXElement(string xmlFilePath, Encoding encoding)
         {
+            if(string.IsNullOrEmpty(xmlFilePath))
+                throw new ArgumentException($"{nameof(xmlFilePath)} is not allowed to be null or empty");
+
             return XElement.Load(_xmlTextReaderFactory.Create(xmlFilePath, encoding));
         }
 

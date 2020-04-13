@@ -1,3 +1,4 @@
+using System;
 using Xunit;
 using FluentAssertions;
 using CIM.Asset.Parser.Xmi;
@@ -29,6 +30,20 @@ namespace CIM.Asset.Parser.Tests.Xmi
             xElement.Should().NotBeNull();
             xElement.Should().BeOfType<XElement>();
             xElement.Descendants().Count().Should().BeGreaterThan(0);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void LoadXElement_ShouldThrowArgumentException_OnNullOrEmptyXmlPath(string xmlPath)
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+            var encoding = Encoding.GetEncoding("windows-1252");
+
+            var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+
+            xmiExtractor.Invoking(x => x.LoadXElement(xmlPath, encoding)).Should().Throw<ArgumentException>();
         }
     }
 }
