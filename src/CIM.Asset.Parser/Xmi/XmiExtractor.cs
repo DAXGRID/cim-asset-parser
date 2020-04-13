@@ -40,7 +40,7 @@ namespace CIM.Asset.Parser.Xmi
 
         public XElement LoadXElement(string xmlFilePath, Encoding encoding)
         {
-            if(string.IsNullOrEmpty(xmlFilePath))
+            if (string.IsNullOrEmpty(xmlFilePath))
                 throw new ArgumentException($"{nameof(xmlFilePath)} is not allowed to be null or empty");
 
             return XElement.Load(_xmlTextReaderFactory.Create(xmlFilePath, encoding));
@@ -48,6 +48,9 @@ namespace CIM.Asset.Parser.Xmi
 
         public IEnumerable<XElement> GetXElementClasses(XElement xElement)
         {
+            if (xElement is null)
+                throw new ArgumentNullException($"{nameof(xElement)} is not allowed to be null");
+
             return GetOnLocalName(xElement, EnterpriseArchitectConfig.Class);
         }
 
@@ -56,7 +59,7 @@ namespace CIM.Asset.Parser.Xmi
             return GetOnLocalName(xElement, EnterpriseArchitectConfig.Generalization);
         }
 
-        public IEnumerable<XElement> GetOnLocalName(XElement xElement, string localName)
+        private IEnumerable<XElement> GetOnLocalName(XElement xElement, string localName)
         {
             return xElement.Descendants().OfType<XElement>()
                 .Where(x => x.Name.LocalName == localName);
