@@ -13,7 +13,7 @@ namespace CIM.Asset.Parser.Tests.Xmi
         public void Create_ShouldReturnCreatedXmlTextReader_OnBeingCalledWithValidParameters()
         {
             var factory = new XmlTextReaderFactory();
-            var xmlTextReader = factory.Create("TestData/example.xml", Encoding.UTF8);
+            var xmlTextReader = factory.Create("TestData/cim.xml", Encoding.UTF8);
 
             xmlTextReader.Should().NotBeNull();
             xmlTextReader.Should().BeOfType<XmlTextReader>();

@@ -37,22 +37,22 @@ namespace CIM.Asset.Parser.Xmi
                 });
         }
 
-        private XElement LoadXElement(string xmlFilePath, Encoding encoding)
+        public XElement LoadXElement(string xmlFilePath, Encoding encoding)
         {
             return XElement.Load(_xmlTextReaderFactory.Create(xmlFilePath, encoding));
         }
 
-        private IEnumerable<XElement> GetXElementClasses(XElement xElement)
+        public IEnumerable<XElement> GetXElementClasses(XElement xElement)
         {
             return GetOnLocalName(xElement, EnterpriseArchitectConfig.Class);
         }
 
-        private IEnumerable<XElement> GetGeneralizations(XElement xElement)
+        public IEnumerable<XElement> GetGeneralizations(XElement xElement)
         {
             return GetOnLocalName(xElement, EnterpriseArchitectConfig.Generalization);
         }
 
-        private IEnumerable<XElement> GetOnLocalName(XElement xElement, string localName)
+        public IEnumerable<XElement> GetOnLocalName(XElement xElement, string localName)
         {
             return xElement.Descendants().OfType<XElement>()
                 .Where(x => x.Name.LocalName == localName);
