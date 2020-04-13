@@ -56,6 +56,9 @@ namespace CIM.Asset.Parser.Xmi
 
         public IEnumerable<XElement> GetGeneralizations(XElement xElement)
         {
+            if (xElement is null)
+                throw new ArgumentNullException($"{nameof(xElement)} is not allowed to be null");
+
             return GetOnLocalName(xElement, EnterpriseArchitectConfig.Generalization);
         }
 
