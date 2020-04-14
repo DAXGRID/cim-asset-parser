@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace CIM.Asset.Parser
+namespace CIM.Asset.Parser.Cim
 {
     public class CimEntity
     {

@@ -1,4 +1,4 @@
-namespace CIM.Asset.Parser
+namespace CIM.Asset.Parser.Cim
 {
     public class Attribute
     {
