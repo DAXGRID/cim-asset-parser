@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using CIM.Asset.Parser.Xmi;
+using CIM.Asset.Parser.Cim;
 
 namespace CIM.Asset.Parser.Internal
 {
@@ -17,6 +18,7 @@ namespace CIM.Asset.Parser.Internal
                 .AddSingleton<Startup>()
                 .AddTransient<IXmlTextReaderFactory, XmlTextReaderFactory>()
                 .AddTransient<IXmiExtractor, XmiExtractor>()
+                .AddTransient<ICimParser, CimParser>()
                 .BuildServiceProvider();
 
             return serviceProvider;
