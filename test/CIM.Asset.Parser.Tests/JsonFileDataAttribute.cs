@@ -5,54 +5,62 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Xunit.Sdk;
+using System.Linq;
 
 namespace CIM.Asset.Parser.Tests
 {
-
     public class JsonFileDataAttribute : DataAttribute
     {
-        private readonly string _filePath;
-        private readonly string _propertyName;
+        private readonly string[] _filePaths;
 
         /// <summary>
-        /// Load data from a JSON file as the data source for a theory
+        /// Load data from a JSON files as the data source for a theory
         /// </summary>
-        /// <param name="filePath">The absolute or relative path to the JSON file to load</param>
-        public JsonFileDataAttribute(string filePath)
-            : this(filePath, null) { }
-
-        /// <summary>
-        /// Load data from a JSON file as the data source for a theory
-        /// </summary>
-        /// <param name="filePath">The absolute or relative path to the JSON file to load</param>
-        /// <param name="propertyName">The name of the property on the JSON file that contains the data for the test</param>
-        public JsonFileDataAttribute(string filePath, string propertyName)
+        /// <param name="filePaths">The absolute or relative paths to the JSON files to load</param>
+        public JsonFileDataAttribute(params string[] filePaths)
         {
-            _filePath = filePath;
-            _propertyName = propertyName;
+            _filePaths = filePaths;
         }
 
-        /// <inheritDoc />
+        /// <inheritdoc/>
         public override IEnumerable<object[]> GetData(MethodInfo testMethod)
         {
-            if (testMethod == null) { throw new ArgumentNullException(nameof(testMethod)); }
+            if (testMethod == null)
+                throw new ArgumentNullException(nameof(testMethod));
 
-            var path = Path.IsPathRooted(_filePath)
-                ? _filePath
-                : Path.GetRelativePath(Directory.GetCurrentDirectory(), _filePath);
+            var parametersTypes = testMethod.GetParameters().Select(p => p.ParameterType);
+
+            var result = new List<object[]>();
+            _filePaths.ToList().ForEach(p => result.AddRange(GetFileData(p, parametersTypes)));
+
+            return result;
+        }
+
+        private IEnumerable<object[]> GetFileData(string filePath, IEnumerable<Type> parametersTypes)
+        {
+            // Get the absolute path to the JSON file
+            var path = Path.IsPathRooted(filePath)
+            ? filePath
+            : Path.GetRelativePath(Directory.GetCurrentDirectory(), filePath);
 
             if (!File.Exists(path))
                 throw new ArgumentException($"Could not find file at path: {path}");
 
-            var fileData = File.ReadAllText(_filePath);
+            // Load the file
+            var fileData = File.ReadAllText(filePath);
 
-            if (string.IsNullOrEmpty(_propertyName))
-                return JsonConvert.DeserializeObject<List<object[]>>(fileData);
+            var jsonSerializerSettings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
 
-            // Only use the specified property as the data
-            var allData = JObject.Parse(fileData);
-            var data = allData[_propertyName];
-            return data.ToObject<List<object[]>>();
+            var rawData = JsonConvert.DeserializeObject<object[][]>(fileData);
+            var result = rawData.Select(x =>
+            {
+                return x.Select((y, index) =>
+                    {
+                        return ((JObject)y).ToObject(parametersTypes.ElementAt(index), JsonSerializer.Create(jsonSerializerSettings));
+                    }).ToArray();
+            });
+
+            return result;
         }
     }
 }
