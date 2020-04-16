@@ -1,3 +1,4 @@
+using System;
 using CIM.Asset.Parser.Xmi;
 using System.Collections.Generic;
 using System.Xml.Linq;
@@ -17,6 +18,9 @@ namespace CIM.Asset.Parser.Cim
 
         public IEnumerable<CimEntity> Parse(string xmlFilePath, Encoding encoding)
         {
+            if (string.IsNullOrEmpty(xmlFilePath))
+                throw new ArgumentException($"{nameof(xmlFilePath)} null or empty is not valid");
+
             var xElement = _xmiExtractor.LoadXElement(xmlFilePath, encoding);
             var classes = _xmiExtractor.GetXElementClasses(xElement);
             var generalizations = _xmiExtractor.GetGeneralizations(xElement);

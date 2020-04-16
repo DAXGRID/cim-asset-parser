@@ -7,7 +7,7 @@ using CIM.Asset.Parser.Xmi;
 using FakeItEasy;
 using System.IO;
 using System.Xml;
-using System.Collections.Generic;
+using System;
 
 namespace CIM.Asset.Parser.Tests.Cim
 {
@@ -39,6 +39,18 @@ namespace CIM.Asset.Parser.Tests.Cim
 
             actualEntity.Should().NotBeNull();
             actualEntity.Should().BeEquivalentTo(expected);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        public void Parse_ShouldThrowArgumentException_OnBeingPasedNullOrEmptyString(string xmlPath)
+        {
+            var xmiExtractor = A.Fake<IXmiExtractor>();
+
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor);
+
+            cimParser.Invoking(x => x.Parse(xmlPath, Encoding.UTF8)).Should().Throw<ArgumentException>();
         }
     }
 }
