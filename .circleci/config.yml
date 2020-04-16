@@ -33,7 +33,7 @@ jobs:
           command: make test
 
 workflows:
-  build-test-upload_image:
+  build-test:
     jobs:
       - build
       - test:
