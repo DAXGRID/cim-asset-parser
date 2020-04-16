@@ -30,18 +30,49 @@ namespace CIM.Asset.Parser.Cim
                 {
                     Name = x.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
                     XmiId = x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString(),
-                    Description = x.Descendants().OfType<XElement>()
-                    .Where(y => y.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)
-                        .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Documentation)?.Attribute(EnterpriseArchitectConfig.Value)?.Value?.ToString(),
-                    Attributes = x.Descendants().OfType<XElement>()
-                        .Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Attribute)
-                    .Select(z => new Attribute { Name = z.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(), Description = z.Descendants().OfType<XElement>().Where(t => t.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)?.FirstOrDefault(n => n.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Description)?.Attribute(EnterpriseArchitectConfig.Value).Value?.ToString() }),
-
+                    Description = GetDescription(x),
+                    Attributes = GetAttributes(x),
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
-                    SuperType = generalizations.FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Subtype)?.Value == x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString())?.Attribute(EnterpriseArchitectConfig.Supertype)?.Value.ToString()
+                    SuperType = GetSuperType(generalizations, x)
                 });
 
             return cimEntities;
+        }
+
+        private string GetDescription(XElement xElement)
+        {
+            var tags =  xElement.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.TaggedValue);
+
+            var description = tags
+                .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Documentation)
+                ?.Attribute(EnterpriseArchitectConfig.Value)?.Value?.ToString();
+
+            return description;
+        }
+
+        private IEnumerable<Attribute> GetAttributes(XElement xElement)
+        {
+            var attributeElements = xElement.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Attribute);
+
+            var attributes = attributeElements.Select(z => new Attribute
+                {
+                    Name = z.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
+                    Description = z
+                        .Descendants().OfType<XElement>()
+                        .Where(t => t.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)
+                            ?.FirstOrDefault(n => n.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Description)
+                            ?.Attribute(EnterpriseArchitectConfig.Value).Value?.ToString() });
+
+            return attributes;
+        }
+
+        private string GetSuperType(IEnumerable<XElement> generalizations, XElement entity)
+        {
+            var generalization = generalizations
+                .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Subtype)?.Value == entity.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString())
+                ?.Attribute(EnterpriseArchitectConfig.Supertype)?.Value.ToString();
+
+            return generalization;
         }
     }
 }
