@@ -1,4 +1,3 @@
-using CIM.Asset.Parser.Xmi;
 using CIM.Asset.Parser.Cim;
 using System.Text;
 
@@ -16,7 +15,7 @@ namespace CIM.Asset.Parser
         public void Start()
         {
             RegisterCodePages();
-            _cimParser.Parse("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"));
+            var cimEntities = _cimParser.Parse("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"));
         }
 
         private static void RegisterCodePages()
