@@ -28,10 +28,12 @@ namespace CIM.Asset.Parser.Tests
             if (testMethod == null)
                 throw new ArgumentNullException(nameof(testMethod));
 
+
             var parametersTypes = testMethod.GetParameters().Select(p => p.ParameterType);
 
             var result = new List<object[]>();
             _filePaths.ToList().ForEach(p => result.AddRange(GetFileData(p, parametersTypes)));
+
 
             return result;
         }
@@ -46,12 +48,12 @@ namespace CIM.Asset.Parser.Tests
             if (!File.Exists(path))
                 throw new ArgumentException($"Could not find file at path: {path}");
 
-            // Load the file
             var fileData = File.ReadAllText(filePath);
 
             var jsonSerializerSettings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
 
             var rawData = JsonConvert.DeserializeObject<object[][]>(fileData);
+          
             var result = rawData.Select(x =>
             {
                 return x.Select((y, index) =>

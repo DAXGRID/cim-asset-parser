@@ -27,7 +27,7 @@ namespace CIM.Asset.Parser.Cim
                     Name = x.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
                     XmiId = x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString(),
                     Description = x.Descendants().OfType<XElement>()
-                        .Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Generalization)
+                    .Where(y => y.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)
                         .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Documentation)?.Attribute(EnterpriseArchitectConfig.Value)?.Value?.ToString(),
                     Attributes = x.Descendants().OfType<XElement>()
                         .Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Attribute)
