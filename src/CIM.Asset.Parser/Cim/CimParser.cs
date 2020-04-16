@@ -60,8 +60,8 @@ namespace CIM.Asset.Parser.Cim
                     Description = z
                         .Descendants().OfType<XElement>()
                         .Where(t => t.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)
-                            ?.FirstOrDefault(n => n.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Description)
-                            ?.Attribute(EnterpriseArchitectConfig.Value).Value?.ToString() });
+                        ?.FirstOrDefault(n => n.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Description)
+                        ?.Attribute(EnterpriseArchitectConfig.Value).Value?.ToString() });
 
             return attributes;
         }
