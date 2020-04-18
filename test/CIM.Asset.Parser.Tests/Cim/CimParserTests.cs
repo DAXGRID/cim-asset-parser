@@ -31,7 +31,6 @@ namespace CIM.Asset.Parser.Tests.Cim
             var cimParser = new Parser.Cim.CimParser(xmiExtractor);
             var cimEntities = cimParser.Parse(xmlFilePath, encoding);
 
-
             cimEntities.Should().NotBeNull().Should();
             cimEntities.Should().NotBeEmpty();
 

@@ -5,6 +5,6 @@ namespace CIM.Asset.Parser.Asset
 {
     public interface IAssetSchemaCreator
     {
-        void Create(IEnumerable<CimEntity> cimEntities);
+        Schema Create(IEnumerable<CimEntity> cimEntities);
     }
 }
