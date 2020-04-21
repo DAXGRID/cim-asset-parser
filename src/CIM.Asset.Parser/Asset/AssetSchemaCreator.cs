@@ -24,9 +24,25 @@ namespace CIM.Asset.Parser.Asset
 
         private IEnumerable<Namespace> CreateNamespaces(IEnumerable<CimEntity> cimEntities)
         {
-            var namespaces = cimEntities.Select(x => new Namespace { Name = x.Name, Id = x.XmiId, Entities = new List<Entity>() });
+            var namespaces = cimEntities.Select(x => new Namespace
+                {
+                    Name = x.Name,
+                    Id = x.Namespace,
+                    Entities = CreateEntities(cimEntities.Where(y => y.Namespace == x.Namespace))
+                });
 
             return namespaces;
+        }
+
+        private IEnumerable<Entity> CreateEntities(IEnumerable<CimEntity> cimEntities)
+        {
+            return cimEntities.Select(x => new Entity
+                {
+                    Id = x.XmiId,
+                    Name = x.Name,
+                    Description = x.Description,
+                    Attributes = x.Attributes.Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
+                });
         }
     }
 }

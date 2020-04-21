@@ -18,6 +18,9 @@ namespace CIM.Asset.Parser.Tests.Asset
             var schema = assetSchemaCreator.Create(cimEntities);
 
             schema.Namespaces.Count().Should().BePositive();
+            schema.Namespaces.FirstOrDefault().Id.Should().Match(cimEntities.FirstOrDefault().Namespace);
+            schema.Namespaces.FirstOrDefault().Entities.Count().Should().BeGreaterThan(0);
+            schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault().Attributes.Count().Should().BeGreaterThan(0);
         }
 
         [Fact]

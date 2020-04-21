@@ -58,10 +58,6 @@ namespace CIM.Asset.Parser.Tests
 
             var rawData = JsonConvert.DeserializeObject<object[][]>(fileData);
 
-            foreach (var parameter in parametersTypes)
-                Console.WriteLine(parameter.Name);
-
-
             var result = rawData.Select(x =>
             {
                 return x.Select((y, index) =>
