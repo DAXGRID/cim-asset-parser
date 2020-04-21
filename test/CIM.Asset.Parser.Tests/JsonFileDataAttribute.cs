@@ -6,9 +6,16 @@ using Newtonsoft.Json.Linq;
 using System.Reflection;
 using Xunit.Sdk;
 using System.Linq;
+using System.Collections;
 
 namespace CIM.Asset.Parser.Tests
 {
+    public enum JsonDataType
+    {
+        JObject,
+        JArray
+    }
+
     public class JsonFileDataAttribute : DataAttribute
     {
         private readonly string[] _filePaths;
@@ -28,19 +35,16 @@ namespace CIM.Asset.Parser.Tests
             if (testMethod == null)
                 throw new ArgumentNullException(nameof(testMethod));
 
-
             var parametersTypes = testMethod.GetParameters().Select(p => p.ParameterType);
 
             var result = new List<object[]>();
             _filePaths.ToList().ForEach(p => result.AddRange(GetFileData(p, parametersTypes)));
-
 
             return result;
         }
 
         private IEnumerable<object[]> GetFileData(string filePath, IEnumerable<Type> parametersTypes)
         {
-            // Get the absolute path to the JSON file
             var path = Path.IsPathRooted(filePath)
             ? filePath
             : Path.GetRelativePath(Directory.GetCurrentDirectory(), filePath);
@@ -53,12 +57,19 @@ namespace CIM.Asset.Parser.Tests
             var jsonSerializerSettings = new JsonSerializerSettings() { TypeNameHandling = TypeNameHandling.All };
 
             var rawData = JsonConvert.DeserializeObject<object[][]>(fileData);
-          
+
+            foreach (var parameter in parametersTypes)
+                Console.WriteLine(parameter.Name);
+
+
             var result = rawData.Select(x =>
             {
                 return x.Select((y, index) =>
                     {
-                        return ((JObject)y).ToObject(parametersTypes.ElementAt(index), JsonSerializer.Create(jsonSerializerSettings));
+                        if (typeof(IEnumerable).IsAssignableFrom(parametersTypes.ElementAt(index)))
+                            return ((JArray)y).ToObject(parametersTypes.ElementAt(index), JsonSerializer.Create(jsonSerializerSettings));
+                        else
+                            return ((JObject)y).ToObject(parametersTypes.ElementAt(index), JsonSerializer.Create(jsonSerializerSettings));
                     }).ToArray();
             });
 

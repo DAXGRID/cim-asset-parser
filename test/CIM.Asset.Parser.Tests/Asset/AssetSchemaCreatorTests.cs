@@ -4,16 +4,20 @@ using FluentAssertions;
 using CIM.Asset.Parser.Asset;
 using CIM.Asset.Parser.Cim;
 using System.Collections.Generic;
-using Newtonsoft.Json;
+using System.Linq;
 
 namespace CIM.Asset.Parser.Tests.Asset
 {
     public class AssetSchemaCreatorTests
     {
-        [Fact]
-        public void Create_ShouldReturnSchemaContaingCimEntities_OnSuppliedCimEntities()
+        [Theory]
+        [JsonFileData("TestData/entity-group.json")]
+        public void Create_ShouldReturnSchemaContaingCimEntities_OnSuppliedCimEntities(IEnumerable<CimEntity> cimEntities)
         {
             var assetSchemaCreator = new AssetSchemaCreator();
+            var schema = assetSchemaCreator.Create(cimEntities);
+
+            schema.Namespaces.Count().Should().BePositive();
         }
 
         [Fact]

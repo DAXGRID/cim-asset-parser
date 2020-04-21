@@ -23,6 +23,7 @@
     <None Update="TestData/cim.xml" CopyToOutputDirectory="PreserveNewest" />
     <None Update="TestData/power-transformer.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="TestData/power-transformer-end.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData/entity-group.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>
