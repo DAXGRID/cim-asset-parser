@@ -45,6 +45,8 @@ namespace CIM.Asset.Parser.Asset
                     Attributes = x.Attributes.Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
                 }).ToList();
 
+            var derivedEntityIds = new List<string>();
+
             foreach (var entity in entities)
             {
                 var cimSuperTypeId = cimEntities.FirstOrDefault(x => x.XmiId == entity.Id)?.SuperType;
@@ -57,9 +59,14 @@ namespace CIM.Asset.Parser.Asset
                         superType.DerivedEntities = new List<Entity>();
 
                     if (superType != null)
+                    {
                         superType.DerivedEntities.Add(entity);
+                        derivedEntityIds.Add(entity.Id);
+                    }
                 }
             }
+
+            entities.RemoveAll(x => derivedEntityIds.Contains(x.Id));
 
             return entities;
         }
