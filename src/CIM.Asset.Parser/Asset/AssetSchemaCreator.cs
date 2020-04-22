@@ -15,9 +15,11 @@ namespace CIM.Asset.Parser.Asset
             if (cimEntities.Count() <= 0)
                 return new Schema { Namespaces = new List<Namespace>() };
 
-            var namespaces = CreateNamespaces(cimEntities);
-
+            var namespaces = CreateNamespaces(cimEntities).ToList();
             var schema = new Schema { Namespaces = namespaces };
+
+            var data = schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault(x => x?.DerivedEntities?.Count() > 0);
+            Console.WriteLine("Data: " + data?.Name);
 
             return schema;
         }
@@ -26,23 +28,40 @@ namespace CIM.Asset.Parser.Asset
         {
             var namespaces = cimEntities.Select(x => new Namespace
                 {
-                    Name = x.Name,
                     Id = x.Namespace,
-                    Entities = CreateEntities(cimEntities.Where(y => y.Namespace == x.Namespace))
+                    Entities = CreateEntities(cimEntities.Where(y => y.Namespace == x.Namespace)).ToList()
                 });
 
             return namespaces;
         }
 
-        private IEnumerable<Entity> CreateEntities(IEnumerable<CimEntity> cimEntities)
+        private List<Entity> CreateEntities(IEnumerable<CimEntity> cimEntities)
         {
-            return cimEntities.Select(x => new Entity
+            var entities = cimEntities.Select(x => new Entity
                 {
                     Id = x.XmiId,
                     Name = x.Name,
                     Description = x.Description,
                     Attributes = x.Attributes.Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
-                });
+                }).ToList();
+
+            foreach (var entity in entities)
+            {
+                var cimSuperTypeId = cimEntities.FirstOrDefault(x => x.XmiId == entity.Id)?.SuperType;
+
+                if (!(String.IsNullOrEmpty(cimSuperTypeId)))
+                {
+                    var superType = entities.FirstOrDefault(x => x.Id == cimSuperTypeId);
+
+                    if (!(superType is null) && superType.DerivedEntities is null)
+                        superType.DerivedEntities = new List<Entity>();
+
+                    if (superType != null)
+                        superType.DerivedEntities.Add(entity);
+                }
+            }
+
+            return entities;
         }
     }
 }
