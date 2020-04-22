@@ -6,6 +6,7 @@ namespace CIM.Asset.Parser
     public class Startup
     {
         private readonly ICimParser _cimParser;
+        private readonly Encoding _encoding = Encoding.GetEncoding("windows-1252");
 
         public Startup(ICimParser cimParser)
         {
@@ -15,7 +16,7 @@ namespace CIM.Asset.Parser
         public void Start()
         {
             RegisterCodePages();
-            var cimEntities = _cimParser.Parse("../cim-model/cim.xml", Encoding.GetEncoding("windows-1252"));
+            _cimParser.Parse("../cim-model/cim.xml", _encoding);
         }
 
         private static void RegisterCodePages()

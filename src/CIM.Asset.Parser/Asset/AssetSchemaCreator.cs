@@ -18,33 +18,36 @@ namespace CIM.Asset.Parser.Asset
             var namespaces = CreateNamespaces(cimEntities).ToList();
             var schema = new Schema { Namespaces = namespaces };
 
-            var data = schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault(x => x?.DerivedEntities?.Count() > 0);
-            Console.WriteLine("Data: " + data?.Name);
-
             return schema;
         }
 
         private IEnumerable<Namespace> CreateNamespaces(IEnumerable<CimEntity> cimEntities)
         {
-            var namespaces = cimEntities.Select(x => new Namespace
-                {
-                    Id = x.Namespace,
-                    Entities = CreateEntities(cimEntities.Where(y => y.Namespace == x.Namespace)).ToList()
-                });
-
-            return namespaces;
+            return cimEntities.Select(x => new Namespace
+            {
+                Id = x.Namespace,
+                Entities = CreateEntities(cimEntities.Where(y => y.Namespace == x.Namespace)).ToList()
+            });
         }
 
         private List<Entity> CreateEntities(IEnumerable<CimEntity> cimEntities)
         {
             var entities = cimEntities.Select(x => new Entity
-                {
-                    Id = x.XmiId,
-                    Name = x.Name,
-                    Description = x.Description,
-                    Attributes = x.Attributes.Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
-                }).ToList();
+            {
+                Id = x.XmiId,
+                Name = x.Name,
+                Description = x.Description,
+                Attributes = x.Attributes.Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
+            }).ToList();
 
+            var derivedEntityIds = CreateObjectGraph(entities, cimEntities);
+            CleanObjectGraph(entities, derivedEntityIds);
+
+            return entities;
+        }
+
+        private List<string> CreateObjectGraph(List<Entity> entities, IEnumerable<CimEntity> cimEntities)
+        {
             var derivedEntityIds = new List<string>();
 
             foreach (var entity in entities)
@@ -58,17 +61,28 @@ namespace CIM.Asset.Parser.Asset
                     if (!(superType is null) && superType.DerivedEntities is null)
                         superType.DerivedEntities = new List<Entity>();
 
-                    if (superType != null)
+                    if (!(superType is null))
                     {
-                        superType.DerivedEntities.Add(entity);
+                        InsertDerivedEntity(superType, entity);
                         derivedEntityIds.Add(entity.Id);
                     }
                 }
             }
 
-            entities.RemoveAll(x => derivedEntityIds.Contains(x.Id));
+            return derivedEntityIds;
+        }
 
-            return entities;
+        private void CleanObjectGraph(List<Entity> entities, List<string> derivedEntityIds)
+        {
+            entities.RemoveAll(x => derivedEntityIds.Contains(x.Id));
+        }
+
+        private void InsertDerivedEntity(Entity superType, Entity derivedEntity)
+        {
+            if (superType is null)
+                return;
+
+            superType.DerivedEntities.Add(derivedEntity);
         }
     }
 }
