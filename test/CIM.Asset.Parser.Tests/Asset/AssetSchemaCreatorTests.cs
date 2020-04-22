@@ -17,8 +17,6 @@ namespace CIM.Asset.Parser.Tests.Asset
             var assetSchemaCreator = new AssetSchemaCreator();
             var schema = assetSchemaCreator.Create(cimEntities);
 
-            System.IO.File.WriteAllText("test.json", Newtonsoft.Json.JsonConvert.SerializeObject(schema, Newtonsoft.Json.Formatting.Indented));
-
             schema.Namespaces.Count().Should().BePositive();
             schema.Namespaces.FirstOrDefault().Id.Should().Match(cimEntities.FirstOrDefault().Namespace);
             schema.Namespaces.FirstOrDefault().Entities.Count().Should().BeGreaterThan(0);
