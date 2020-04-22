@@ -1,4 +1,5 @@
 using CIM.Asset.Parser.Cim;
+using CIM.Asset.Parser.Asset;
 using System.Text;
 
 namespace CIM.Asset.Parser
@@ -7,16 +8,19 @@ namespace CIM.Asset.Parser
     {
         private readonly ICimParser _cimParser;
         private readonly Encoding _encoding = Encoding.GetEncoding("windows-1252");
+        private readonly IAssetSchemaCreator _assetSchemaCreator;
 
-        public Startup(ICimParser cimParser)
+        public Startup(ICimParser cimParser, IAssetSchemaCreator assetSchemaCreator)
         {
             _cimParser = cimParser;
+            _assetSchemaCreator = assetSchemaCreator;
         }
 
         public void Start()
         {
             RegisterCodePages();
-            _cimParser.Parse("../cim-model/cim.xml", _encoding);
+            var cimEntities = _cimParser.Parse("../cim-model/cim.xml", _encoding);
+            var schema = _assetSchemaCreator.Create(cimEntities);
         }
 
         private static void RegisterCodePages()
