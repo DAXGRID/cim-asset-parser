@@ -4,16 +4,19 @@ using System.Collections.Generic;
 using System.Xml.Linq;
 using System.Linq;
 using System.Text;
+using Microsoft.Extensions.Logging;
 
 namespace CIM.Asset.Parser.Cim
 {
     public class CimParser : ICimParser
     {
         private readonly IXmiExtractor _xmiExtractor;
+        private readonly ILogger _logger;
 
-        public CimParser(IXmiExtractor xmiExtractor)
+        public CimParser(IXmiExtractor xmiExtractor, ILogger<CimParser> logger)
         {
             _xmiExtractor = xmiExtractor;
+            _logger = logger;
         }
 
         public IEnumerable<CimEntity> Parse(string xmlFilePath, Encoding encoding)
@@ -21,10 +24,13 @@ namespace CIM.Asset.Parser.Cim
             if (string.IsNullOrEmpty(xmlFilePath))
                 throw new ArgumentException($"{nameof(xmlFilePath)} null or empty is not valid");
 
+            _logger.LogInformation($"Starting to parse XMI: '{xmlFilePath}'");
+
             var xElement = _xmiExtractor.LoadXElement(xmlFilePath, encoding);
             var classes = _xmiExtractor.GetXElementClasses(xElement);
             var generalizations = _xmiExtractor.GetGeneralizations(xElement);
 
+            _logger.LogInformation($"Creating CIM entities");
             var cimEntities = classes?
                 .Select(x => new CimEntity
                 {
@@ -35,6 +41,8 @@ namespace CIM.Asset.Parser.Cim
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
                     SuperType = GetSuperType(generalizations, x)
                 });
+
+            _logger.LogInformation($"Finished parsing XMI: '{xmlFilePath}' - returns {cimEntities.Count()} CIM entities");
 
             return cimEntities;
         }

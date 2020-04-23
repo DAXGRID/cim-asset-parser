@@ -8,6 +8,7 @@ using System.Xml.Linq;
 using System.IO;
 using System.Xml;
 using System.Linq;
+using Microsoft.Extensions.Logging;
 
 namespace CIM.Asset.Parser.Tests.Xmi
 {
@@ -20,11 +21,12 @@ namespace CIM.Asset.Parser.Tests.Xmi
             var xmlPath = "TestData/cim.xml";
             var encoding = Encoding.GetEncoding("windows-1252");
 
+            var logger = A.Fake<ILogger<XmiExtractor>>();
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
             var reader = new StreamReader(xmlPath, encoding, true);
             A.CallTo(() => xmlTextReaderFactory.Create(xmlPath, encoding)).Returns(new XmlTextReader(reader));
 
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
             var xElement = xmiExtractor.LoadXElement(xmlPath, encoding);
 
             xElement.Should().NotBeNull();
@@ -40,8 +42,10 @@ namespace CIM.Asset.Parser.Tests.Xmi
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var encoding = Encoding.GetEncoding("windows-1252");
 
+            var logger = A.Fake<ILogger<XmiExtractor>>();
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
 
             xmiExtractor.Invoking(x => x.LoadXElement(xmlPath, encoding)).Should().Throw<ArgumentException>();
         }
@@ -57,12 +61,13 @@ namespace CIM.Asset.Parser.Tests.Xmi
             var xmlPath = "TestData/cim.xml";
             var encoding = Encoding.GetEncoding("windows-1252");
 
+            var logger = A.Fake<ILogger<XmiExtractor>>();
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
             var reader = new StreamReader(xmlPath, encoding, true);
             var xmlTextReader = new XmlTextReader(reader);
             var xElement = XElement.Load(xmlTextReader);
 
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
             var classes = xmiExtractor.GetXElementClasses(xElement);
 
             xElement.Should().NotBeNull();
@@ -76,8 +81,9 @@ namespace CIM.Asset.Parser.Tests.Xmi
         {
             XElement xElement = null;
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var logger = A.Fake<ILogger<XmiExtractor>>();
 
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
 
             xmiExtractor.Invoking(x => x.GetXElementClasses(xElement)).Should().Throw<ArgumentNullException>();
         }
@@ -93,11 +99,12 @@ namespace CIM.Asset.Parser.Tests.Xmi
             var encoding = Encoding.GetEncoding("windows-1252");
 
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var logger = A.Fake<ILogger<XmiExtractor>>();
             var reader = new StreamReader(xmlPath, encoding, true);
             var xmlTextReader = new XmlTextReader(reader);
             var xElement = XElement.Load(xmlTextReader);
 
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
             var classes = xmiExtractor.GetGeneralizations(xElement);
 
             xElement.Should().NotBeNull();
@@ -116,8 +123,9 @@ namespace CIM.Asset.Parser.Tests.Xmi
         {
             XElement xElement = null;
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var logger = A.Fake<ILogger<XmiExtractor>>();
 
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
 
             xmiExtractor.Invoking(x => x.GetGeneralizations(xElement)).Should().Throw<ArgumentNullException>();
         }

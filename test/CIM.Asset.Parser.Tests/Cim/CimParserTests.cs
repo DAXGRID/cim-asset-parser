@@ -8,6 +8,7 @@ using FakeItEasy;
 using System.IO;
 using System.Xml;
 using System;
+using Microsoft.Extensions.Logging;
 
 namespace CIM.Asset.Parser.Tests.Cim
 {
@@ -22,13 +23,15 @@ namespace CIM.Asset.Parser.Tests.Cim
             var encoding = Encoding.GetEncoding("windows-1252");
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
+            var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
+            var cimParserLogger = A.Fake<ILogger<CimParser>>();
             var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
             var reader = new StreamReader(xmlFilePath, encoding, true);
             A.CallTo(() => xmlTextReaderFactory.Create(xmlFilePath, encoding)).Returns(new XmlTextReader(reader));
 
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory);
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, xmiExtractorLogger);
 
-            var cimParser = new Parser.Cim.CimParser(xmiExtractor);
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
             var cimEntities = cimParser.Parse(xmlFilePath, encoding);
 
             cimEntities.Should().NotBeNull().Should();
@@ -46,8 +49,9 @@ namespace CIM.Asset.Parser.Tests.Cim
         public void Parse_ShouldThrowArgumentException_OnBeingPasedNullOrEmptyString(string xmlPath)
         {
             var xmiExtractor = A.Fake<IXmiExtractor>();
+            var cimParserLogger = A.Fake<ILogger<CimParser>>();
 
-            var cimParser = new Parser.Cim.CimParser(xmiExtractor);
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
 
             cimParser.Invoking(x => x.Parse(xmlPath, Encoding.UTF8)).Should().Throw<ArgumentException>();
         }
