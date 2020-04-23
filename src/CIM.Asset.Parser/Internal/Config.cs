@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CIM.Asset.Parser.Xmi;
 using CIM.Asset.Parser.Cim;
 using CIM.Asset.Parser.Asset;
+using CIM.Asset.Parser.FileIO;
 
 namespace CIM.Asset.Parser.Internal
 {
@@ -21,6 +22,7 @@ namespace CIM.Asset.Parser.Internal
                 .AddTransient<IXmiExtractor, XmiExtractor>()
                 .AddTransient<ICimParser, CimParser>()
                 .AddTransient<IAssetSchemaCreator, AssetSchemaCreator>()
+                .AddTransient<IFileWriter, FileWriter>()
                 .BuildServiceProvider();
 
             return serviceProvider;
