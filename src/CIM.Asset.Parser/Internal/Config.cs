@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 using CIM.Asset.Parser.Xmi;
 using CIM.Asset.Parser.Cim;
 using CIM.Asset.Parser.Asset;
@@ -17,6 +18,7 @@ namespace CIM.Asset.Parser.Internal
         private static ServiceProvider BuildServiceProvider()
         {
             var serviceProvider = new ServiceCollection()
+                .AddLogging(x => x.AddConsole())
                 .AddSingleton<Startup>()
                 .AddTransient<IXmlTextReaderFactory, XmlTextReaderFactory>()
                 .AddTransient<IXmiExtractor, XmiExtractor>()
