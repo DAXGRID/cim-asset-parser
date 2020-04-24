@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CIM.Asset.Parser.Cim;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace CIM.Asset.Parser.Asset
 {
@@ -48,41 +49,41 @@ namespace CIM.Asset.Parser.Asset
 
             var lookupNamespaces = CreateLookupTableNamespaces(entities, cimEntities);
 
-            return lookupNamespaces.Select(x => new Namespace
-                {
-                    Id = x.Key,
-                    Entities = x.Where(x => !(x is null)).ToList()
-                }).ToList();
+            return lookupNamespaces.AsParallel().Select(x => new Namespace
+            {
+                Id = x.Key,
+                Entities = x.AsParallel().Where(x => !(x is null)).ToList()
+            }).ToList();
         }
 
         private void CreateLookupTableCimEntities(IEnumerable<CimEntity> cimEntities)
         {
-             _logger.LogInformation("Creating lookup table for cim entities");
-            _lookupCimEntities = cimEntities.ToDictionary(x => x.XmiId, x => x);
+            _logger.LogInformation("Creating lookup table for cim entities");
+            _lookupCimEntities = cimEntities.AsParallel().ToDictionary(x => x.XmiId, x => x);
         }
 
         private void CreateLookupTableEntities(IEnumerable<Entity> entities)
         {
-           _logger.LogInformation($"Creating lookup table for entities {entities.Count()}");
-           _lookupEntities = entities.ToDictionary(x => x.Id, x => x);
+            _logger.LogInformation($"Creating lookup table for entities {entities.Count()}");
+            _lookupEntities = entities.AsParallel().ToDictionary(x => x.Id, x => x);
         }
 
         private ILookup<string, Entity> CreateLookupTableNamespaces(IEnumerable<Entity> entities, IEnumerable<CimEntity> cimEntities)
         {
             _logger.LogInformation($"Creating lookup for cim namespaces");
-            return cimEntities.ToLookup(x => x.Namespace, x => entities.FirstOrDefault(y => y.Id == x.XmiId));
+            return cimEntities.AsParallel().ToLookup(x => x.Namespace, x => entities.FirstOrDefault(y => y.Id == x.XmiId));
         }
 
         private List<Entity> CreateEntities(IEnumerable<CimEntity> cimEntities)
         {
             _logger.LogInformation("Creating entities");
 
-            return cimEntities.Select(x => new Entity
+            return cimEntities.AsParallel().Select(x => new Entity
             {
                 Id = x.XmiId,
                 Name = x.Name,
                 Description = x.Description,
-                Attributes = x.Attributes.Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
+                Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
             }).ToList();
         }
 
@@ -90,24 +91,24 @@ namespace CIM.Asset.Parser.Asset
         {
             var derivedEntityIds = new List<string>();
 
-            foreach (var entity in entities)
-            {
-                var cimSuperTypeId = _lookupCimEntities.ContainsKey(entity.Id) ? _lookupCimEntities[entity.Id]?.SuperType : null;
-
-                if (!(String.IsNullOrEmpty(cimSuperTypeId)))
+            Parallel.ForEach(entities, entity =>
                 {
-                    var superType = _lookupEntities.ContainsKey(cimSuperTypeId) ? _lookupEntities[cimSuperTypeId] : null;
+                    var cimSuperTypeId = _lookupCimEntities.ContainsKey(entity.Id) ? _lookupCimEntities[entity.Id]?.SuperType : null;
 
-                    if (!(superType is null) && superType.DerivedEntities is null)
-                        superType.DerivedEntities = new List<Entity>();
-
-                    if (!(superType is null))
+                    if (!(String.IsNullOrEmpty(cimSuperTypeId)))
                     {
-                        InsertDerivedEntity(superType, entity);
-                        derivedEntityIds.Add(entity.Id);
+                        var superType = _lookupEntities.ContainsKey(cimSuperTypeId) ? _lookupEntities[cimSuperTypeId] : null;
+
+                        if (!(superType is null) && superType.DerivedEntities is null)
+                            superType.DerivedEntities = new List<Entity>();
+
+                        if (!(superType is null))
+                        {
+                            InsertDerivedEntity(superType, entity);
+                            derivedEntityIds.Add(entity.Id);
+                        }
                     }
-                }
-            }
+                });
 
             return derivedEntityIds;
         }

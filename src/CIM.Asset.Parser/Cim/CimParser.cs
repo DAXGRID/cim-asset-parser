@@ -41,7 +41,7 @@ namespace CIM.Asset.Parser.Cim
 
         private IEnumerable<CimEntity> CreateCimEntities(IEnumerable<XElement> classes, IEnumerable<XElement> generalizations)
         {
-            return classes?.Select(x => new CimEntity
+            return classes?.AsParallel().Select(x => new CimEntity
                 {
                     Name = x.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
                     XmiId = x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString(),
@@ -55,7 +55,7 @@ namespace CIM.Asset.Parser.Cim
 
         private string GetDescription(XElement xElement)
         {
-            var tags =  xElement.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.TaggedValue);
+            var tags =  xElement.Descendants().OfType<XElement>().AsParallel().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.TaggedValue);
 
             var description = tags
                 .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Documentation)
@@ -66,9 +66,9 @@ namespace CIM.Asset.Parser.Cim
 
         private IEnumerable<Attribute> GetAttributes(XElement xElement)
         {
-            var attributeElements = xElement.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Attribute);
+            var attributeElements = xElement.Descendants().OfType<XElement>().AsParallel().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Attribute);
 
-            var attributes = attributeElements.Select(z => new Attribute
+            var attributes = attributeElements.AsParallel().Select(z => new Attribute
                 {
                     Name = z.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
                     Description = z
