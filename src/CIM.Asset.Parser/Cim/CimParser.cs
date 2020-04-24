@@ -31,8 +31,17 @@ namespace CIM.Asset.Parser.Cim
             var generalizations = _xmiExtractor.GetGeneralizations(xElement);
 
             _logger.LogInformation($"Creating CIM entities");
-            var cimEntities = classes?
-                .Select(x => new CimEntity
+
+            var cimEntities = CreateCimEntities(classes, generalizations);
+
+            _logger.LogInformation($"Finished parsing XMI: '{xmlFilePath}' - returns {cimEntities.Count()} CIM entities");
+
+            return cimEntities;
+        }
+
+        private IEnumerable<CimEntity> CreateCimEntities(IEnumerable<XElement> classes, IEnumerable<XElement> generalizations)
+        {
+            return classes?.Select(x => new CimEntity
                 {
                     Name = x.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
                     XmiId = x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString(),
@@ -41,11 +50,8 @@ namespace CIM.Asset.Parser.Cim
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
                     SuperType = GetSuperType(generalizations, x)
                 });
-
-            _logger.LogInformation($"Finished parsing XMI: '{xmlFilePath}' - returns {cimEntities.Count()} CIM entities");
-
-            return cimEntities;
         }
+
 
         private string GetDescription(XElement xElement)
         {
