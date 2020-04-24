@@ -49,7 +49,7 @@ namespace CIM.Asset.Parser.Asset
 
             var lookupNamespaces = CreateLookupTableNamespaces(entities, cimEntities);
 
-            return lookupNamespaces.AsParallel().Select(x => new Namespace
+            return lookupNamespaces.Select(x => new Namespace
             {
                 Id = x.Key,
                 Entities = x.Where(x => !(x is null)).ToList()
@@ -83,7 +83,7 @@ namespace CIM.Asset.Parser.Asset
                 Id = x.XmiId,
                 Name = x.Name,
                 Description = x.Description,
-                Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name })
+                Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name }).ToList()
             }).ToList();
         }
 
@@ -91,9 +91,9 @@ namespace CIM.Asset.Parser.Asset
         {
             var derivedEntityIds = new List<string>();
 
-            Parallel.ForEach(entities, entity =>
-                {
-                    var cimSuperTypeId = _lookupCimEntities.ContainsKey(entity.Id) ? _lookupCimEntities[entity.Id]?.SuperType : null;
+            foreach(var entity in entities)
+            {
+                     var cimSuperTypeId = _lookupCimEntities.ContainsKey(entity.Id) ? _lookupCimEntities[entity.Id]?.SuperType : null;
 
                     if (!(String.IsNullOrEmpty(cimSuperTypeId)))
                     {
@@ -108,9 +108,11 @@ namespace CIM.Asset.Parser.Asset
                             derivedEntityIds.Add(entity.Id);
                         }
                     }
-                });
+            }
 
-            return derivedEntityIds;
+
+
+            return derivedEntityIds.ToList();
         }
 
         private void CleanObjectGraph(List<Entity> entities, List<string> derivedEntityIds)

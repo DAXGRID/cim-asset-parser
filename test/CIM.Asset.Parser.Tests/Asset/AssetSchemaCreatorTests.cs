@@ -20,15 +20,26 @@ namespace CIM.Asset.Parser.Tests.Asset
             var assetSchemaCreator = new AssetSchemaCreator(logger);
             var schema = assetSchemaCreator.Create(cimEntities);
 
-            schema.Namespaces.Count().Should().BePositive();
-            schema.Namespaces.FirstOrDefault().Id.Should().Match(cimEntities.FirstOrDefault().Namespace);
-            schema.Namespaces.FirstOrDefault().Entities.Count().Should().BeGreaterThan(0);
-            schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault().Attributes.Count().Should().BeGreaterThan(0);
             schema.Namespaces.FirstOrDefault()
                 .Entities.FirstOrDefault(x => x.Name == "EnergyConnection")
                 .DerivedEntities.Count().Should().BeGreaterThan(0);
+
             schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault(x => x.Name == "AsynchronousMachineKind").DerivedEntities.Should().BeNull();
         }
+
+        [Theory]
+        [JsonFileData("TestData/entity-group.json")]
+        public void Create_ShouldReturnExactAttributeCount_OnSuppliedCimEntities(IEnumerable<CimEntity> cimEntities)
+        {
+            var logger = A.Fake<ILogger<AssetSchemaCreator>>();
+            var assetSchemaCreator = new AssetSchemaCreator(logger);
+            var schema = assetSchemaCreator.Create(cimEntities);
+
+            var attributesCount = 0;
+            schema.Namespaces.ToList().ForEach(x => { x.Entities.ForEach(y => { attributesCount += y.Attributes.Count(); }); });
+            attributesCount.Should().Be(171);
+        }
+
 
         [Fact]
         public void Create_ShouldThrowNullArgumentException_OnCimEntitiesCollectionBeingNull()

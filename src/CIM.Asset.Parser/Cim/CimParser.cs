@@ -41,7 +41,7 @@ namespace CIM.Asset.Parser.Cim
 
         private IEnumerable<CimEntity> CreateCimEntities(IEnumerable<XElement> classes, IEnumerable<XElement> generalizations)
         {
-            return classes?.AsParallel().Select(x => new CimEntity
+            return classes.AsParallel()?.Select(x => new CimEntity
                 {
                     Name = x.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
                     XmiId = x.Attribute(EnterpriseArchitectConfig.XmiId).Value?.ToString(),
@@ -49,7 +49,7 @@ namespace CIM.Asset.Parser.Cim
                     Attributes = GetAttributes(x),
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
                     SuperType = GetSuperType(generalizations, x)
-                });
+                }).ToList();
         }
 
 
@@ -74,7 +74,7 @@ namespace CIM.Asset.Parser.Cim
                     Description = GetTaggedAttributeValue(x, EnterpriseArchitectConfig.Description),
                     Type = GetTaggedAttributeValue(x, EnterpriseArchitectConfig.Type),
                     TypeReferenceId = GetTypeReferenceId(x)
-                });
+                }).ToList();
 
 
             return attributes;

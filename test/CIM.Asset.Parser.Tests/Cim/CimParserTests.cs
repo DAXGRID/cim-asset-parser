@@ -34,13 +34,55 @@ namespace CIM.Asset.Parser.Tests.Cim
             var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
             var cimEntities = cimParser.Parse(xmlFilePath, encoding);
 
-            cimEntities.Should().NotBeNull().Should();
-            cimEntities.Should().NotBeEmpty();
-
             var actualEntity = cimEntities.FirstOrDefault(x => x.XmiId == expected.XmiId);
 
             actualEntity.Should().NotBeNull();
             actualEntity.Should().BeEquivalentTo(expected);
+        }
+
+        [Theory]
+        [InlineData(1929)]
+        public void Parse_ShouldHaveExtactCimEntityCount_OnValidXElementInput(int entityCount)
+        {
+            var xmlFilePath = "TestData/cim.xml";
+            var encoding = Encoding.GetEncoding("windows-1252");
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
+            var cimParserLogger = A.Fake<ILogger<CimParser>>();
+            var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var reader = new StreamReader(xmlFilePath, encoding, true);
+            A.CallTo(() => xmlTextReaderFactory.Create(xmlFilePath, encoding)).Returns(new XmlTextReader(reader));
+
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, xmiExtractorLogger);
+
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
+            var cimEntities = cimParser.Parse(xmlFilePath, encoding);
+
+            cimEntities.Count().Should().Be(entityCount);
+        }
+
+        [Fact]
+        public void Parse_ShouldHaveExtractTotalAttributeCount_OnValidXElementInput()
+        {
+            var xmlFilePath = "TestData/cim.xml";
+            var encoding = Encoding.GetEncoding("windows-1252");
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
+            var cimParserLogger = A.Fake<ILogger<CimParser>>();
+            var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var reader = new StreamReader(xmlFilePath, encoding, true);
+            A.CallTo(() => xmlTextReaderFactory.Create(xmlFilePath, encoding)).Returns(new XmlTextReader(reader));
+
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, xmiExtractorLogger);
+
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
+            var cimEntities = cimParser.Parse(xmlFilePath, encoding);
+
+            var count = 0;
+            cimEntities.ToList().ForEach(x => { count += x.Attributes.Count(); });
+            count.Should().Be(9365);
         }
 
         [Theory]
