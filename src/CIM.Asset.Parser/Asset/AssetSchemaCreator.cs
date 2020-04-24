@@ -52,26 +52,26 @@ namespace CIM.Asset.Parser.Asset
             return lookupNamespaces.AsParallel().Select(x => new Namespace
             {
                 Id = x.Key,
-                Entities = x.AsParallel().Where(x => !(x is null)).ToList()
+                Entities = x.Where(x => !(x is null)).ToList()
             }).ToList();
         }
 
         private void CreateLookupTableCimEntities(IEnumerable<CimEntity> cimEntities)
         {
             _logger.LogInformation("Creating lookup table for cim entities");
-            _lookupCimEntities = cimEntities.AsParallel().ToDictionary(x => x.XmiId, x => x);
+            _lookupCimEntities = cimEntities.ToDictionary(x => x.XmiId, x => x);
         }
 
         private void CreateLookupTableEntities(IEnumerable<Entity> entities)
         {
             _logger.LogInformation($"Creating lookup table for entities {entities.Count()}");
-            _lookupEntities = entities.AsParallel().ToDictionary(x => x.Id, x => x);
+            _lookupEntities = entities.ToDictionary(x => x.Id, x => x);
         }
 
         private ILookup<string, Entity> CreateLookupTableNamespaces(IEnumerable<Entity> entities, IEnumerable<CimEntity> cimEntities)
         {
             _logger.LogInformation($"Creating lookup for cim namespaces");
-            return cimEntities.AsParallel().ToLookup(x => x.Namespace, x => entities.FirstOrDefault(y => y.Id == x.XmiId));
+            return cimEntities.ToLookup(x => x.Namespace, x => entities.FirstOrDefault(y => y.Id == x.XmiId));
         }
 
         private List<Entity> CreateEntities(IEnumerable<CimEntity> cimEntities)
@@ -115,7 +115,6 @@ namespace CIM.Asset.Parser.Asset
 
         private void CleanObjectGraph(List<Entity> entities, List<string> derivedEntityIds)
         {
-            _logger.LogInformation($"Cleaning object graph");
             entities.RemoveAll(x => derivedEntityIds.Contains(x.Id));
         }
 
