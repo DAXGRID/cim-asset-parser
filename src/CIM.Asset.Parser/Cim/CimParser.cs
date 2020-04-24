@@ -68,16 +68,33 @@ namespace CIM.Asset.Parser.Cim
         {
             var attributeElements = xElement.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.Attribute);
 
-            var attributes = attributeElements.AsParallel().Select(z => new Attribute
+            var attributes = attributeElements.AsParallel().Select(x => new Attribute
                 {
-                    Name = z.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
-                    Description = z
-                        .Descendants().OfType<XElement>()
-                        .Where(t => t.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)
-                        ?.FirstOrDefault(n => n.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Description)
-                        ?.Attribute(EnterpriseArchitectConfig.Value).Value?.ToString() });
+                    Name = x.Attribute(EnterpriseArchitectConfig.Name).Value?.ToString(),
+                    Description = GetTaggedAttributeValue(x, EnterpriseArchitectConfig.Description),
+                    Type = GetTaggedAttributeValue(x, EnterpriseArchitectConfig.Type),
+                    TypeReferenceId = GetTypeReferenceId(x)
+                });
+
 
             return attributes;
+        }
+
+        private string GetTaggedAttributeValue(XElement xElement, string tagAttributeValueName)
+        {
+            return xElement
+                .Descendants().OfType<XElement>()
+                .Where(t => t.Name.LocalName == EnterpriseArchitectConfig.TaggedValue)
+                ?.FirstOrDefault(n => n.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == tagAttributeValueName)
+                ?.Attribute(EnterpriseArchitectConfig.Value).Value?.ToString();
+        }
+
+        private string GetTypeReferenceId(XElement xElement)
+        {
+            return xElement
+                .Descendants().OfType<XElement>()
+                ?.FirstOrDefault(t => t.Name.LocalName == EnterpriseArchitectConfig.Classifier)
+                ?.Attribute(EnterpriseArchitectConfig.XmiIdRef).Value?.ToString();
         }
 
         private string GetSuperType(IEnumerable<XElement> generalizations, XElement entity)
