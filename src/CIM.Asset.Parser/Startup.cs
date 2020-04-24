@@ -14,7 +14,8 @@ namespace CIM.Asset.Parser
         private readonly IAssetSchemaCreator _assetSchemaCreator;
         private readonly IFileWriter _fileWriter;
         private readonly ILogger _logger;
-        private readonly string _outputPath = "schema.json";
+        private const string _outputPath = "schema.json";
+        private const string _inputPath = "../cim-model/cim.xml";
 
         public Startup(ICimParser cimParser, IAssetSchemaCreator assetSchemaCreator, IFileWriter fileWriter, ILogger<Startup> logger)
         {
@@ -29,7 +30,7 @@ namespace CIM.Asset.Parser
             RegisterCodePages();
 
             _logger.LogInformation($"Starting parsing");
-            var cimEntities = _cimParser.Parse("../cim-model/cim.xml", Encoding.GetEncoding(_encoding));
+            var cimEntities = _cimParser.Parse(_inputPath, Encoding.GetEncoding(_encoding));
             var schema = _assetSchemaCreator.Create(cimEntities);
 
             _logger.LogInformation($"Writing Schema to JSON {_outputPath}");
