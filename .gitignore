@@ -358,3 +358,4 @@ MigrationBackup/
 
 # So we dont commit appsettings
 appsettings.json
+schema.json
