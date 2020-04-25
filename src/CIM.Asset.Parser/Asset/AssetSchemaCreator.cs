@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using CIM.Asset.Parser.Cim;
 using Microsoft.Extensions.Logging;
-using System.Threading.Tasks;
 
 namespace CIM.Asset.Parser.Asset
 {
@@ -49,11 +48,11 @@ namespace CIM.Asset.Parser.Asset
 
             var lookupNamespaces = CreateLookupTableNamespaces(entities, cimEntities);
 
-            return lookupNamespaces.Select(x => new Namespace
+            return lookupNamespaces.AsParallel().Select(x => new Namespace
             {
                 Id = x.Key,
                 Entities = x.Where(x => !(x is null)).ToList()
-            }).ToList();
+            }).ToList().OrderBy(x => x.Id).ToList();
         }
 
         private void CreateLookupTableCimEntities(IEnumerable<CimEntity> cimEntities)
@@ -83,8 +82,13 @@ namespace CIM.Asset.Parser.Asset
                 Id = x.XmiId,
                 Name = x.Name,
                 Description = x.Description,
-                Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute { Description = y.Description, Name = y.Name }).ToList()
-            }).ToList();
+                Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute {
+                        Description = y.Description,
+                        Name = y.Name,
+                        TypeReferenceId = y.TypeReferenceId,
+                        Type = y.Type
+                    }).ToList()
+            }).ToList().OrderBy(x => x.Name).ToList();
         }
 
         private List<string> CreateObjectGraph(List<Entity> entities, IEnumerable<CimEntity> cimEntities)
@@ -93,26 +97,24 @@ namespace CIM.Asset.Parser.Asset
 
             foreach(var entity in entities)
             {
-                     var cimSuperTypeId = _lookupCimEntities.ContainsKey(entity.Id) ? _lookupCimEntities[entity.Id]?.SuperType : null;
+                var cimSuperTypeId = _lookupCimEntities.ContainsKey(entity.Id) ? _lookupCimEntities[entity.Id]?.SuperType : null;
 
-                    if (!(String.IsNullOrEmpty(cimSuperTypeId)))
+                if (!(String.IsNullOrEmpty(cimSuperTypeId)))
+                {
+                    var superType = _lookupEntities.ContainsKey(cimSuperTypeId) ? _lookupEntities[cimSuperTypeId] : null;
+
+                    if (!(superType is null) && superType.DerivedEntities is null)
+                        superType.DerivedEntities = new List<Entity>();
+
+                    if (!(superType is null))
                     {
-                        var superType = _lookupEntities.ContainsKey(cimSuperTypeId) ? _lookupEntities[cimSuperTypeId] : null;
-
-                        if (!(superType is null) && superType.DerivedEntities is null)
-                            superType.DerivedEntities = new List<Entity>();
-
-                        if (!(superType is null))
-                        {
-                            InsertDerivedEntity(superType, entity);
-                            derivedEntityIds.Add(entity.Id);
-                        }
+                        InsertDerivedEntity(superType, entity);
+                        derivedEntityIds.Add(entity.Id);
                     }
+                }
             }
 
-
-
-            return derivedEntityIds.ToList();
+            return derivedEntityIds;
         }
 
         private void CleanObjectGraph(List<Entity> entities, List<string> derivedEntityIds)

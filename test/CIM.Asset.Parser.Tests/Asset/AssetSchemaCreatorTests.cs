@@ -40,7 +40,6 @@ namespace CIM.Asset.Parser.Tests.Asset
             attributesCount.Should().Be(171);
         }
 
-
         [Fact]
         public void Create_ShouldThrowNullArgumentException_OnCimEntitiesCollectionBeingNull()
         {
