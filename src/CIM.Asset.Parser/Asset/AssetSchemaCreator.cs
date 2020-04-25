@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CIM.Asset.Parser.Cim;
 using Microsoft.Extensions.Logging;
+using System.Threading.Tasks;
 
 namespace CIM.Asset.Parser.Asset
 {

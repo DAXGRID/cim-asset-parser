@@ -85,6 +85,27 @@ namespace CIM.Asset.Parser.Tests.Cim
             count.Should().Be(9365);
         }
 
+        [Fact]
+        public void Parse_ShouldReturnMagneticFieldWithStereoTypeFilled_OnValidXElementInput()
+        {
+            var xmlFilePath = "TestData/cim.xml";
+            var encoding = Encoding.GetEncoding("windows-1252");
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+
+            var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
+            var cimParserLogger = A.Fake<ILogger<CimParser>>();
+            var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var reader = new StreamReader(xmlFilePath, encoding, true);
+            A.CallTo(() => xmlTextReaderFactory.Create(xmlFilePath, encoding)).Returns(new XmlTextReader(reader));
+
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, xmiExtractorLogger);
+
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
+            var cimEntities = cimParser.Parse(xmlFilePath, encoding);
+
+            cimEntities.FirstOrDefault(x => x.Name == "MagneticField").StereoType.Should().Be("CIMDatatype");
+        }
+
         [Theory]
         [InlineData(null)]
         [InlineData("")]

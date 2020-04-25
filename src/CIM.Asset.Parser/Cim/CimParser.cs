@@ -48,10 +48,19 @@ namespace CIM.Asset.Parser.Cim
                     Description = GetDescription(x),
                     Attributes = GetAttributes(x),
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
-                    SuperType = GetSuperType(generalizations, x)
+                    SuperType = GetSuperType(generalizations, x),
+                    StereoType = GetStereoType(x)
                 }).ToList();
         }
 
+
+        private string GetStereoType(XElement xElement)
+        {
+            return xElement.Descendants()
+                .FirstOrDefault(x => x.Name.LocalName == EnterpriseArchitectConfig.StereoType)
+                ?.Attribute(EnterpriseArchitectConfig.Name)
+                ?.Value.ToString();
+        }
 
         private string GetDescription(XElement xElement)
         {
