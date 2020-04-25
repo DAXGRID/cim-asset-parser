@@ -1,55 +1,51 @@
-[
-   [
-      {
-         "Name":"PowerTransformer",
-         "XmiId":"EAID_3D50627C_324C_4e9d_AB5C_592E0A1E0AFE",
-         "Description":"An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits. Transformers can be used to control voltage and phase shift (active power flow).\nA power transformer may be composed of separate transformer tanks that need not be identical.\nA power transformer can be modelled with or without tanks and is intended for use in both balanced and unbalanced representations.   A power transformer typically has two terminals, but may have one (grounding), three or more terminals.\nThe inherited association ConductingEquipment.BaseVoltage should not be used.  The association from TransformerEnd to BaseVoltage should be used instead.",
-         "Namespace":"EAPK_6C99E9CA_2035_4035_B77F_9217E17D86F4",
-         "SuperType":"EAID_7C5F19FB_5253_430c_8E53_BDCF7EBCE4C1",
-         "Attributes":[
-            {
-               "Name":"vectorGroup",
-               "Description":"Vector group of the transformer for protective relaying, e.g., Dyn1. For unbalanced transformers, this may not be simply determined from the constituent winding connections and phase angle displacements.\n\nThe vectorGroup string consists of the following components in the order listed: high voltage winding connection, mid voltage winding connection (for three winding transformers), phase displacement clock number from 0 to 11,  low voltage winding connection \nphase displacement clock number from 0 to 11.   The winding connections are D (delta), Y (wye), YN (wye with neutral), Z (zigzag), ZN (zigzag with neutral), A (auto transformer). Upper case means the high voltage, lower case mid or low. The high voltage winding always has clock position 0 and is not included in the vector group string.  Some examples: YNy0 (two winding wye to wye with no phase displacement), YNd11 (two winding wye to delta with 330 degrees phase displacement), YNyn0d5 (three winding transformer wye with neutral high voltage, wye with neutral mid voltage and no phase displacement, delta low voltage with 150 degrees displacement).\n\nPhase displacement is defined as the angular difference between the phasors representing the voltages between the neutral point (real or imaginary) and the corresponding terminals of two windings, a positive sequence voltage system being applied to the high-voltage terminals, following each other in alphabetical sequence if they are lettered, or in numerical sequence if they are numbered: the phasors are assumed to rotate in a counter-clockwise sense.",
-               "Type":"String",
-               "TypeReferenceId":"EAID_E50DF78B_84CE_42e9_A275_A956DEF45490"
-            },
-            {
-               "Name":"beforeShortCircuitAnglePf",
-               "Description":"The angle of power factor before short circuit (phib in IEC 60909-0). It is used for calculation of the impedance correction factor KT defined in IEC 60909-0. This is the worst case power factor. Used to define operating conditions.",
-               "Type":"AngleDegrees",
-               "TypeReferenceId":"EAID_A633BDC9_A238_4f69_AF1B_FF8A5C2FFCC8"
-            },
-            {
-               "Name":"highSideMinOperatingU",
-               "Description":"The minimum operating voltage (uQmin in IEC 60909-0) at the high voltage side (Q side) of the unit transformer of the power station unit. A value well established from long-term operating experience of the system. It is used for calculation of the impedance correction factor KG defined in IEC 60909-0.",
-               "Type":"Voltage",
-               "TypeReferenceId":"EAID_233C330A_11B8_4705_879C_5497380F1D82"
-            },
-            {
-               "Name":"operationalValuesConsidered",
-               "Description":"It is used to define if the data (other attributes related to short circuit data exchange) defines long term operational conditions or not. Used for short circuit data exchange according to IEC 60909.",
-               "Type":"Boolean",
-               "TypeReferenceId":"EAID_9F8964F1_6C32_465b_A83D_F5A201A291C3"
-            },
-            {
-               "Name":"beforeShCircuitHighestOperatingCurrent",
-               "Description":"The highest operating current (Ib in IEC 60909-0) before short circuit (depends on network configuration and relevant reliability philosophy). It is used for calculation of the impedance correction factor KT defined in IEC 60909-0.",
-               "Type":"CurrentFlow",
-               "TypeReferenceId":"EAID_DC3FD69C_E9B2_440d_A113_BE84B71BA691"
-            },
-            {
-               "Name":"beforeShCircuitHighestOperatingVoltage",
-               "Description":"The highest operating voltage (Ub in IEC 60909-0) before short circuit. It is used for calculation of the impedance correction factor KT defined in IEC 60909-0. This is worst case voltage on the low side winding (3.7.1 of IEC 60909:2001). Used to define operating conditions.",
-               "Type":"Voltage",
-               "TypeReferenceId":"EAID_233C330A_11B8_4705_879C_5497380F1D82"
-            },
-            {
-               "Name":"isPartOfGeneratorUnit",
-               "Description":"Indicates whether the machine is part of a power station unit. Used for short circuit data exchange according to IEC 60909.  It has an impact on how the correction factors are calculated for transformers, since the transformer is not necessarily part of a synchronous machine and generating unit. It is not always possible to derive this information from the model. This is why the attribute is necessary.",
-               "Type":"Boolean",
-               "TypeReferenceId":"EAID_9F8964F1_6C32_465b_A83D_F5A201A291C3"
-            }
-         ]
-      }
-   ]
-]
+{
+    "Name":"PowerTransformer",
+    "XmiId":"EAID_3D50627C_324C_4e9d_AB5C_592E0A1E0AFE",
+    "Description":"An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits. Transformers can be used to control voltage and phase shift (active power flow).\nA power transformer may be composed of separate transformer tanks that need not be identical.\nA power transformer can be modelled with or without tanks and is intended for use in both balanced and unbalanced representations.   A power transformer typically has two terminals, but may have one (grounding), three or more terminals.\nThe inherited association ConductingEquipment.BaseVoltage should not be used.  The association from TransformerEnd to BaseVoltage should be used instead.",
+    "Namespace":"EAPK_6C99E9CA_2035_4035_B77F_9217E17D86F4",
+    "SuperType":"EAID_7C5F19FB_5253_430c_8E53_BDCF7EBCE4C1",
+    "Attributes":[
+        {
+        "Name":"vectorGroup",
+        "Description":"Vector group of the transformer for protective relaying, e.g., Dyn1. For unbalanced transformers, this may not be simply determined from the constituent winding connections and phase angle displacements.\n\nThe vectorGroup string consists of the following components in the order listed: high voltage winding connection, mid voltage winding connection (for three winding transformers), phase displacement clock number from 0 to 11,  low voltage winding connection \nphase displacement clock number from 0 to 11.   The winding connections are D (delta), Y (wye), YN (wye with neutral), Z (zigzag), ZN (zigzag with neutral), A (auto transformer). Upper case means the high voltage, lower case mid or low. The high voltage winding always has clock position 0 and is not included in the vector group string.  Some examples: YNy0 (two winding wye to wye with no phase displacement), YNd11 (two winding wye to delta with 330 degrees phase displacement), YNyn0d5 (three winding transformer wye with neutral high voltage, wye with neutral mid voltage and no phase displacement, delta low voltage with 150 degrees displacement).\n\nPhase displacement is defined as the angular difference between the phasors representing the voltages between the neutral point (real or imaginary) and the corresponding terminals of two windings, a positive sequence voltage system being applied to the high-voltage terminals, following each other in alphabetical sequence if they are lettered, or in numerical sequence if they are numbered: the phasors are assumed to rotate in a counter-clockwise sense.",
+        "Type":"String",
+        "TypeReferenceId":"EAID_E50DF78B_84CE_42e9_A275_A956DEF45490"
+        },
+        {
+        "Name":"beforeShortCircuitAnglePf",
+        "Description":"The angle of power factor before short circuit (phib in IEC 60909-0). It is used for calculation of the impedance correction factor KT defined in IEC 60909-0. This is the worst case power factor. Used to define operating conditions.",
+        "Type":"AngleDegrees",
+        "TypeReferenceId":"EAID_A633BDC9_A238_4f69_AF1B_FF8A5C2FFCC8"
+        },
+        {
+        "Name":"highSideMinOperatingU",
+        "Description":"The minimum operating voltage (uQmin in IEC 60909-0) at the high voltage side (Q side) of the unit transformer of the power station unit. A value well established from long-term operating experience of the system. It is used for calculation of the impedance correction factor KG defined in IEC 60909-0.",
+        "Type":"Voltage",
+        "TypeReferenceId":"EAID_233C330A_11B8_4705_879C_5497380F1D82"
+        },
+        {
+        "Name":"operationalValuesConsidered",
+        "Description":"It is used to define if the data (other attributes related to short circuit data exchange) defines long term operational conditions or not. Used for short circuit data exchange according to IEC 60909.",
+        "Type":"Boolean",
+        "TypeReferenceId":"EAID_9F8964F1_6C32_465b_A83D_F5A201A291C3"
+        },
+        {
+        "Name":"beforeShCircuitHighestOperatingCurrent",
+        "Description":"The highest operating current (Ib in IEC 60909-0) before short circuit (depends on network configuration and relevant reliability philosophy). It is used for calculation of the impedance correction factor KT defined in IEC 60909-0.",
+        "Type":"CurrentFlow",
+        "TypeReferenceId":"EAID_DC3FD69C_E9B2_440d_A113_BE84B71BA691"
+        },
+        {
+        "Name":"beforeShCircuitHighestOperatingVoltage",
+        "Description":"The highest operating voltage (Ub in IEC 60909-0) before short circuit. It is used for calculation of the impedance correction factor KT defined in IEC 60909-0. This is worst case voltage on the low side winding (3.7.1 of IEC 60909:2001). Used to define operating conditions.",
+        "Type":"Voltage",
+        "TypeReferenceId":"EAID_233C330A_11B8_4705_879C_5497380F1D82"
+        },
+        {
+        "Name":"isPartOfGeneratorUnit",
+        "Description":"Indicates whether the machine is part of a power station unit. Used for short circuit data exchange according to IEC 60909.  It has an impact on how the correction factors are calculated for transformers, since the transformer is not necessarily part of a synchronous machine and generating unit. It is not always possible to derive this information from the model. This is why the attribute is necessary.",
+        "Type":"Boolean",
+        "TypeReferenceId":"EAID_9F8964F1_6C32_465b_A83D_F5A201A291C3"
+        }
+    ]
+}

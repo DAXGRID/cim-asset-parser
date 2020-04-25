@@ -14,39 +14,19 @@ namespace CIM.Asset.Parser.Tests.Cim
 {
     public class CimParserTests
     {
-        [Theory]
-        [JsonFileData("TestData/power-transformer.json")]
-        [JsonFileData("TestData/power-transformer-end.json")]
-        public void Parse_ShouldReturnCimEntities_OnValidXElementInput(CimEntity expected)
+        public CimParserTests()
         {
-            var xmlFilePath = "TestData/cim.xml";
-            var encoding = Encoding.GetEncoding("windows-1252");
             Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
-
-            var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
-            var cimParserLogger = A.Fake<ILogger<CimParser>>();
-            var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
-            var reader = new StreamReader(xmlFilePath, encoding, true);
-            A.CallTo(() => xmlTextReaderFactory.Create(xmlFilePath, encoding)).Returns(new XmlTextReader(reader));
-
-            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, xmiExtractorLogger);
-
-            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
-            var cimEntities = cimParser.Parse(xmlFilePath, encoding);
-
-            var actualEntity = cimEntities.FirstOrDefault(x => x.XmiId == expected.XmiId);
-
-            actualEntity.Should().NotBeNull();
-            actualEntity.Should().BeEquivalentTo(expected);
         }
 
-        [Theory]
-        [InlineData(1929)]
-        public void Parse_ShouldHaveExtactCimEntityCount_OnValidXElementInput(int entityCount)
+        [Fact]
+        public void Parse_ShouldReturnCimEntities_OnValidXElementInput()
         {
+            var expectedPowerTransformer = TestDataHelper.LoadTestData<CimEntity>("TestData/power-transformer.json");
+            var expectedPowerTransformerEnd = TestDataHelper.LoadTestData<CimEntity>("TestData/power-transformer-end.json");
+
             var xmlFilePath = "TestData/cim.xml";
             var encoding = Encoding.GetEncoding("windows-1252");
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
 
             var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
             var cimParserLogger = A.Fake<ILogger<CimParser>>();
@@ -59,7 +39,32 @@ namespace CIM.Asset.Parser.Tests.Cim
             var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
             var cimEntities = cimParser.Parse(xmlFilePath, encoding);
 
-            cimEntities.Count().Should().Be(entityCount);
+            var actualPowerTransformer = cimEntities.FirstOrDefault(x => x.XmiId == expectedPowerTransformer.XmiId);
+            var actualPowerTransformerEnd = cimEntities.FirstOrDefault(x => x.XmiId == expectedPowerTransformerEnd.XmiId);
+
+            actualPowerTransformer.Should().BeEquivalentTo(expectedPowerTransformer);
+            actualPowerTransformerEnd.Should().BeEquivalentTo(expectedPowerTransformerEnd);
+        }
+
+        [Fact]
+        public void Parse_ShouldHaveExtactCimEntityCount_OnValidXElementInput()
+        {
+            var expectedEntityCount = 1929;
+            var xmlFilePath = "TestData/cim.xml";
+            var encoding = Encoding.GetEncoding("windows-1252");
+
+            var xmiExtractorLogger = A.Fake<ILogger<XmiExtractor>>();
+            var cimParserLogger = A.Fake<ILogger<CimParser>>();
+            var xmlTextReaderFactory = A.Fake<IXmlTextReaderFactory>();
+            var reader = new StreamReader(xmlFilePath, encoding, true);
+            A.CallTo(() => xmlTextReaderFactory.Create(xmlFilePath, encoding)).Returns(new XmlTextReader(reader));
+
+            var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, xmiExtractorLogger);
+
+            var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
+            var cimEntities = cimParser.Parse(xmlFilePath, encoding);
+
+            cimEntities.Count().Should().Be(expectedEntityCount);
         }
 
         [Fact]
@@ -106,17 +111,16 @@ namespace CIM.Asset.Parser.Tests.Cim
             cimEntities.FirstOrDefault(x => x.Name == "MagneticField").StereoType.Should().Be("CIMDatatype");
         }
 
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        public void Parse_ShouldThrowArgumentException_OnBeingPasedNullOrEmptyString(string xmlPath)
+        [Fact]
+        public void Parse_ShouldThrowArgumentException_OnBeingPasedNullOrEmptyString()
         {
             var xmiExtractor = A.Fake<IXmiExtractor>();
             var cimParserLogger = A.Fake<ILogger<CimParser>>();
 
             var cimParser = new Parser.Cim.CimParser(xmiExtractor, cimParserLogger);
 
-            cimParser.Invoking(x => x.Parse(xmlPath, Encoding.UTF8)).Should().Throw<ArgumentException>();
+            cimParser.Invoking(x => x.Parse(null, Encoding.UTF8)).Should().Throw<ArgumentException>();
+            cimParser.Invoking(x => x.Parse("", Encoding.UTF8)).Should().Throw<ArgumentException>();
         }
     }
 }

@@ -14,10 +14,14 @@ namespace CIM.Asset.Parser.Tests.Xmi
 {
     public class XmiExtractorTests
     {
+        public XmiExtractorTests()
+        {
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
+        }
+
         [Fact]
         public void LoadXElement_ShouldReturnXElement_OnValidPath()
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var xmlPath = "TestData/cim.xml";
             var encoding = Encoding.GetEncoding("windows-1252");
 
@@ -34,12 +38,9 @@ namespace CIM.Asset.Parser.Tests.Xmi
             xElement.Descendants().Count().Should().BeGreaterThan(0);
         }
 
-        [Theory]
-        [InlineData(null)]
-        [InlineData("")]
-        public void LoadXElement_ShouldThrowArgumentException_OnNullOrEmptyXmlPath(string xmlPath)
+        [Fact]
+        public void LoadXElement_ShouldThrowArgumentException_OnNullOrEmptyXmlPath()
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var encoding = Encoding.GetEncoding("windows-1252");
 
             var logger = A.Fake<ILogger<XmiExtractor>>();
@@ -47,7 +48,8 @@ namespace CIM.Asset.Parser.Tests.Xmi
 
             var xmiExtractor = new XmiExtractor(xmlTextReaderFactory, logger);
 
-            xmiExtractor.Invoking(x => x.LoadXElement(xmlPath, encoding)).Should().Throw<ArgumentException>();
+            xmiExtractor.Invoking(x => x.LoadXElement(null, encoding)).Should().Throw<ArgumentException>();
+            xmiExtractor.Invoking(x => x.LoadXElement("", encoding)).Should().Throw<ArgumentException>();
         }
 
         [Theory]
@@ -57,7 +59,6 @@ namespace CIM.Asset.Parser.Tests.Xmi
         [InlineData("WireSegment")]
         public void GetXElementClasses_ShouldReturnXElementsOfTypeClasses_OnValidXElement(string className)
         {
-            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance);
             var xmlPath = "TestData/cim.xml";
             var encoding = Encoding.GetEncoding("windows-1252");
 

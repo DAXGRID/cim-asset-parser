@@ -15,6 +15,8 @@ restore:
 start:
 	dotnet run -p src/CIM.Asset.Parser/CIM.Asset.Parser.csproj
 test:
+	dotnet test
+test-verbose:
 	dotnet test /p:CollectCoverage=true -l "console;verbosity=detailed"
 
 .PHONY: build build-release clean restore start test
