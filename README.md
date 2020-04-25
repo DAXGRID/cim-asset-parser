@@ -1,4 +1,5 @@
 # CIM Asset Parser
+CIM asset parser is a library for parsing the CIM-standard into a format that can be used for the cim-asset management system.
 [![CircleCI](https://circleci.com/gh/DAXGRID/cim-asset-parser/tree/master.svg?style=shield&circle)](https://circleci.com/gh/DAXGRID/cim-asset-parser/tree/master)
 [![MIT](https://img.shields.io/badge/license-MIT-green.svg?style=flat-square)](./LICENSE)
 
@@ -21,7 +22,3 @@ Running the application
 ``` makefile
 make start
 ```
-
-
-CIM asset parser is a library for parsing the CIM-standard into a format that
-can be used for the cim-asset management system.
