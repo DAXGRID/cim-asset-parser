@@ -1,0 +1,2985 @@
+{
+  "Namespaces": [
+    {
+      "Id": "EAPK_6C99E9CA_2035_4035_B77F_9217E17D86F4",
+      "Entities": [
+        {
+          "Id": "EAID_03C06AF1_0AFA_4b28_8911_9258B630BBA4",
+          "Name": "AsynchronousMachineKind",
+          "Description": "Kind of Asynchronous Machine.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "generator",
+              "Description": "The Asynchronous Machine is a generator.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "motor",
+              "Description": "The Asynchronous Machine is a motor.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_081B186A_D45B_44d1_81DF_94EE3918A4D5",
+          "Name": "ShuntCompensatorPhase",
+          "Description": "Single phase of a multi-phase shunt compensator when its attributes might be different per phase.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_15B42F89_92AF_4830_BC3C_4CD7FB779043",
+              "Name": "LinearShuntCompensatorPhase",
+              "Description": "A per phase linear shunt compensator has banks or sections with equal admittance values.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "bPerSection",
+                  "Description": "Susceptance per section of the phase if shunt compensator is wye connected.   Susceptance per section phase to phase if shunt compensator is delta connected.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "gPerSection",
+                  "Description": "Conductance per section for this phase if shunt compensator is wye connected.  Conductance per section phase to phase if shunt compensator is delta connected.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_178D630D_8883_41d1_BFE0_81BFD2B70087",
+              "Name": "NonlinearShuntCompensatorPhase",
+              "Description": "A per phase non linear shunt compensator has bank or section admittance values that differ. The attributes g and b of the associated NonlinearShuntCompensatorPhasePoint describe the total conductance and admittance of a NonlinearShuntCompensatorPhasePoint at a section number specified by NonlinearShuntCompensatorPhasePoint.sectionNumber.",
+              "DerivedEntities": null,
+              "Attributes": []
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "maximumSections",
+              "Description": "The maximum number of sections that may be switched in for this phase. \n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "normalSections",
+              "Description": "For the capacitor phase, the normal number of sections switched in. The value shall be between zero and ShuntCompensatorPhase.maximumSections.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "phase",
+              "Description": "Phase of this shunt compensator component.   If the shunt compensator is wye connected, the connection is from the indicated phase to the central ground or neutral point.  If the shunt compensator is delta connected, the phase indicates a shunt compensator connected from the indicated phase to the next logical non-neutral phase.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "sections",
+              "Description": "Shunt compensator sections in use. Starting value for steady state solution. The attribute shall be a positive value or zero. Non integer values are allowed to support continuous variables. The reasons for continuous value are to support study cases where no discrete shunt compensators has yet been designed, a solutions where a narrow voltage band force the sections to oscillate or accommodate for a continuous solution as input.\nFor LinearShuntConpensator the value shall be between zero and ShuntCompensatorPhase.maximumSections. At value zero the shunt compensator conductance and admittance is zero. Linear interpolation of conductance and admittance between the previous and next integer section is applied in case of non-integer values.\nFor NonlinearShuntCompensator-s shall only be set to one of the NonlinearShuntCompenstorPhasePoint.sectionNumber. There is no interpolation between NonlinearShuntCompenstorPhasePoint-s.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_0AD52D65_4270_45c1_9AF4_29C53A398AE3",
+          "Name": "SinglePhaseKind",
+          "Description": "Enumeration of single phase identifiers. Allows designation of single phases for both transmission and distribution equipment, circuits and loads.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "A",
+              "Description": "Phase A.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "B",
+              "Description": "Phase B.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "C",
+              "Description": "Phase C.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "N",
+              "Description": "Neutral.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "s1",
+              "Description": "Secondary phase 1.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "s2",
+              "Description": "Secondary phase 2.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_0CAA4373_C2DA_47f6_A18B_9EDC59465FCE",
+          "Name": "TransformerTank",
+          "Description": "An assembly of two or more coupled windings that transform electrical power between voltage levels. These windings are bound on a common core and placed in the same tank. Transformer tank can be used to model both single-phase and 3-phase transformers.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_13966DE6_BE71_4f50_8051_2A082891138D",
+          "Name": "EnergyConnection",
+          "Description": "A connection of energy generation or consumption on the power system model.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_BCEC7EE8_7294_4b50_8216_0286C31A035C",
+              "Name": "EnergyConsumer",
+              "Description": "Generic user of energy - a  point of consumption on the power system model.\nEnergyConsumer.pfixed, .qfixed, .pfixedPct and .qfixedPct have meaning only if there is no LoadResponseCharacteristic associated with EnergyConsumer or if LoadResponseCharacteristic.exponentModel is set to False.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "customerCount",
+                  "Description": "Number of individual customers represented by this demand.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "grounded",
+                  "Description": "Used for Yn and Zn connections. True if the neutral is solidly grounded.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "p",
+                  "Description": "Active power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.\nFor voltage dependent loads the value is at rated voltage.\nStarting value for a steady state solution.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "pfixed",
+                  "Description": "Active power of the load that is a fixed quantity and does not vary as load group value varies. Load sign convention is used, i.e. positive sign means flow out from a node.  ",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "pfixedPct",
+                  "Description": "Fixed active power as a percentage of load group fixed active power. Used to represent the time-varying components.  Load sign convention is used, i.e. positive sign means flow out from a node.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "phaseConnection",
+                  "Description": "The type of phase connection, such as wye or delta.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "q",
+                  "Description": "Reactive power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.\nFor voltage dependent loads the value is at rated voltage.\nStarting value for a steady state solution.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "qfixed",
+                  "Description": "Reactive power of the load that is a fixed quantity and does not vary as load group value varies. Load sign convention is used, i.e. positive sign means flow out from a node.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "qfixedPct",
+                  "Description": "Fixed reactive power as a percentage of load group fixed reactive power. Used to represent the time-varying components.  Load sign convention is used, i.e. positive sign means flow out from a node.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_7174F78A_A2B7_457a_8EBC_4E9CBA6DA738",
+              "Name": "EnergySource",
+              "Description": "A generic equivalent for an energy supplier on a transmission or distribution voltage level.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "activePower",
+                  "Description": "High voltage source active injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for steady state solutions.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "nominalVoltage",
+                  "Description": "Phase-to-phase nominal voltage.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "pMax",
+                  "Description": "This is the maximum active power that can be produced by the source. Load sign convention is used, i.e. positive sign means flow out from a TopologicalNode (bus) into the conducting equipment.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "pMin",
+                  "Description": "This is the minimum active power that can be produced by the source. Load sign convention is used, i.e. positive sign means flow out from a TopologicalNode (bus) into the conducting equipment.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "r",
+                  "Description": "Positive sequence Thevenin resistance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "r0",
+                  "Description": "Zero sequence Thevenin resistance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "reactivePower",
+                  "Description": "High voltage source reactive injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for steady state solutions.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "rn",
+                  "Description": "Negative sequence Thevenin resistance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "voltageAngle",
+                  "Description": "Phase angle of a-phase open circuit used when voltage characteristics need to be imposed at the node associated with the terminal of the energy source, such as when voltages and angles from the transmission level are used as input to the distribution network. The attribute shall be a positive value or zero.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "voltageMagnitude",
+                  "Description": "Phase-to-phase open circuit voltage magnitude used when voltage characteristics need to be imposed at the node associated with the terminal of the energy source, such as when voltages and angles from the transmission level are used as input to the distribution network. The attribute shall be a positive value or zero.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "x",
+                  "Description": "Positive sequence Thevenin reactance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "x0",
+                  "Description": "Zero sequence Thevenin reactance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "xn",
+                  "Description": "Negative sequence Thevenin reactance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_598D5E45_FF89_4074_B3C1_3F40425EE8D6",
+              "Name": "RegulatingCondEq",
+              "Description": "A type of conducting equipment that can regulate a quantity (i.e. voltage or flow) at a specific point in the network. ",
+              "DerivedEntities": [
+                {
+                  "Id": "EAID_B7E110A4_CE7A_4414_9477_4310D44B43D0",
+                  "Name": "ExternalNetworkInjection",
+                  "Description": "This class represents the external network and it is used for IEC 60909 calculations.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "governorSCD",
+                      "Description": "Power Frequency Bias. This is the change in power injection divided by the change in frequency and negated.  A positive value of the power frequency bias provides additional power injection upon a drop in frequency.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "ikSecond",
+                      "Description": "Indicates whether initial symmetrical short-circuit current and power have been calculated according to IEC (Ik\").  Used only if short circuit calculations are done according to superposition method.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxInitialSymShCCurrent",
+                      "Description": "  Maximum initial symmetrical short-circuit currents (Ik\" max) in A (Ik\" = Sk\"/(SQRT(3) Un)). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxP",
+                      "Description": "Maximum active power of the injection.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxQ",
+                      "Description": "Maximum reactive power limit. It is used for modelling of infeed for load flow exchange and not for short circuit modelling.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxR0ToX0Ratio",
+                      "Description": "Maximum ratio of zero sequence resistance of Network Feeder to its zero sequence reactance (R(0)/X(0) max). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxR1ToX1Ratio",
+                      "Description": "Maximum ratio of positive sequence resistance of Network Feeder to its positive sequence reactance (R(1)/X(1) max). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxZ0ToZ1Ratio",
+                      "Description": "Maximum ratio of zero sequence impedance to its positive sequence impedance (Z(0)/Z(1) max). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minInitialSymShCCurrent",
+                      "Description": "Minimum initial symmetrical short-circuit currents (Ik\" min) in A (Ik\" = Sk\"/(SQRT(3) Un)). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minP",
+                      "Description": "Minimum active power of the injection.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minQ",
+                      "Description": "Minimum reactive power limit. It is used for modelling of infeed for load flow exchange and not for short circuit modelling.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minR0ToX0Ratio",
+                      "Description": "Indicates whether initial symmetrical short-circuit current and power have been calculated according to IEC (Ik\"). Used for short circuit data exchange according to IEC 6090.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minR1ToX1Ratio",
+                      "Description": "Minimum ratio of positive sequence resistance of Network Feeder to its positive sequence reactance (R(1)/X(1) min). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minZ0ToZ1Ratio",
+                      "Description": "Minimum ratio of zero sequence impedance to its positive sequence impedance (Z(0)/Z(1) min). Used for short circuit data exchange according to IEC 60909.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "p",
+                      "Description": "Active power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for steady state solutions.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "q",
+                      "Description": "Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for steady state solutions.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "referencePriority",
+                      "Description": "Priority of unit for use as powerflow voltage phase angle reference bus selection. 0 = don t care (default) 1 = highest priority. 2 is less than 1 and so on.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "voltageFactor",
+                      "Description": "Voltage factor in pu, which was used to calculate short-circuit current Ik\" and power Sk\".  Used only if short circuit calculations are done according to superposition method.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_CE012E43_26BF_4af0_ABD2_68CA9BB35D60",
+                  "Name": "FrequencyConverter",
+                  "Description": "A device to convert from one frequency to another (e.g., frequency F1 to F2) comprises a pair of FrequencyConverter instances. One converts from F1 to DC, the other converts the DC to F2.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "frequency",
+                      "Description": "Frequency on the AC side.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxP",
+                      "Description": "The maximum active power on the DC side at which the frequency converter should operate.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxU",
+                      "Description": "The maximum voltage on the DC side at which the frequency converter should operate.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minP",
+                      "Description": "The minimum active power on the DC side at which the frequency converter should operate.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minU",
+                      "Description": "The minimum voltage on the DC side at which the frequency converter should operate.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_AEF4A2AB_D126_4311_B299_CAB7D826A16E",
+                  "Name": "PowerElectronicsConnection",
+                  "Description": "A connection to the AC network for energy production or consumption that uses power electronics rather than rotating machines.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "maxIFault",
+                      "Description": "Maximum fault current this device will contribute, in per-unit of rated current, before the converter protection will trip or bypass.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maxQ",
+                      "Description": "Maximum reactive power limit. This is the maximum (nameplate) limit for the unit.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "minQ",
+                      "Description": "Minimum reactive power limit for the unit. This is the minimum (nameplate) limit for the unit.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "p",
+                      "Description": "Active power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for a steady state solution.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "q",
+                      "Description": "Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for a steady state solution.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "r",
+                      "Description": "Equivalent resistance (RG) of generator. RG is considered for the calculation of all currents, except for the calculation of the peak current ip. Used for short circuit data exchange according to IEC 60909.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "r0",
+                      "Description": "Zero sequence resistance of the synchronous machine.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "ratedS",
+                      "Description": "Nameplate apparent power rating for the unit.\nThe attribute shall have a positive value.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "ratedU",
+                      "Description": "Rated voltage (nameplate data, Ur in IEC 60909-0). It is primarily used for short circuit data exchange according to IEC 60909.\nThe attribute shall be a positive value.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "rn",
+                      "Description": "Negative sequence Thevenin resistance.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "x",
+                      "Description": "Positive sequence Thevenin reactance.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "x0",
+                      "Description": "Zero sequence Thevenin reactance.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "xn",
+                      "Description": "Negative sequence Thevenin reactance.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_8ADF23B6_43B5_436b_91CE_E22D54B323B8",
+                  "Name": "RotatingMachine",
+                  "Description": "A rotating machine which may be used as a generator or motor.",
+                  "DerivedEntities": [
+                    {
+                      "Id": "EAID_EC5FCEFF_1274_4771_9D92_C0FF7A100AB8",
+                      "Name": "AsynchronousMachine",
+                      "Description": "A rotating machine whose shaft rotates asynchronously with the electrical field.  Also known as an induction machine with no external connection to the rotor windings, e.g. squirrel-cage induction machine.",
+                      "DerivedEntities": null,
+                      "Attributes": [
+                        {
+                          "Name": "asynchronousMachineType",
+                          "Description": "Indicates the type of Asynchronous Machine (motor or generator).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "converterFedDrive",
+                          "Description": "Indicates whether the machine is a converter fed drive. Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "efficiency",
+                          "Description": "Efficiency of the asynchronous machine at nominal operation as a percentage. Indicator for converter drive motors. Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "iaIrRatio",
+                          "Description": "Ratio of locked-rotor current to the rated current of the motor (Ia/Ir). Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "nominalFrequency",
+                          "Description": "Nameplate data indicates if the machine is 50 Hz or 60 Hz.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "nominalSpeed",
+                          "Description": "Nameplate data.  Depends on the slip and number of pole pairs.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "polePairNumber",
+                          "Description": "Number of pole pairs of stator. Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "ratedMechanicalPower",
+                          "Description": "Rated mechanical power (Pr in IEC 60909-0). Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "reversible",
+                          "Description": "Indicates for converter drive motors if the power can be reversible. Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "rr1",
+                          "Description": "Damper 1 winding resistance.\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "rr2",
+                          "Description": "Damper 2 winding resistance.\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "rxLockedRotorRatio",
+                          "Description": "Locked rotor ratio (R/X). Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "tpo",
+                          "Description": "Transient rotor time constant (greater than tppo).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "tppo",
+                          "Description": "Sub-transient rotor time constant (greater than 0).\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "xlr1",
+                          "Description": "Damper 1 winding leakage reactance.\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "xlr2",
+                          "Description": "Damper 2 winding leakage reactance.\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "xm",
+                          "Description": "Magnetizing reactance.\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "xp",
+                          "Description": "Transient reactance (unsaturated) (greater than or equal to xpp).\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "xpp",
+                          "Description": "Sub-transient reactance (unsaturated).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "xs",
+                          "Description": "Synchronous reactance (greater than xp).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        }
+                      ]
+                    },
+                    {
+                      "Id": "EAID_7862E21E_F054_4a33_949F_04B8B4690D49",
+                      "Name": "SynchronousMachine",
+                      "Description": "An electromechanical device that operates with shaft rotating synchronously with the network. It is a single machine operating either as a generator or synchronous condenser or pump.",
+                      "DerivedEntities": null,
+                      "Attributes": [
+                        {
+                          "Name": "aVRToManualLag",
+                          "Description": "Time delay required when switching from Automatic Voltage Regulation (AVR) to Manual for a lagging MVAr violation.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "aVRToManualLead",
+                          "Description": "Time delay required when switching from Automatic Voltage Regulation (AVR) to Manual for a leading MVAr violation.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "baseQ",
+                          "Description": "Default base reactive power value. This value represents the initial reactive power that can be used by any application function.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "condenserP",
+                          "Description": "Active power consumed when in condenser mode operation.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "coolantCondition",
+                          "Description": "Temperature or pressure of coolant medium.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "coolantType",
+                          "Description": "Method of cooling the machine.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "earthing",
+                          "Description": "Indicates whether or not the generator is earthed. Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "earthingStarPointR",
+                          "Description": "Generator star point earthing resistance (Re). Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "earthingStarPointX",
+                          "Description": "Generator star point earthing reactance (Xe). Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "ikk",
+                          "Description": "Steady-state short-circuit current (in A for the profile) of generator with compound excitation during 3-phase short circuit.\n- Ikk=0: Generator with no compound excitation.\n- Ikk&lt;&gt;0: Generator with compound excitation.\nIkk is used to calculate the minimum steady-state short-circuit current for generators with compound excitation.\n(4.6.1.2 in IEC 60909-0:2001).\nUsed only for single fed short circuit on a generator. (4.3.4.2. in IEC 60909-0:2001).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "manualToAVR",
+                          "Description": "Time delay required when switching from Manual to Automatic Voltage Regulation. This value is used in the accelerating power reference frame for powerflow solutions.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "maxQ",
+                          "Description": "Maximum reactive power limit. This is the maximum (nameplate) limit for the unit.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "maxU",
+                          "Description": "Maximum voltage limit for the unit.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "minQ",
+                          "Description": "Minimum reactive power limit for the unit.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "minU",
+                          "Description": "Minimum voltage  limit for the unit.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "mu",
+                          "Description": "Factor to calculate the breaking current (Section 4.5.2.1 in IEC 60909-0).\nUsed only for single fed short circuit on a generator (Section 4.3.4.2. in IEC 60909-0).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "operatingMode",
+                          "Description": "Current mode of operation.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "qPercent",
+                          "Description": "Part of the coordinated reactive control that comes from this machine. The attribute is used as a participation factor not necessarily summing up to 100% for the participating devices in the control.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "r",
+                          "Description": "Equivalent resistance (RG) of generator. RG is considered for the calculation of all currents, except for the calculation of the peak current ip. Used for short circuit data exchange according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "r0",
+                          "Description": "Zero sequence resistance of the synchronous machine.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "r2",
+                          "Description": "Negative sequence resistance.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "referencePriority",
+                          "Description": "Priority of unit for use as powerflow voltage phase angle reference bus selection. 0 = don t care (default) 1 = highest priority. 2 is less than 1 and so on.\n",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "satDirectSubtransX",
+                          "Description": "Direct-axis subtransient reactance saturated, also known as Xd\"sat.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "satDirectSyncX",
+                          "Description": "Direct-axes saturated synchronous reactance (xdsat); reciprocal of short-circuit ration. Used for short circuit data exchange, only for single fed short circuit on a generator. (4.3.4.2. in IEC 60909-0:2001).",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "satDirectTransX",
+                          "Description": "Saturated Direct-axis transient reactance. The attribute is primarily used for short circuit calculations according to ANSI.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "shortCircuitRotorType",
+                          "Description": "Type of rotor, used by short circuit applications, only for single fed short circuit according to IEC 60909.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "type",
+                          "Description": "Modes that this synchronous machine can operate in.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "voltageRegulationRange",
+                          "Description": "Range of generator voltage regulation (PG in IEC 60909-0) used for calculation of the impedance correction factor KG defined in IEC 60909-0.\nThis attribute is used to describe the operating voltage of the generating unit.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "x0",
+                          "Description": "Zero sequence reactance of the synchronous machine.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "x2",
+                          "Description": "Negative sequence reactance.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        }
+                      ]
+                    }
+                  ],
+                  "Attributes": [
+                    {
+                      "Name": "p",
+                      "Description": "Active power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for a steady state solution.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "q",
+                      "Description": "Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for a steady state solution.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "ratedPowerFactor",
+                      "Description": "Power factor (nameplate data). It is primarily used for short circuit data exchange according to IEC 60909. The attribute cannot be a negative value.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "ratedS",
+                      "Description": "Nameplate apparent power rating for the unit.\nThe attribute shall have a positive value.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "ratedU",
+                      "Description": "Rated voltage (nameplate data, Ur in IEC 60909-0). It is primarily used for short circuit data exchange according to IEC 60909.\nThe attribute shall be a positive value.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_92B30569_5ED0_4fc0_B796_984D9BF75453",
+                  "Name": "ShuntCompensator",
+                  "Description": "A shunt capacitor or reactor or switchable bank of shunt capacitors or reactors. A section of a shunt compensator is an individual capacitor or reactor.  A negative value for reactivePerSection indicates that the compensator is a reactor. ShuntCompensator is a single terminal device.  Ground is implied.",
+                  "DerivedEntities": [
+                    {
+                      "Id": "EAID_94E82A47_069F_4e2b_A4FA_8CFD5E140FD7",
+                      "Name": "LinearShuntCompensator",
+                      "Description": "A linear shunt compensator has banks or sections with equal admittance values.",
+                      "DerivedEntities": null,
+                      "Attributes": [
+                        {
+                          "Name": "b0PerSection",
+                          "Description": "Zero sequence shunt (charging) susceptance per section.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "bPerSection",
+                          "Description": "Positive sequence shunt (charging) susceptance per section.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "g0PerSection",
+                          "Description": "Zero sequence shunt (charging) conductance per section.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        },
+                        {
+                          "Name": "gPerSection",
+                          "Description": "Positive sequence shunt (charging) conductance per section.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        }
+                      ]
+                    },
+                    {
+                      "Id": "EAID_111DB4FF_7967_4eb5_AABE_CDA0EA065CF8",
+                      "Name": "NonlinearShuntCompensator",
+                      "Description": "A non linear shunt compensator has bank or section admittance values that differ. The attributes g, b, g0 and b0 of the associated NonlinearShuntCompensatorPoint describe the total conductance and admittance of a NonlinearShuntCompensatorPoint at a section number specified by NonlinearShuntCompensatorPoint.sectionNumber.",
+                      "DerivedEntities": null,
+                      "Attributes": []
+                    }
+                  ],
+                  "Attributes": [
+                    {
+                      "Name": "aVRDelay",
+                      "Description": "An automatic voltage regulation delay (AVRDelay) which is the time delay from a change in voltage to when the capacitor is allowed to change state. This filters out temporary changes in voltage.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "grounded",
+                      "Description": "Used for Yn and Zn connections. True if the neutral is solidly grounded.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "maximumSections",
+                      "Description": "The maximum number of sections that may be switched in. \n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "nomU",
+                      "Description": "The voltage at which the nominal reactive power may be calculated. This should normally be within 10% of the voltage at which the capacitor is connected to the network.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "normalSections",
+                      "Description": "The normal number of sections switched in. The value shall be between zero and ShuntCompensator.maximumSections.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "phaseConnection",
+                      "Description": "The type of phase connection, such as wye or delta.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "sections",
+                      "Description": "Shunt compensator sections in use. Starting value for steady state solution. The attribute shall be a positive value or zero. Non integer values are allowed to support continuous variables. The reasons for continuous value are to support study cases where no discrete shunt compensators has yet been designed, a solutions where a narrow voltage band force the sections to oscillate or accommodate for a continuous solution as input. \nFor LinearShuntConpensator the value shall be between zero and ShuntCompensator.maximumSections. At value zero the shunt compensator conductance and admittance is zero. Linear interpolation of conductance and admittance between the previous and next integer section is applied in case of non-integer values.\nFor NonlinearShuntCompensator-s shall only be set to one of the NonlinearShuntCompenstorPoint.sectionNumber. There is no interpolation between NonlinearShuntCompenstorPoint-s.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "switchOnCount",
+                      "Description": "The switch on count since the capacitor count was last reset or initialized.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "switchOnDate",
+                      "Description": "The date and time when the capacitor bank was last switched on.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "voltageSensitivity",
+                      "Description": "Voltage sensitivity required for the device to regulate the bus voltage, in voltage/reactive power.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_B540EF99_8CE4_4da6_9E4D_D22E867F8BAE",
+                  "Name": "StaticVarCompensator",
+                  "Description": "A facility for providing variable and controllable shunt reactive power. The SVC typically consists of a stepdown transformer, filter, thyristor-controlled reactor, and thyristor-switched capacitor arms.\n\nThe SVC may operate in fixed MVar output mode or in voltage control mode. When in voltage control mode, the output of the SVC will be proportional to the deviation of voltage at the controlled bus from the voltage setpoint.  The SVC characteristic slope defines the proportion.  If the voltage at the controlled bus is equal to the voltage setpoint, the SVC MVar output is zero.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "capacitiveRating",
+                      "Description": "Capacitive reactance at maximum capacitive reactive power.  Shall always be positive.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "inductiveRating",
+                      "Description": "Inductive reactance at maximum inductive reactive power.  Shall always be negative.  ",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "q",
+                      "Description": "Reactive power injection. Load sign convention is used, i.e. positive sign means flow out from a node.\nStarting value for a steady state solution.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "slope",
+                      "Description": "The characteristics slope of an SVC defines how the reactive power output changes in proportion to the difference between the regulated bus voltage and the voltage setpoint.\nThe attribute shall be a positive value or zero.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "sVCControlMode",
+                      "Description": "SVC control mode.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "voltageSetPoint",
+                      "Description": "The reactive power output of the SVC is proportional to the difference between the voltage at the regulated bus and the voltage setpoint.  When the regulated bus voltage is equal to the voltage setpoint, the reactive power output is zero.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                }
+              ],
+              "Attributes": [
+                {
+                  "Name": "controlEnabled",
+                  "Description": "Specifies the regulation status of the equipment.  True is regulating, false is not regulating.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            }
+          ],
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_199B695F_644C_4cbf_AB67_76AB51EE5078",
+          "Name": "TapChangerTablePoint",
+          "Description": "Describes each tap step in the tabular curve.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_D2A2282D_3EBD_47ea_8339_B78FEC97977F",
+              "Name": "PhaseTapChangerTablePoint",
+              "Description": "Describes each tap step in the phase tap changer tabular curve.\n",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "angle",
+                  "Description": "The angle difference in degrees. A positive value indicates a positive angle variation from the Terminal at the  PowerTransformerEnd,  where the TapChanger is located, into the transformer.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_607E97C8_E4A3_4721_8592_1AE1B256EB77",
+              "Name": "RatioTapChangerTablePoint",
+              "Description": "Describes each tap step in the ratio tap changer tabular curve.\n",
+              "DerivedEntities": null,
+              "Attributes": []
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "b",
+              "Description": "The magnetizing branch susceptance deviation as a percentage of nominal value. The actual susceptance is calculated as follows:\ncalculated magnetizing susceptance = b(nominal) * (1 + b(from this class)/100).   The b(nominal) is defined as the static magnetizing susceptance on the associated power transformer end or ends.  This model assumes the star impedance (pi model) form.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g",
+              "Description": "The magnetizing branch conductance deviation as a percentage of nominal value. The actual conductance is calculated as follows:\ncalculated magnetizing conductance = g(nominal) * (1 + g(from this class)/100).   The g(nominal) is defined as the static magnetizing conductance on the associated power transformer end or ends.  This model assumes the star impedance (pi model) form.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "r",
+              "Description": "The resistance deviation as a percentage of nominal value. The actual reactance is calculated as follows:\ncalculated resistance = r(nominal) * (1 + r(from this class)/100).   The r(nominal) is defined as the static resistance on the associated power transformer end or ends.  This model assumes the star impedance (pi model) form.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "ratio",
+              "Description": "The voltage at the tap step divided by rated voltage of the transformer end having the tap changer. Hence this is a value close to one.\nFor example, if the ratio at step 1 is 1.01, and the rated voltage of the transformer end is 110kV, then the voltage obtained by setting the tap changer to step 1 to is 111.1kV.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "step",
+              "Description": "The tap step.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x",
+              "Description": "The series reactance deviation as a percentage of nominal value. The actual reactance is calculated as follows:\ncalculated reactance = x(nominal) * (1 + x(from this class)/100).   The x(nominal) is defined as the static series reactance on the associated power transformer end or ends.  This model assumes the star impedance (pi model) form.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_1EABE5E1_F61A_4758_ADFC_E9C816E97063",
+          "Name": "EnergySourcePhase",
+          "Description": "Represents the single phase information of an unbalanced energy source.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "phase",
+              "Description": "Phase of this energy source component.   If the energy source wye connected, the connection is from the indicated phase to the central ground or neutral point.  If the energy source is delta connected, the phase indicates an energy source connected from the indicated phase to the next logical non-neutral phase.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_204A4D0D_C13F_4c97_BBE8_EEE743ACDA3F",
+          "Name": "TapSchedule",
+          "Description": "A pre-established pattern over time for a tap step.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_25B2D790_161A_45c8_8551_E77A34DE684C",
+          "Name": "TransformerCoreAdmittance",
+          "Description": "The transformer core admittance.  Used to specify the core admittance of a transformer in a manner that can be shared among power transformers.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "b",
+              "Description": "Magnetizing branch susceptance (B mag).  The value can be positive or negative.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "b0",
+              "Description": "Zero sequence magnetizing branch susceptance.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g",
+              "Description": "Magnetizing branch conductance (G mag).\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g0",
+              "Description": "Zero sequence magnetizing branch conductance.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_269933B9_3FD0_433d_B360_86FF6CDCDDC8",
+          "Name": "SVCControlMode",
+          "Description": "Static VAr Compensator control mode.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "reactivePower",
+              "Description": "Reactive power control.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "voltage",
+              "Description": "Voltage control.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_2933FF4A_CF68_4099_B3FE_DBE8919C85AE",
+          "Name": "EnergyConsumerPhase",
+          "Description": "A single phase of an energy consumer.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "p",
+              "Description": "Active power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.\nFor voltage dependent loads the value is at rated voltage.\nStarting value for a steady state solution.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "pfixed",
+              "Description": "Active power of the load that is a fixed quantity. Load sign convention is used, i.e. positive sign means flow out from a node.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "pfixedPct",
+              "Description": "Fixed active power as per cent of load group fixed active power. Load sign convention is used, i.e. positive sign means flow out from a node.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "phase",
+              "Description": "Phase of this energy consumer component.   If the energy consumer is wye connected, the connection is from the indicated phase to the central ground or neutral point.  If the energy consumer is delta connected, the phase indicates an energy consumer connected from the indicated phase to the next logical non-neutral phase.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "q",
+              "Description": "Reactive power of the load. Load sign convention is used, i.e. positive sign means flow out from a node.\nFor voltage dependent loads the value is at rated voltage.\nStarting value for a steady state solution.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "qfixed",
+              "Description": "Reactive power of the load that is a fixed quantity. Load sign convention is used, i.e. positive sign means flow out from a node.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "qfixedPct",
+              "Description": "Fixed reactive power as per cent of load group fixed reactive power. Load sign convention is used, i.e. positive sign means flow out from a node.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_2A28E29E_8761_4008_AAD2_FDA8D5889F29",
+          "Name": "SynchronousMachineOperatingMode",
+          "Description": "Synchronous machine operating mode.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "generator",
+              "Description": "Operating as generator.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "condenser",
+              "Description": "Operating as condenser.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "motor",
+              "Description": "Operating as motor.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_350A69CE_A6C9_4967_9BB9_7BF7A361B5C8",
+          "Name": "PhaseTapChangerTable",
+          "Description": "Describes a tabular curve for how the phase angle difference and impedance varies with the tap step.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_35D1EE00_F393_4e93_A01A_B4E816466033",
+          "Name": "TransformerStarImpedance",
+          "Description": "Transformer star impedance (Pi-model) that accurately reflects impedance for transformers with 2 or 3 windings. For transformers with 4 or more windings, TransformerMeshImpedance class shall be used.\nFor transmission networks use PowerTransformerEnd impedances (r, r0, x, x0, b, b0, g and g0).",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "r",
+              "Description": "Resistance of the transformer end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "r0",
+              "Description": "Zero sequence series resistance of the transformer end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x",
+              "Description": "Positive sequence series reactance of the transformer end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x0",
+              "Description": "Zero sequence series reactance of the transformer end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_3C7AD112_5779_4f2a_8A87_ABB7FBA99EBF",
+          "Name": "SwitchSchedule",
+          "Description": "A schedule of switch positions.  If RegularTimePoint.value1 is 0, the switch is open.  If 1, the switch is closed.  ",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_3D50627C_324C_4e9d_AB5C_592E0A1E0AFE",
+          "Name": "PowerTransformer",
+          "Description": "An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits. Transformers can be used to control voltage and phase shift (active power flow).\nA power transformer may be composed of separate transformer tanks that need not be identical.\nA power transformer can be modelled with or without tanks and is intended for use in both balanced and unbalanced representations.   A power transformer typically has two terminals, but may have one (grounding), three or more terminals.\nThe inherited association ConductingEquipment.BaseVoltage should not be used.  The association from TransformerEnd to BaseVoltage should be used instead.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "beforeShCircuitHighestOperatingCurrent",
+              "Description": "The highest operating current (Ib in IEC 60909-0) before short circuit (depends on network configuration and relevant reliability philosophy). It is used for calculation of the impedance correction factor KT defined in IEC 60909-0.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "beforeShCircuitHighestOperatingVoltage",
+              "Description": "The highest operating voltage (Ub in IEC 60909-0) before short circuit. It is used for calculation of the impedance correction factor KT defined in IEC 60909-0. This is worst case voltage on the low side winding (3.7.1 of IEC 60909:2001). Used to define operating conditions.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "beforeShortCircuitAnglePf",
+              "Description": "The angle of power factor before short circuit (phib in IEC 60909-0). It is used for calculation of the impedance correction factor KT defined in IEC 60909-0. This is the worst case power factor. Used to define operating conditions.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "highSideMinOperatingU",
+              "Description": "The minimum operating voltage (uQmin in IEC 60909-0) at the high voltage side (Q side) of the unit transformer of the power station unit. A value well established from long-term operating experience of the system. It is used for calculation of the impedance correction factor KG defined in IEC 60909-0.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "isPartOfGeneratorUnit",
+              "Description": "Indicates whether the machine is part of a power station unit. Used for short circuit data exchange according to IEC 60909.  It has an impact on how the correction factors are calculated for transformers, since the transformer is not necessarily part of a synchronous machine and generating unit. It is not always possible to derive this information from the model. This is why the attribute is necessary.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "operationalValuesConsidered",
+              "Description": "It is used to define if the data (other attributes related to short circuit data exchange) defines long term operational conditions or not. Used for short circuit data exchange according to IEC 60909.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "vectorGroup",
+              "Description": "Vector group of the transformer for protective relaying, e.g., Dyn1. For unbalanced transformers, this may not be simply determined from the constituent winding connections and phase angle displacements.\n\nThe vectorGroup string consists of the following components in the order listed: high voltage winding connection, mid voltage winding connection (for three winding transformers), phase displacement clock number from 0 to 11,  low voltage winding connection \nphase displacement clock number from 0 to 11.   The winding connections are D (delta), Y (wye), YN (wye with neutral), Z (zigzag), ZN (zigzag with neutral), A (auto transformer). Upper case means the high voltage, lower case mid or low. The high voltage winding always has clock position 0 and is not included in the vector group string.  Some examples: YNy0 (two winding wye to wye with no phase displacement), YNd11 (two winding wye to delta with 330 degrees phase displacement), YNyn0d5 (three winding transformer wye with neutral high voltage, wye with neutral mid voltage and no phase displacement, delta low voltage with 150 degrees displacement).\n\nPhase displacement is defined as the angular difference between the phasors representing the voltages between the neutral point (real or imaginary) and the corresponding terminals of two windings, a positive sequence voltage system being applied to the high-voltage terminals, following each other in alphabetical sequence if they are lettered, or in numerical sequence if they are numbered: the phasors are assumed to rotate in a counter-clockwise sense.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_437ABFFA_B6B0_47fd_BFE2_76ACD0B7FFDC",
+          "Name": "Ground",
+          "Description": "A point where the system is grounded used for connecting conducting equipment to ground. The power system model can have any number of grounds.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_43D9D2B8_DA1E_45c4_B99D_EC28FCAB742B",
+          "Name": "Line",
+          "Description": "Contains equipment beyond a substation belonging to a power transmission line. ",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_44BDEBB6_4580_4df6_9245_179240EB5058",
+          "Name": "NonlinearShuntCompensatorPhasePoint",
+          "Description": "A per phase non linear shunt compensator bank or section admittance value. The number of NonlinearShuntCompenstorPhasePoint instances associated with a NonlinearShuntCompensatorPhase shall be equal to ShuntCompensatorPhase.maximumSections. ShuntCompensator.sections shall only be set to one of the NonlinearShuntCompenstorPhasePoint.sectionNumber. There is no interpolation between NonlinearShuntCompenstorPhasePoint-s.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "b",
+              "Description": "Positive sequence shunt (charging) susceptance per section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g",
+              "Description": "Positive sequence shunt (charging) conductance per section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "sectionNumber",
+              "Description": "The number of the section.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_48632975_29AC_44f1_AC6C_1C7E7CEDBB0B",
+          "Name": "RegulationSchedule",
+          "Description": "A pre-established pattern over time for a controlled variable, e.g., busbar voltage.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_49FE2028_1AD5_4550_A55A_FA43C4D07C38",
+          "Name": "TransformerMeshImpedance",
+          "Description": "Transformer mesh impedance (Delta-model) between transformer ends.\nThe typical case is that this class describes the impedance between two transformer ends pair-wise, i.e. the cardinalities at both transformer end associations are 1. However, in cases where two or more transformer ends are modelled the cardinalities are larger than 1.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "r",
+              "Description": "Resistance between the 'from' and the 'to' end, seen from the 'from' end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "r0",
+              "Description": "Zero-sequence resistance between the 'from' and the 'to' end, seen from the 'from' end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x",
+              "Description": "Reactance between the 'from' and the 'to' end, seen from the 'from' end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x0",
+              "Description": "Zero-sequence reactance between the 'from' and the 'to' end, seen from the 'from' end.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_4BAF4C19_5181_41b2_B690_9758DB9D4F8B",
+          "Name": "SwitchPhase",
+          "Description": "Single phase of a multi-phase switch when its attributes might be different per phase.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "closed",
+              "Description": "The attribute tells if the switch is considered closed when used as input to topology processing.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "normalOpen",
+              "Description": "Used in cases when no Measurement for the status value is present. If the SwitchPhase has a status measurement the Discrete.normalValue is expected to match with this value.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "phaseSide1",
+              "Description": "Phase of this SwitchPhase on the side with terminal sequence number equal to 1. Should be a phase contained in that terminal’s phases attribute.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "phaseSide2",
+              "Description": "Phase of this SwitchPhase on the side with terminal sequence number equal to 2.  Should be a phase contained in that terminal’s Terminal.phases attribute.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "ratedCurrent",
+              "Description": "The maximum continuous current carrying capacity in amps governed by the device material and construction.\nThe attribute shall be a positive value.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_5B656059_8C65_455e_9E02_5A14C2631D6A",
+          "Name": "SeriesCompensator",
+          "Description": "A Series Compensator is a series capacitor or reactor or an AC transmission line without charging susceptance.  It is a two terminal device.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "r",
+              "Description": "Positive sequence resistance.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "r0",
+              "Description": "Zero sequence resistance.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "varistorPresent",
+              "Description": "Describe if a metal oxide varistor (mov) for over voltage protection is configured in parallel with the series compensator. It is used for short circuit calculations.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "varistorRatedCurrent",
+              "Description": "The maximum current the varistor is designed to handle at specified duration. It is used for short circuit calculations and exchanged only if SeriesCompensator.varistorPresent is true.\nThe attribute shall be a positive value.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "varistorVoltageThreshold",
+              "Description": "The dc voltage at which the varistor starts conducting. It is used for short circuit calculations and exchanged only if SeriesCompensator.varistorPresent is true.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x",
+              "Description": "Positive sequence reactance.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x0",
+              "Description": "Zero sequence reactance.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_5DE5A24B_B6E5_4f26_890B_6906EB2213C8",
+          "Name": "PhaseShuntConnectionKind",
+          "Description": "The configuration of phase connections for a single terminal device such as a load or capacitor.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "D",
+              "Description": "Delta connection.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "Y",
+              "Description": "Wye connection.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "Yn",
+              "Description": "Wye, with neutral brought out for grounding.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "I",
+              "Description": "Independent winding, for single-phase connections.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "G",
+              "Description": "Ground connection; use when explicit connection to ground needs to be expressed in combination with the phase code, such as for electrical wire/cable or for meters.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_5E96862B_1FFF_4fbf_B5D5_919E4DE8A1A9",
+          "Name": "PerLengthLineParameter",
+          "Description": "Common type for per-length electrical catalogues describing line parameters.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_C4C200C6_DFC4_4bec_AE5E_84B332E79E0C",
+              "Name": "PerLengthImpedance",
+              "Description": "Common type for per-length impedance electrical catalogues.\n",
+              "DerivedEntities": [
+                {
+                  "Id": "EAID_048ADD31_9C78_4fb8_93AD_0F89496AC846",
+                  "Name": "PerLengthPhaseImpedance",
+                  "Description": "Impedance and admittance parameters per unit length for n-wire unbalanced lines, in matrix form.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "conductorCount",
+                      "Description": "Number of phase, neutral, and other wires retained. Constrains the number of matrix elements and the phase codes that can be used with this matrix.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_03E92000_9F13_4deb_B5E1_B3262BEBDE92",
+                  "Name": "PerLengthSequenceImpedance",
+                  "Description": "Sequence impedance and admittance parameters per unit length, for transposed lines of 1, 2, or 3 phases. For 1-phase lines, define x=x0=xself. For 2-phase lines, define x=xs-xm and x0=xs+xm.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "b0ch",
+                      "Description": "Zero sequence shunt (charging) susceptance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "bch",
+                      "Description": "Positive sequence shunt (charging) susceptance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "g0ch",
+                      "Description": "Zero sequence shunt (charging) conductance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "gch",
+                      "Description": "Positive sequence shunt (charging) conductance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "r",
+                      "Description": "Positive sequence series resistance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "r0",
+                      "Description": "Zero sequence series resistance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "x",
+                      "Description": "Positive sequence series reactance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "x0",
+                      "Description": "Zero sequence series reactance, per unit of length.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                }
+              ],
+              "Attributes": []
+            }
+          ],
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_601E1E7A_46DB_4d07_95C8_4B61EBFC65C0",
+          "Name": "TransformerControlMode",
+          "Description": "Control modes for a transformer.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "volt",
+              "Description": "Voltage control.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "reactive",
+              "Description": "Reactive power flow control.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_6A5875D8_2294_45a2_BEE1_C33F5FEDF914",
+          "Name": "CompositeSwitch",
+          "Description": "A model of a set of individual Switches normally enclosed within the same cabinet and possibly with interlocks that restrict the combination of switch positions. These are typically found in medium voltage distribution networks. \nA CompositeSwitch could represent a Ring-Main-Unit (RMU), or pad-mounted switchgear, with primitive internal devices such as an internal bus-bar plus 3 or 4 internal switches each of which may individually be open or closed. A CompositeSwitch and a set of contained Switches can also be used to represent a multi-position switch e.g. a switch that can connect a circuit to Ground, Open or Busbar.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "compositeSwitchType",
+              "Description": "An alphanumeric code that can be used as a reference to extra information such as the description of the interlocking scheme if any.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_6E6AF445_8CD5_434b_8E74_08970A4E6D95",
+          "Name": "TransformerEnd",
+          "Description": "A conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In earlier CIM versions, the TransformerWinding class served a similar purpose, but this class is more flexible because it associates to terminal but is not a specialization of ConductingEquipment.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_51A671B1_C546_4106_92F9_ED7C0305A2DB",
+              "Name": "PowerTransformerEnd",
+              "Description": "A PowerTransformerEnd is associated with each Terminal of a PowerTransformer.\nThe impedance values r, r0, x, and x0 of a PowerTransformerEnd represents a star equivalent as follows.\n1) for a two Terminal PowerTransformer the high voltage (TransformerEnd.endNumber=1) PowerTransformerEnd has non zero values on r, r0, x, and x0 while the low voltage (TransformerEnd.endNumber=2) PowerTransformerEnd has zero values for r, r0, x, and x0.  Parameters are always provided, even if the PowerTransformerEnds have the same rated voltage.  In this case, the parameters are provided at the PowerTransformerEnd which has TransformerEnd.endNumber equal to 1.\n2) for a three Terminal PowerTransformer the three PowerTransformerEnds represent a star equivalent with each leg in the star represented by r, r0, x, and x0 values.\n3) For a three Terminal transformer each PowerTransformerEnd shall have g, g0, b and b0 values corresponding to the no load losses distributed on the three PowerTransformerEnds. The total no load loss shunt impedances may also be placed at one of the PowerTransformerEnds, preferably the end numbered 1, having the shunt values on end 1.  This is the preferred way.\n4) for a PowerTransformer with more than three Terminals the PowerTransformerEnd impedance values cannot be used. Instead use the TransformerMeshImpedance or split the transformer into multiple PowerTransformers.\nEach PowerTransformerEnd must be contained by a PowerTransformer. Because a PowerTransformerEnd (or any other object) can not be contained by more than one parent, a PowerTransformerEnd can not have an association to an EquipmentContainer (Substation, VoltageLevel, etc).",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "b",
+                  "Description": "Magnetizing branch susceptance (B mag).  The value can be positive or negative.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "b0",
+                  "Description": "Zero sequence magnetizing branch susceptance.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "connectionKind",
+                  "Description": "Kind of connection.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "g",
+                  "Description": "Magnetizing branch conductance.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "g0",
+                  "Description": "Zero sequence magnetizing branch conductance (star-model).\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "phaseAngleClock",
+                  "Description": "Terminal voltage phase angle displacement where 360 degrees are represented with clock hours. The valid values are 0 to 11. For example, for the secondary side end of a transformer with vector group code of 'Dyn11', specify the connection kind as wye with neutral and specify the phase angle of the clock as 11.  The clock value of the transformer end number specified as 1, is assumed to be zero.  Note the transformer end number is not assumed to be the same as the terminal sequence number.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "r",
+                  "Description": "Resistance (star-model) of the transformer end.\nThe attribute shall be equal to or greater than zero for non-equivalent transformers.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "r0",
+                  "Description": "Zero sequence series resistance (star-model) of the transformer end.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "ratedS",
+                  "Description": "Normal apparent power rating.\nThe attribute shall be a positive value. For a two-winding transformer the values for the high and low voltage sides shall be identical. ",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "ratedU",
+                  "Description": "Rated voltage: phase-phase for three-phase windings, and either phase-phase or phase-neutral for single-phase windings.\nA high voltage side, as given by TransformerEnd.endNumber, shall have a ratedU that is greater than or equal to ratedU for the lower voltage sides.\nThe attribute shall be a positive value.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "x",
+                  "Description": "Positive sequence series reactance (star-model) of the transformer end.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "x0",
+                  "Description": "Zero sequence series reactance of the transformer end.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_7CAE4704_5B8C_4ad5_B3B1_6ECD141F8A09",
+              "Name": "TransformerTankEnd",
+              "Description": "Transformer tank end represents an individual winding for unbalanced models or for transformer tanks connected into a bank (and bank is modelled with the PowerTransformer).\n",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "phases",
+                  "Description": "Describes the phases carried by a conducting equipment.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "bmagSat",
+              "Description": "Core shunt magnetizing susceptance in the saturation region.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "endNumber",
+              "Description": "Number for this transformer end, corresponding to the end's order in the power transformer vector group or phase angle clock number.  Highest voltage winding should be 1.  Each end within a power transformer should have a unique subsequent end number.   Note the transformer end number need not match the terminal sequence number.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "grounded",
+              "Description": "(for Yn and Zn connections) True if the neutral is solidly grounded.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "magBaseU",
+              "Description": "The reference voltage at which the magnetizing saturation measurements were made.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "magSatFlux",
+              "Description": "Core magnetizing saturation curve knee flux level.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "rground",
+              "Description": "(for Yn and Zn connections) Resistance part of neutral impedance where 'grounded' is true.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "xground",
+              "Description": "(for Yn and Zn connections) Reactive part of neutral impedance where 'grounded' is true.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_709A85C2_97B8_431c_A661_FB83BDEBF933",
+          "Name": "VoltageControlZone",
+          "Description": "An area of the power system network which is defined for secondary voltage control purposes. A voltage control zone consists of a collection of substations with a designated bus bar section whose voltage will be controlled.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_7AA04AD0_E999_4595_877D_33844C01F860",
+          "Name": "RegulatingControlModeKind",
+          "Description": "The kind of regulation model.   For example regulating voltage, reactive power, active power, etc.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "voltage",
+              "Description": "Voltage is specified.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "activePower",
+              "Description": "Active power is specified.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "reactivePower",
+              "Description": "Reactive power is specified.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "currentFlow",
+              "Description": "Current flow is specified.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "admittance",
+              "Description": "Admittance is specified.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "timeScheduled",
+              "Description": "Control switches on/off by time of day. The times may change on the weekend, or in different seasons.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "temperature",
+              "Description": "Control switches on/off based on the local temperature (i.e., a thermostat).",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "powerFactor",
+              "Description": "Power factor is specified.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_7B0758AF_6E8E_438e_BD69_A838A56F256D",
+          "Name": "Clamp",
+          "Description": "A Clamp is a galvanic connection at a line segment where other equipment is connected. A Clamp does not cut the line segment. \nA Clamp is ConductingEquipment and has one Terminal with an associated ConnectivityNode. Any other ConductingEquipment can be connected to the Clamp ConnectivityNode.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "lengthFromTerminal1",
+              "Description": "The length to the place where the clamp is located starting from side one of the line segment, i.e. the line segment terminal with sequence number equal to 1.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_84627F88_F666_4f07_890A_62622070CD0F",
+          "Name": "ACLineSegmentPhase",
+          "Description": "Represents a single wire of an alternating current line segment.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "phase",
+              "Description": "The phase connection of the wire at both ends.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "sequenceNumber",
+              "Description": "Number designation for this line segment phase. Each line segment phase within a line segment should have a unique sequence number. This is useful for unbalanced modelling to bind the mathematical model (PhaseImpedanceData of PerLengthPhaseImpedance) with the connectivity model (this class) and the physical model (WirePosition) without tight coupling.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_8A7FA923_A193_4c6f_B315_1DF1A13C9AA1",
+          "Name": "RatioTapChangerTable",
+          "Description": "Describes a curve for how the voltage magnitude and impedance varies with the tap step. ",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_8C28B28D_4735_4033_9F33_7D86F6819922",
+          "Name": "RegulatingControl",
+          "Description": "Specifies a set of equipment that works together to control a power system quantity such as voltage or flow. \nRemote bus voltage control is possible by specifying the controlled terminal located at some place remote from the controlling equipment.\nThe specified terminal shall be associated with the connectivity node of the controlled point.  The most specific subtype of RegulatingControl shall be used in case such equipment participate in the control, e.g. TapChangerControl for tap changers.\nFor flow control, load sign convention is used, i.e. positive sign means flow out from a TopologicalNode (bus) into the conducting equipment.\nThe attribute minAllowedTargetValue and maxAllowedTargetValue are required in the following cases:\n- For a power generating module operated in power factor control mode to specify maximum and minimum power factor values;\n- Whenever it is necessary to have an off center target voltage for the tap changer regulator. For instance, due to long cables to off shore wind farms and the need to have a simpler setup at the off shore transformer platform, the voltage is controlled from the land at the connection point for the off shore wind farm. Since there usually is a voltage rise along the cable, there is typical and overvoltage of up 3-4 kV compared to the on shore station. Thus in normal operation the tap changer on the on shore station is operated with a target set point, which is in the lower parts of the dead band.\nThe attributes minAllowedTargetValue and maxAllowedTargetValue are not related to the attribute targetDeadband and thus they are not treated as an alternative of the targetDeadband. They are needed due to limitations in the local substation controller. The attribute targetDeadband is used to prevent the power flow from move the tap position in circles (hunting) that is to be used regardless of the attributes minAllowedTargetValue and maxAllowedTargetValue.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_32D5C39A_ABB5_4ac8_8B3F_FBDC00DB19BB",
+              "Name": "TapChangerControl",
+              "Description": "Describes behaviour specific to tap changers, e.g. how the voltage at the end of a line varies with the load level and compensation of the voltage drop by tap adjustment.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "limitVoltage",
+                  "Description": "Maximum allowed regulated voltage on the PT secondary, regardless of line drop compensation. Sometimes referred to as first-house protection.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "lineDropCompensation",
+                  "Description": "If true, the line drop compensation is to be applied.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "lineDropR",
+                  "Description": "Line drop compensator resistance setting for normal (forward) power flow.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "lineDropX",
+                  "Description": "Line drop compensator reactance setting for normal (forward) power flow.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "reverseLineDropR",
+                  "Description": "Line drop compensator resistance setting for reverse power flow.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "reverseLineDropX",
+                  "Description": "Line drop compensator reactance setting for reverse power flow.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "discrete",
+              "Description": "The regulation is performed in a discrete mode. This applies to equipment with discrete controls, e.g. tap changers and shunt compensators.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "enabled",
+              "Description": "The flag tells if regulation is enabled.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "maxAllowedTargetValue",
+              "Description": "Maximum allowed target value (RegulatingControl.targetValue).",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "minAllowedTargetValue",
+              "Description": "Minimum allowed target value (RegulatingControl.targetValue).\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "mode",
+              "Description": "The regulating control mode presently available.  This specification allows for determining the kind of regulation without need for obtaining the units from a schedule.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "monitoredPhase",
+              "Description": "Phase voltage controlling this regulator, measured at regulator location.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "targetDeadband",
+              "Description": "This is a deadband used with discrete control to avoid excessive update of controls like tap changers and shunt compensator banks while regulating.  The units of those appropriate for the mode. The attribute shall be a positive value or zero. If RegulatingControl.discrete is set to \"false\", the RegulatingControl.targetDeadband is to be ignored.\nNote that for instance, if the targetValue is 100 kV and the targetDeadband is 2 kV the range is from 99 to 101 kV.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "targetValue",
+              "Description": "The target value specified for case input.   This value can be used for the target value without the use of schedules. The value has the units appropriate to the mode attribute.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "targetValueUnitMultiplier",
+              "Description": "Specify the multiplier for used for the targetValue.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_8D8D03C8_6278_4397_9EFA_EDC98D359BBC",
+          "Name": "PhaseImpedanceData",
+          "Description": "Impedance and conductance matrix element values. \nThe diagonal elements are described by the elements having the same toPhase and fromPhase value and the off diagonal elements have different toPhase and fromPhase values.  The matrix can also be stored in symmetric lower triangular format using the row and column attributes, which map to ACLineSegmentPhase.sequenceNumber.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "b",
+              "Description": "Susceptance matrix element value, per length of unit.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "column",
+              "Description": "The matrix element's column number, in the range 1 to row. Only the lower triangle needs to be stored. This column number matches ACLineSegmentPhase.sequenceNumber.\n\n\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "fromPhase",
+              "Description": "Refer to the class description.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g",
+              "Description": "Conductance matrix element value, per length of unit.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "r",
+              "Description": "Resistance matrix element value, per length of unit.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "row",
+              "Description": "The matrix element’s row number, in the range 1 to PerLengthPhaseImpedance.conductorCount. Only the lower triangle needs to be stored. This row number matches ACLineSegmentPhase.sequenceNumber.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "toPhase",
+              "Description": "Refer to the class description.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x",
+              "Description": "Reactance matrix element value, per length of unit.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_8FD4114B_3942_4e7c_8E33_9600BA19CF38",
+          "Name": "EnergySchedulingType",
+          "Description": "Used to define the type of generation for scheduling purposes.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_91BE148F_E7B0_4687_B275_4A9FF1797051",
+          "Name": "WireSegmentPhase",
+          "Description": "Represents a single wire of an alternating current wire segment.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "phase",
+              "Description": "The phase connection of the wire at both ends.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "sequenceNumber",
+              "Description": "Number designation for this wire segment phase. Each wire segment phase within a wire segment should have a unique sequence number.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_96F8BB1B_2776_413c_A4AF_63924395C921",
+          "Name": "NonlinearShuntCompensatorPoint",
+          "Description": "A non linear shunt compensator bank or section admittance value. The number of NonlinearShuntCompenstorPoint instances associated with a NonlinearShuntCompensator shall be equal to ShuntCompensator.maximumSections. ShuntCompensator.sections shall only be set to one of the NonlinearShuntCompenstorPoint.sectionNumber. There is no interpolation between NonlinearShuntCompenstorPoint-s.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "b",
+              "Description": "Positive sequence shunt (charging) susceptance per section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "b0",
+              "Description": "Zero sequence shunt (charging) susceptance per section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g",
+              "Description": "Positive sequence shunt (charging) conductance per section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g0",
+              "Description": "Zero sequence shunt (charging) conductance per section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "sectionNumber",
+              "Description": "The number of the section.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_99B51F43_C935_4382_AB8A_6352DAB082D4",
+          "Name": "EarthFaultCompensator",
+          "Description": "A conducting equipment used to represent a connection to ground which is typically used to compensate earth faults.   An earth fault compensator device modelled with a single terminal implies a second terminal solidly connected to ground.  If two terminals are modelled, the ground is not assumed and normal connection rules apply.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_5E278FF4_B19F_4c63_8AA5_5DE09E2586DA",
+              "Name": "GroundingImpedance",
+              "Description": "A fixed impedance device used for grounding.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "x",
+                  "Description": "Reactance of device.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_5538A367_14D4_4160_836F_2D049DB218B6",
+              "Name": "PetersenCoil",
+              "Description": "A variable impedance device normally used to offset line charging during single line faults in an ungrounded section of network.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "mode",
+                  "Description": "The mode of operation of the Petersen coil.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "nominalU",
+                  "Description": "The nominal voltage for which the coil is designed.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "offsetCurrent",
+                  "Description": "The offset current that the Petersen coil controller is operating from the resonant point.  This is normally a fixed amount for which the controller is configured and could be positive or negative.  Typically 0 to 60 A depending on voltage and resonance conditions.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "positionCurrent",
+                  "Description": "The control current used to control the Petersen coil also known as the position current.  Typically in the range of 20 mA to 200 mA.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "xGroundMax",
+                  "Description": "The maximum reactance. ",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "xGroundMin",
+                  "Description": "The minimum reactance.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "xGroundNominal",
+                  "Description": "The nominal reactance.  This is the operating point (normally over compensation) that is defined based on the resonance point in the healthy network condition.  The impedance is calculated based on nominal voltage divided by position current.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "r",
+              "Description": "Nominal resistance of device.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_A46F0441_DB66_4ff2_A892_7C5F9F54FA38",
+          "Name": "MutualCoupling",
+          "Description": "This class represents the zero sequence line mutual coupling.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "b0ch",
+              "Description": "Zero sequence mutual coupling shunt (charging) susceptance, uniformly distributed, of the entire line section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "distance11",
+              "Description": "Distance to the start of the coupled region from the first line's terminal having sequence number equal to 1.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "distance12",
+              "Description": "Distance to the end of the coupled region from the first line's terminal with sequence number equal to 1.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "distance21",
+              "Description": "Distance to the start of coupled region from the second line's terminal with sequence number equal to 1.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "distance22",
+              "Description": "Distance to the end of coupled region from the second line's terminal with sequence number equal to 1.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "g0ch",
+              "Description": "Zero sequence mutual coupling shunt (charging) conductance, uniformly distributed, of the entire line section.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "r0",
+              "Description": "Zero sequence branch-to-branch mutual impedance coupling, resistance.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "x0",
+              "Description": "Zero sequence branch-to-branch mutual impedance coupling, reactance.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_AB5F986C_93A1_4f1f_A62B_CFB733BEF874",
+          "Name": "ReactiveCapabilityCurve",
+          "Description": "Reactive power rating envelope versus the synchronous machine's active power, in both the generating and motoring modes. For each active power value there is a corresponding high and low reactive power limit  value. Typically there will be a separate curve for each coolant condition, such as hydrogen pressure.  The Y1 axis values represent reactive minimum and the Y2 axis values represent reactive maximum.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "coolantTemperature",
+              "Description": "The machine's coolant temperature (e.g., ambient air or stator circulating water).",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "hydrogenPressure",
+              "Description": "The hydrogen coolant pressure.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_ACE2DDBB_536E_489a_A3A8_22589256302D",
+          "Name": "Switch",
+          "Description": "A generic device designed to close, or open, or both, one or more electric circuits.  All switches are two terminal devices including grounding switches. The ACDCTerminal.connected at the two sides of the switch shall not be considered for assessing switch connectivity, i.e. only Switch.open, .normalOpen and .locked are relevant.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_A7BE7DB8_C02A_427a_95EE_F342693F1590",
+              "Name": "Cut",
+              "Description": "A cut separates a line segment into two parts. The cut appears as a switch inserted between these two parts and connects them together. As the cut is normally open there is no galvanic connection between the two line segment parts. But it is possible to close the cut to get galvanic connection.\nThe cut terminals are oriented towards the line segment terminals with the same sequence number. Hence the cut terminal with sequence number equal to 1 is oriented to the line segment's terminal with sequence number equal to 1.\nThe cut terminals also act as connection points for jumpers and other equipment, e.g. a mobile generator. To enable this, connectivity nodes are placed at the cut terminals. Once the connectivity nodes are in place any conducting equipment can be connected at them.\n",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "lengthFromTerminal1",
+                  "Description": "The length to the place where the cut is located starting from side one of the cut line segment, i.e. the line segment Terminal with sequenceNumber equal to 1.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_1B506DF7_CBD6_492a_8C9E_F6752F0F0185",
+              "Name": "Disconnector",
+              "Description": "A manually operated or motor operated mechanical switching device used for changing the connections in a circuit, or for isolating a circuit or equipment from a source of power. It is required to open or close circuits when negligible current is broken or made. ",
+              "DerivedEntities": null,
+              "Attributes": []
+            },
+            {
+              "Id": "EAID_48B8830C_2798_4c86_8B89_01449EA9D4F6",
+              "Name": "Fuse",
+              "Description": "An overcurrent protective device with a circuit opening fusible part that is heated and severed by the passage of overcurrent through it. A fuse is considered a switching device because it breaks current.",
+              "DerivedEntities": null,
+              "Attributes": []
+            },
+            {
+              "Id": "EAID_39802A96_B06F_4dc2_B805_8DF16C5B398D",
+              "Name": "GroundDisconnector",
+              "Description": "A manually operated or motor operated mechanical switching device used for isolating a circuit or equipment from ground.",
+              "DerivedEntities": null,
+              "Attributes": []
+            },
+            {
+              "Id": "EAID_1D1D3E1A_76FB_4219_90DD_F6AE687989FC",
+              "Name": "Jumper",
+              "Description": "A short section of conductor with negligible impedance which can be manually removed and replaced if the circuit is de-energized. Note that zero-impedance branches can potentially be modelled by other equipment types.",
+              "DerivedEntities": null,
+              "Attributes": []
+            },
+            {
+              "Id": "EAID_BADE2A18_37F4_49bf_87BC_A087E4D2E4F7",
+              "Name": "ProtectedSwitch",
+              "Description": "A ProtectedSwitch is a switching device that can be operated by ProtectionEquipment.",
+              "DerivedEntities": [
+                {
+                  "Id": "EAID_380D92AA_1D80_4e84_A8EE_843DACEB59DD",
+                  "Name": "Breaker",
+                  "Description": "A mechanical switching device capable of making, carrying, and breaking currents under normal circuit conditions and also making, carrying for a specified time, and breaking currents under specified abnormal circuit conditions e.g.  those of short circuit.",
+                  "DerivedEntities": [
+                    {
+                      "Id": "EAID_E15222BE_C02A_4417_AED7_A395E55A943A",
+                      "Name": "DisconnectingCircuitBreaker",
+                      "Description": "A circuit breaking device including disconnecting function, eliminating the need for separate disconnectors.",
+                      "DerivedEntities": null,
+                      "Attributes": []
+                    }
+                  ],
+                  "Attributes": [
+                    {
+                      "Name": "inTransitTime",
+                      "Description": "The transition time from open to close.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_D64FF392_C9F8_4220_8861_1944D504F342",
+                  "Name": "LoadBreakSwitch",
+                  "Description": "A mechanical switching device capable of making, carrying, and breaking currents under normal operating conditions.",
+                  "DerivedEntities": null,
+                  "Attributes": []
+                },
+                {
+                  "Id": "EAID_6408BE78_ED1B_4fcc_9463_EBC827CDFEBB",
+                  "Name": "Recloser",
+                  "Description": "Pole-mounted fault interrupter with built-in phase and ground relays, current transformer (CT), and supplemental controls.\n",
+                  "DerivedEntities": null,
+                  "Attributes": []
+                }
+              ],
+              "Attributes": [
+                {
+                  "Name": "breakingCapacity",
+                  "Description": "The maximum fault current a breaking device can break safely under prescribed conditions of use.\n",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_6F75B963_A39E_4dc7_B75B_E205EE11AE4F",
+              "Name": "Sectionaliser",
+              "Description": "Automatic switch that will lock open to isolate a faulted section. It may, or may not, have load breaking capability. Its primary purpose is to provide fault sectionalising at locations where the fault current is either too high, or too low, for proper coordination of fuses.\n",
+              "DerivedEntities": null,
+              "Attributes": []
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "locked",
+              "Description": "If true, the switch is locked. The resulting switch state is a combination of locked and Switch.open attributes as follows:\n<ul>\n <li>locked=true and Switch.open=true. The resulting state is open and locked;</li>\n <li>locked=false and Switch.open=true. The resulting state is open;</li>\n <li>locked=false and Switch.open=false. The resulting state is closed.</li>\n</ul>",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "normalOpen",
+              "Description": "The attribute is used in cases when no Measurement for the status value is present. If the Switch has a status measurement the Discrete.normalValue is expected to match with the Switch.normalOpen.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "open",
+              "Description": "The attribute tells if the switch is considered open when used as input to topology processing.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "ratedCurrent",
+              "Description": "The maximum continuous current carrying capacity in amps governed by the device material and construction.\nThe attribute shall be a positive value.\n\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "retained",
+              "Description": "Branch is retained in the topological solution.  The flow through retained switches will normally be calculated in power flow.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "switchOnCount",
+              "Description": "The switch on count since the switch was last reset or initialized.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "switchOnDate",
+              "Description": "The date and time when the switch was last switched on.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_B998EE6D_BC68_49d3_813C_F5AB11CF6CFD",
+          "Name": "CoolantType",
+          "Description": "Method of cooling a machine.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "air",
+              "Description": "Air.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "hydrogenGas",
+              "Description": "Hydrogen gas.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "water",
+              "Description": "Water.\n",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_C435D1A4_31AE_46ef_BCF8_7932F0785DA9",
+          "Name": "Conductor",
+          "Description": "Combination of conducting material with consistent electrical characteristics, building a single electrical system, used to carry current between points in the power system.  ",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_625BD764_3907_4d65_8497_7FD09708BD8E",
+              "Name": "ACLineSegment",
+              "Description": "A wire or combination of wires, with consistent electrical characteristics, building a single electrical system, used to carry alternating current between points in the power system.\nFor symmetrical, transposed three phase lines, it is sufficient to use attributes of the line segment, which describe impedances and admittances for the entire length of the segment.  Additionally impedances can be computed by using length and associated per length impedances.\nThe BaseVoltage at the two ends of ACLineSegments in a Line shall have the same BaseVoltage.nominalVoltage. However, boundary lines may have slightly different BaseVoltage.nominalVoltages and variation is allowed. Larger voltage difference in general requires use of an equivalent branch.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "b0ch",
+                  "Description": "Zero sequence shunt (charging) susceptance, uniformly distributed, of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "bch",
+                  "Description": "Positive sequence shunt (charging) susceptance, uniformly distributed, of the entire line section.  This value represents the full charging over the full length of the line.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "g0ch",
+                  "Description": "Zero sequence shunt (charging) conductance, uniformly distributed, of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "gch",
+                  "Description": "Positive sequence shunt (charging) conductance, uniformly distributed, of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "r",
+                  "Description": "Positive sequence series resistance of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "r0",
+                  "Description": "Zero sequence series resistance of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "shortCircuitEndTemperature",
+                  "Description": "Maximum permitted temperature at the end of SC for the calculation of minimum short-circuit currents. Used for short circuit data exchange according to IEC 60909.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "x",
+                  "Description": "Positive sequence series reactance of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "x0",
+                  "Description": "Zero sequence series reactance of the entire line section.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_56BC76FE_5834_43c3_A34B_B9749293629D",
+              "Name": "WireSegment",
+              "Description": "A two terminal and power conducting device of negligible impedance and length represented as zero impedance device that can be used to connect auxiliary equipment to its terminals.",
+              "DerivedEntities": null,
+              "Attributes": []
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "length",
+              "Description": "Segment length for calculating line section capabilities.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_D10F6D5A_6E2C_4d81_BFE5_9DF925119193",
+          "Name": "Plant",
+          "Description": "A Plant is a collection of equipment for purposes of generation.",
+          "DerivedEntities": null,
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_D7A85068_34C3_4fcd_ABCF_8D0867FEC0FF",
+          "Name": "PetersenCoilModeKind",
+          "Description": "The mode of operation for a Petersen coil.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "fixed",
+              "Description": "Fixed position.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "manual",
+              "Description": "Manual positioning.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "automaticPositioning",
+              "Description": "Automatic positioning.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_DC90E008_CE3C_4415_960F_D7BFC4EB4693",
+          "Name": "SynchronousMachineKind",
+          "Description": "Synchronous machine type.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "generator",
+              "Description": "Indicates the synchronous machine can operate as a generator.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "condenser",
+              "Description": "Indicates the synchronous machine can operate as a condenser.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "generatorOrCondenser",
+              "Description": "Indicates the synchronous machine can operate as a generator or as a condenser.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "motor",
+              "Description": "Indicates the synchronous machine can operate as a motor.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "generatorOrMotor",
+              "Description": "Indicates the synchronous machine can operate as a generator or as a motor.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "motorOrCondenser",
+              "Description": "Indicates the synchronous machine can operate as a motor or as a condenser.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "generatorOrCondenserOrMotor",
+              "Description": "Indicates the synchronous machine can operate as a generator or as a condenser or as a motor.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_E1CB8A17_1A54_4eff_B918_817872DEA162",
+          "Name": "PowerElectronicsConnectionPhase",
+          "Description": "A single phase of a power electronics connection.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "p",
+              "Description": "Active power injection. Load sign convention is used, i.e. positive sign means flow into the equipment from the network.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "phase",
+              "Description": "Phase of this energy producer component.   If the energy producer is wye connected, the connection is from the indicated phase to the central ground or neutral point.  If the energy producer is delta connected, the phase indicates an energy producer connected from the indicated phase to the next logical non-neutral phase.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "q",
+              "Description": "Reactive power injection. Load sign convention is used, i.e. positive sign means flow into the equipment from the network.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_E33769DD_F111_4793_AF11_B4AFE5FDE50F",
+          "Name": "Connector",
+          "Description": "A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation and are modelled with a single logical terminal.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_0A63A81D_5142_4736_BD22_8C28BA32F233",
+              "Name": "BusbarSection",
+              "Description": "A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation. \nVoltage measurements are typically obtained from voltage transformers that are connected to busbar sections. A bus bar section may have many physical terminals but for analysis is modelled with exactly one logical terminal.",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "ipMax",
+                  "Description": "Maximum allowable peak short-circuit current of busbar (Ipmax in IEC 60909-0). \nMechanical limit of the busbar in the substation itself. Used for short circuit data exchange according to IEC 60909.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            },
+            {
+              "Id": "EAID_BE90EE60_8212_44ec_9F4D_775719E80216",
+              "Name": "Junction",
+              "Description": "A point where one or more conducting equipments are connected with zero resistance.",
+              "DerivedEntities": null,
+              "Attributes": []
+            }
+          ],
+          "Attributes": []
+        },
+        {
+          "Id": "EAID_F43099C0_90EA_47f1_B038_EDE831744C07",
+          "Name": "TapChanger",
+          "Description": "Mechanism for changing transformer winding tap positions.",
+          "DerivedEntities": [
+            {
+              "Id": "EAID_7CEA69EF_C8A8_4f3d_99B2_9F934CC95BF4",
+              "Name": "PhaseTapChanger",
+              "Description": "A transformer phase shifting tap model that controls the phase angle difference across the power transformer and potentially the active power flow through the power transformer.  This phase tap model may also impact the voltage magnitude.",
+              "DerivedEntities": [
+                {
+                  "Id": "EAID_BFC68185_DEEC_4665_B2E9_64EC73F18241",
+                  "Name": "PhaseTapChangerLinear",
+                  "Description": "Describes a tap changer with a linear relation between the tap step and the phase angle difference across the transformer. This is a mathematical model that is an approximation of a real phase tap changer.\nThe phase angle is computed as stepPhaseShiftIncrement times the tap position.\nThe voltage magnitude of both sides is the same.",
+                  "DerivedEntities": null,
+                  "Attributes": [
+                    {
+                      "Name": "stepPhaseShiftIncrement",
+                      "Description": "Phase shift per step position. A positive value indicates a positive angle variation from the Terminal at the  PowerTransformerEnd,  where the TapChanger is located, into the transformer.\nThe actual phase shift increment might be more accurately computed from the symmetrical or asymmetrical models or a tap step table lookup if those are available.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "xMax",
+                      "Description": "The reactance depends on the tap position according to a \"u\" shaped curve. The maximum reactance (xMax) appears at the low and high tap positions. Depending on the “u” curve the attribute can be either higher or lower than PowerTransformerEnd.x.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "xMin",
+                      "Description": "The reactance depends on the tap position according to a \"u\" shaped curve. The minimum reactance (xMin) appears at the mid tap position.  PowerTransformerEnd.x shall be consistent with PhaseTapChangerLinear.xMin and PhaseTapChangerNonLinear.xMin. In case of inconsistency, PowerTransformerEnd.x shall be used.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_5B26C38F_A09B_439c_B5E2_A9F4ED801883",
+                  "Name": "PhaseTapChangerNonLinear",
+                  "Description": "The non-linear phase tap changer describes the non-linear behaviour of a phase tap changer. This is a base class for the symmetrical and asymmetrical phase tap changer models. The details of these models can be found in IEC 61970-301.",
+                  "DerivedEntities": [
+                    {
+                      "Id": "EAID_4161A809_7542_4c92_A7D0_99AE5682E89C",
+                      "Name": "PhaseTapChangerAsymmetrical",
+                      "Description": "Describes the tap model for an asymmetrical phase shifting transformer in which the difference voltage vector adds to the in-phase winding. The out-of-phase winding is the transformer end where the tap changer is located.  The angle between the in-phase and out-of-phase windings is named the winding connection angle. The phase shift depends on both the difference voltage magnitude and the winding connection angle.",
+                      "DerivedEntities": null,
+                      "Attributes": [
+                        {
+                          "Name": "windingConnectionAngle",
+                          "Description": "The phase angle between the in-phase winding and the out-of -phase winding used for creating phase shift. The out-of-phase winding produces what is known as the difference voltage.  Setting this angle to 90 degrees is not the same as a symmetrical transformer. The attribute can only be multiples of 30 degrees.  The allowed range is -150 degrees to 150 degrees excluding 0.",
+                          "Type": null,
+                          "TypeReferenceId": null
+                        }
+                      ]
+                    },
+                    {
+                      "Id": "EAID_4841E53F_1B5B_487b_8F43_2ABA7B1FC93D",
+                      "Name": "PhaseTapChangerSymmetrical",
+                      "Description": "Describes a symmetrical phase shifting transformer tap model in which the voltage magnitude of both sides is the same. The difference voltage magnitude is the base in an equal-sided triangle where the sides corresponds to the primary and secondary voltages. The phase angle difference corresponds to the top angle and can be expressed as twice the arctangent of half the total difference voltage.",
+                      "DerivedEntities": null,
+                      "Attributes": []
+                    }
+                  ],
+                  "Attributes": [
+                    {
+                      "Name": "voltageStepIncrement",
+                      "Description": "The voltage step increment on the out of phase winding (the PowerTransformerEnd where the TapChanger is located) specified in percent of rated voltage of the PowerTransformerEnd. A positive value means a positive voltage variation from the Terminal at the PowerTransformerEnd, where the TapChanger is located, into the transformer.\nWhen the increment is negative, the voltage decreases when the tap step increases.",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "xMax",
+                      "Description": "The reactance depends on the tap position according to a \"u\" shaped curve. The maximum reactance (xMax) appears at the low and high tap positions. Depending on the “u” curve the attribute can be either higher or lower than PowerTransformerEnd.x.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    },
+                    {
+                      "Name": "xMin",
+                      "Description": "The reactance depend on the tap position according to a \"u\" shaped curve. The minimum reactance (xMin) appear at the mid tap position.   PowerTransformerEnd.x shall be consistent with PhaseTapChangerLinear.xMin and PhaseTapChangerNonLinear.xMin. In case of inconsistency, PowerTransformerEnd.x shall be used.\n",
+                      "Type": null,
+                      "TypeReferenceId": null
+                    }
+                  ]
+                },
+                {
+                  "Id": "EAID_27778291_3EC1_429b_AD1C_2E9841406540",
+                  "Name": "PhaseTapChangerTabular",
+                  "Description": "Describes a tap changer with a table defining the relation between the tap step and the phase angle difference across the transformer. ",
+                  "DerivedEntities": null,
+                  "Attributes": []
+                }
+              ],
+              "Attributes": []
+            },
+            {
+              "Id": "EAID_09909286_00A6_451c_B420_2E52ABEB2667",
+              "Name": "RatioTapChanger",
+              "Description": "A tap changer that changes the voltage ratio impacting the voltage magnitude but not the phase angle across the transformer.\n\nAngle sign convention (general): Positive value indicates a positive phase shift from the winding where the tap is located to the other winding (for a two-winding transformer).",
+              "DerivedEntities": null,
+              "Attributes": [
+                {
+                  "Name": "stepVoltageIncrement",
+                  "Description": "Tap step increment, in per cent of rated voltage of the power transformer end, per step position.\nWhen the increment is negative, the voltage decreases when the tap step increases.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                },
+                {
+                  "Name": "tculControlMode",
+                  "Description": "Specifies the regulation control mode (voltage or reactive) of the RatioTapChanger.",
+                  "Type": null,
+                  "TypeReferenceId": null
+                }
+              ]
+            }
+          ],
+          "Attributes": [
+            {
+              "Name": "controlEnabled",
+              "Description": "Specifies the regulation status of the equipment.  True is regulating, false is not regulating.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "highStep",
+              "Description": "Highest possible tap step position, advance from neutral.\nThe attribute shall be greater than lowStep.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "initialDelay",
+              "Description": "For an LTC, the delay for initial tap changer operation (first step change).",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "lowStep",
+              "Description": "Lowest possible tap step position, retard from neutral.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "ltcFlag",
+              "Description": "Specifies whether or not a TapChanger has load tap changing capabilities.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "neutralStep",
+              "Description": "The neutral tap step position for this winding.\nThe attribute shall be equal to or greater than lowStep and equal or less than highStep.\nIt is the step position where the voltage is neutralU when the other terminals of the transformer are at the ratedU.  If there are other tap changers on the transformer those taps are kept constant at their neutralStep.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "neutralU",
+              "Description": "Voltage at which the winding operates at the neutral tap setting. It is the voltage at the terminal of the PowerTransformerEnd associated with the tap changer when all tap changers on the transformer are at their neutralStep position.  Normally neutralU of the tap changer is the same as ratedU of the PowerTransformerEnd, but it can differ in special cases such as when the tapping mechanism is separate from the winding more common on lower voltage transformers.\nThis attribute is not relevant for PhaseTapChangerAsymmetrical, PhaseTapChangerSymmetrical and PhaseTapChangerLinear. ",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "normalStep",
+              "Description": "The tap step position used in \"normal\" network operation for this winding. For a \"Fixed\" tap changer indicates the current physical tap setting.\nThe attribute shall be equal to or greater than lowStep and equal to or less than highStep.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "step",
+              "Description": "Tap changer position.\nStarting step for a steady state solution. Non integer values are allowed to support continuous tap variables. The reasons for continuous value are to support study cases where no discrete tap changer has yet been designed, a solution where a narrow voltage band forces the tap step to oscillate or to accommodate for a continuous solution as input.\nThe attribute shall be equal to or greater than lowStep and equal to or less than highStep.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "subsequentDelay",
+              "Description": "For an LTC, the delay for subsequent tap changer operation (second and later step changes).",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_FD4BEA47_D945_4bc1_A574_5C0618B5C429",
+          "Name": "ShortCircuitRotorKind",
+          "Description": "Type of rotor, used by short circuit applications.",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "salientPole1",
+              "Description": "Salient pole 1 in IEC 60909.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "salientPole2",
+              "Description": "Salient pole 2 in IEC 60909.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "turboSeries1",
+              "Description": "Turbo Series 1 in IEC 60909.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "turboSeries2",
+              "Description": "Turbo series 2 in IEC 60909.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        },
+        {
+          "Id": "EAID_FF3816E1_1CFE_4051_9F75_0F3E94DABAFB",
+          "Name": "WindingConnection",
+          "Description": "Winding connection type.\n",
+          "DerivedEntities": null,
+          "Attributes": [
+            {
+              "Name": "D",
+              "Description": "Delta.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "Y",
+              "Description": "Wye.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "Z",
+              "Description": "ZigZag.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "Yn",
+              "Description": "Wye, with neutral brought out for grounding.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "Zn",
+              "Description": "ZigZag, with neutral brought out for grounding.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "A",
+              "Description": "Autotransformer common winding.",
+              "Type": null,
+              "TypeReferenceId": null
+            },
+            {
+              "Name": "I",
+              "Description": "Independent winding, for single-phase connections.",
+              "Type": null,
+              "TypeReferenceId": null
+            }
+          ]
+        }
+      ]
+    }
+  ]
+} 

@@ -25,6 +25,7 @@
     <None Update="TestData/power-transformer.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="TestData/power-transformer-end.json" CopyToOutputDirectory="PreserveNewest" />
     <None Update="TestData/entity-group.json" CopyToOutputDirectory="PreserveNewest" />
+    <None Update="TestData/expected-schema.json" CopyToOutputDirectory="PreserveNewest" />
   </ItemGroup>
 
   <ItemGroup>

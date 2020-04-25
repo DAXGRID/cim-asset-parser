@@ -7,15 +7,45 @@ using System.Collections.Generic;
 using System.Linq;
 using Microsoft.Extensions.Logging;
 using FakeItEasy;
+using Newtonsoft.Json;
+using System.IO;
 
 namespace CIM.Asset.Parser.Tests.Asset
 {
     public class AssetSchemaCreatorTests
     {
-        [Theory]
-        [JsonFileData("TestData/entity-group.json")]
-        public void Create_ShouldReturnSchemaContaingCimEntities_OnSuppliedCimEntities(IEnumerable<CimEntity> cimEntities)
+        [Fact]
+        public void Create_ShouldReturnSchemaContaingNamespacesContaingCimEntities_OnSuppliedCimEntities()
         {
+            var cimEntities = TestDataHelper.LoadTestData<IEnumerable<CimEntity>>("TestData/entity-group.json");
+            var logger = A.Fake<ILogger<AssetSchemaCreator>>();
+            var assetSchemaCreator = new AssetSchemaCreator(logger);
+            var schema = assetSchemaCreator.Create(cimEntities);
+
+            schema.Should().NotBeNull();
+            schema.Namespaces.Should().NotBeNull();
+            schema.Namespaces.FirstOrDefault().Entities.Count().Should().BeGreaterThan(0);
+        }
+
+        [Fact]
+        public void Create_ShouldReturnSchema_OnSuppliedCimEntities()
+        {
+            var cimEntities = TestDataHelper.LoadTestData<IEnumerable<CimEntity>>("TestData/entity-group.json");
+            var expectedSchema = JsonConvert.DeserializeObject<Schema>(File.ReadAllText("TestData/expected-schema.json"));
+
+            var logger = A.Fake<ILogger<AssetSchemaCreator>>();
+            var assetSchemaCreator = new AssetSchemaCreator(logger);
+            var schema = assetSchemaCreator.Create(cimEntities);
+
+            File.WriteAllText("expected.json", Newtonsoft.Json.JsonConvert.SerializeObject(schema, Newtonsoft.Json.Formatting.Indented));
+
+            schema.Should().BeEquivalentTo(expectedSchema);
+        }
+
+        [Fact]
+        public void Create_ShouldReturnEnergyConnectionWithDerivedEntities_OnSuppliedCimEntities()
+        {
+            var cimEntities = TestDataHelper.LoadTestData<IEnumerable<CimEntity>>("TestData/entity-group.json");
             var logger = A.Fake<ILogger<AssetSchemaCreator>>();
             var assetSchemaCreator = new AssetSchemaCreator(logger);
             var schema = assetSchemaCreator.Create(cimEntities);
@@ -23,14 +53,23 @@ namespace CIM.Asset.Parser.Tests.Asset
             schema.Namespaces.FirstOrDefault()
                 .Entities.FirstOrDefault(x => x.Name == "EnergyConnection")
                 .DerivedEntities.Count().Should().BeGreaterThan(0);
+        }
+
+        [Fact]
+        public void Create_ShouldReturnAsyncronousMachineKindWithNoDerivedEntities_OnSuppliedCimEntities()
+        {
+            var cimEntities = TestDataHelper.LoadTestData<IEnumerable<CimEntity>>("TestData/entity-group.json");
+            var logger = A.Fake<ILogger<AssetSchemaCreator>>();
+            var assetSchemaCreator = new AssetSchemaCreator(logger);
+            var schema = assetSchemaCreator.Create(cimEntities);
 
             schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault(x => x.Name == "AsynchronousMachineKind").DerivedEntities.Should().BeNull();
         }
 
-        [Theory]
-        [JsonFileData("TestData/entity-group.json")]
-        public void Create_ShouldReturnExactAttributeCount_OnSuppliedCimEntities(IEnumerable<CimEntity> cimEntities)
+        [Fact]
+        public void Create_ShouldReturnExactAttributeCount_OnSuppliedCimEntities()
         {
+            var cimEntities = TestDataHelper.LoadTestData<IEnumerable<CimEntity>>("TestData/entity-group.json");
             var logger = A.Fake<ILogger<AssetSchemaCreator>>();
             var assetSchemaCreator = new AssetSchemaCreator(logger);
             var schema = assetSchemaCreator.Create(cimEntities);
