@@ -83,6 +83,8 @@ namespace CIM.Asset.Parser.Asset
                 Id = x.XmiId,
                 Name = x.Name,
                 Description = x.Description,
+                DerivedEntities = new List<Entity>(),
+                StereoType = x.StereoType,
                 Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute {
                         Description = y.Description,
                         Name = y.Name,
@@ -103,9 +105,6 @@ namespace CIM.Asset.Parser.Asset
                 if (!(String.IsNullOrEmpty(cimSuperTypeId)))
                 {
                     var superType = _lookupEntities.ContainsKey(cimSuperTypeId) ? _lookupEntities[cimSuperTypeId] : null;
-
-                    if (!(superType is null) && superType.DerivedEntities is null)
-                        superType.DerivedEntities = new List<Entity>();
 
                     if (!(superType is null))
                     {

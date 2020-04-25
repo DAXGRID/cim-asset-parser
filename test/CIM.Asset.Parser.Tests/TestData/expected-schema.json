@@ -7,7 +7,8 @@
           "Id": "EAID_03C06AF1_0AFA_4b28_8911_9258B630BBA4",
           "Name": "AsynchronousMachineKind",
           "Description": "Kind of Asynchronous Machine.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "generator",
@@ -27,12 +28,14 @@
           "Id": "EAID_081B186A_D45B_44d1_81DF_94EE3918A4D5",
           "Name": "ShuntCompensatorPhase",
           "Description": "Single phase of a multi-phase shunt compensator when its attributes might be different per phase.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_15B42F89_92AF_4830_BC3C_4CD7FB779043",
               "Name": "LinearShuntCompensatorPhase",
               "Description": "A per phase linear shunt compensator has banks or sections with equal admittance values.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "bPerSection",
@@ -52,7 +55,8 @@
               "Id": "EAID_178D630D_8883_41d1_BFE0_81BFD2B70087",
               "Name": "NonlinearShuntCompensatorPhase",
               "Description": "A per phase non linear shunt compensator has bank or section admittance values that differ. The attributes g and b of the associated NonlinearShuntCompensatorPhasePoint describe the total conductance and admittance of a NonlinearShuntCompensatorPhasePoint at a section number specified by NonlinearShuntCompensatorPhasePoint.sectionNumber.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             }
           ],
@@ -87,7 +91,8 @@
           "Id": "EAID_0AD52D65_4270_45c1_9AF4_29C53A398AE3",
           "Name": "SinglePhaseKind",
           "Description": "Enumeration of single phase identifiers. Allows designation of single phases for both transmission and distribution equipment, circuits and loads.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "A",
@@ -131,19 +136,22 @@
           "Id": "EAID_0CAA4373_C2DA_47f6_A18B_9EDC59465FCE",
           "Name": "TransformerTank",
           "Description": "An assembly of two or more coupled windings that transform electrical power between voltage levels. These windings are bound on a common core and placed in the same tank. Transformer tank can be used to model both single-phase and 3-phase transformers.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_13966DE6_BE71_4f50_8051_2A082891138D",
           "Name": "EnergyConnection",
           "Description": "A connection of energy generation or consumption on the power system model.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_BCEC7EE8_7294_4b50_8216_0286C31A035C",
               "Name": "EnergyConsumer",
               "Description": "Generic user of energy - a  point of consumption on the power system model.\nEnergyConsumer.pfixed, .qfixed, .pfixedPct and .qfixedPct have meaning only if there is no LoadResponseCharacteristic associated with EnergyConsumer or if LoadResponseCharacteristic.exponentModel is set to False.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "customerCount",
@@ -205,7 +213,8 @@
               "Id": "EAID_7174F78A_A2B7_457a_8EBC_4E9CBA6DA738",
               "Name": "EnergySource",
               "Description": "A generic equivalent for an energy supplier on a transmission or distribution voltage level.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "activePower",
@@ -291,12 +300,14 @@
               "Id": "EAID_598D5E45_FF89_4074_B3C1_3F40425EE8D6",
               "Name": "RegulatingCondEq",
               "Description": "A type of conducting equipment that can regulate a quantity (i.e. voltage or flow) at a specific point in the network. ",
+              "StereoType": null,
               "DerivedEntities": [
                 {
                   "Id": "EAID_B7E110A4_CE7A_4414_9477_4310D44B43D0",
                   "Name": "ExternalNetworkInjection",
                   "Description": "This class represents the external network and it is used for IEC 60909 calculations.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "governorSCD",
@@ -412,7 +423,8 @@
                   "Id": "EAID_CE012E43_26BF_4af0_ABD2_68CA9BB35D60",
                   "Name": "FrequencyConverter",
                   "Description": "A device to convert from one frequency to another (e.g., frequency F1 to F2) comprises a pair of FrequencyConverter instances. One converts from F1 to DC, the other converts the DC to F2.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "frequency",
@@ -450,7 +462,8 @@
                   "Id": "EAID_AEF4A2AB_D126_4311_B299_CAB7D826A16E",
                   "Name": "PowerElectronicsConnection",
                   "Description": "A connection to the AC network for energy production or consumption that uses power electronics rather than rotating machines.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "maxIFault",
@@ -536,12 +549,14 @@
                   "Id": "EAID_8ADF23B6_43B5_436b_91CE_E22D54B323B8",
                   "Name": "RotatingMachine",
                   "Description": "A rotating machine which may be used as a generator or motor.",
+                  "StereoType": null,
                   "DerivedEntities": [
                     {
                       "Id": "EAID_EC5FCEFF_1274_4771_9D92_C0FF7A100AB8",
                       "Name": "AsynchronousMachine",
                       "Description": "A rotating machine whose shaft rotates asynchronously with the electrical field.  Also known as an induction machine with no external connection to the rotor windings, e.g. squirrel-cage induction machine.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": [
                         {
                           "Name": "asynchronousMachineType",
@@ -669,7 +684,8 @@
                       "Id": "EAID_7862E21E_F054_4a33_949F_04B8B4690D49",
                       "Name": "SynchronousMachine",
                       "Description": "An electromechanical device that operates with shaft rotating synchronously with the network. It is a single machine operating either as a generator or synchronous condenser or pump.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": [
                         {
                           "Name": "aVRToManualLag",
@@ -891,12 +907,14 @@
                   "Id": "EAID_92B30569_5ED0_4fc0_B796_984D9BF75453",
                   "Name": "ShuntCompensator",
                   "Description": "A shunt capacitor or reactor or switchable bank of shunt capacitors or reactors. A section of a shunt compensator is an individual capacitor or reactor.  A negative value for reactivePerSection indicates that the compensator is a reactor. ShuntCompensator is a single terminal device.  Ground is implied.",
+                  "StereoType": null,
                   "DerivedEntities": [
                     {
                       "Id": "EAID_94E82A47_069F_4e2b_A4FA_8CFD5E140FD7",
                       "Name": "LinearShuntCompensator",
                       "Description": "A linear shunt compensator has banks or sections with equal admittance values.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": [
                         {
                           "Name": "b0PerSection",
@@ -928,7 +946,8 @@
                       "Id": "EAID_111DB4FF_7967_4eb5_AABE_CDA0EA065CF8",
                       "Name": "NonlinearShuntCompensator",
                       "Description": "A non linear shunt compensator has bank or section admittance values that differ. The attributes g, b, g0 and b0 of the associated NonlinearShuntCompensatorPoint describe the total conductance and admittance of a NonlinearShuntCompensatorPoint at a section number specified by NonlinearShuntCompensatorPoint.sectionNumber.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": []
                     }
                   ],
@@ -999,7 +1018,8 @@
                   "Id": "EAID_B540EF99_8CE4_4da6_9E4D_D22E867F8BAE",
                   "Name": "StaticVarCompensator",
                   "Description": "A facility for providing variable and controllable shunt reactive power. The SVC typically consists of a stepdown transformer, filter, thyristor-controlled reactor, and thyristor-switched capacitor arms.\n\nThe SVC may operate in fixed MVar output mode or in voltage control mode. When in voltage control mode, the output of the SVC will be proportional to the deviation of voltage at the controlled bus from the voltage setpoint.  The SVC characteristic slope defines the proportion.  If the voltage at the controlled bus is equal to the voltage setpoint, the SVC MVar output is zero.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "capacitiveRating",
@@ -1056,12 +1076,14 @@
           "Id": "EAID_199B695F_644C_4cbf_AB67_76AB51EE5078",
           "Name": "TapChangerTablePoint",
           "Description": "Describes each tap step in the tabular curve.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_D2A2282D_3EBD_47ea_8339_B78FEC97977F",
               "Name": "PhaseTapChangerTablePoint",
               "Description": "Describes each tap step in the phase tap changer tabular curve.\n",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "angle",
@@ -1075,7 +1097,8 @@
               "Id": "EAID_607E97C8_E4A3_4721_8592_1AE1B256EB77",
               "Name": "RatioTapChangerTablePoint",
               "Description": "Describes each tap step in the ratio tap changer tabular curve.\n",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             }
           ],
@@ -1122,7 +1145,8 @@
           "Id": "EAID_1EABE5E1_F61A_4758_ADFC_E9C816E97063",
           "Name": "EnergySourcePhase",
           "Description": "Represents the single phase information of an unbalanced energy source.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "phase",
@@ -1136,14 +1160,16 @@
           "Id": "EAID_204A4D0D_C13F_4c97_BBE8_EEE743ACDA3F",
           "Name": "TapSchedule",
           "Description": "A pre-established pattern over time for a tap step.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_25B2D790_161A_45c8_8551_E77A34DE684C",
           "Name": "TransformerCoreAdmittance",
           "Description": "The transformer core admittance.  Used to specify the core admittance of a transformer in a manner that can be shared among power transformers.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "b",
@@ -1175,7 +1201,8 @@
           "Id": "EAID_269933B9_3FD0_433d_B360_86FF6CDCDDC8",
           "Name": "SVCControlMode",
           "Description": "Static VAr Compensator control mode.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "reactivePower",
@@ -1195,7 +1222,8 @@
           "Id": "EAID_2933FF4A_CF68_4099_B3FE_DBE8919C85AE",
           "Name": "EnergyConsumerPhase",
           "Description": "A single phase of an energy consumer.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "p",
@@ -1245,7 +1273,8 @@
           "Id": "EAID_2A28E29E_8761_4008_AAD2_FDA8D5889F29",
           "Name": "SynchronousMachineOperatingMode",
           "Description": "Synchronous machine operating mode.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "generator",
@@ -1271,14 +1300,16 @@
           "Id": "EAID_350A69CE_A6C9_4967_9BB9_7BF7A361B5C8",
           "Name": "PhaseTapChangerTable",
           "Description": "Describes a tabular curve for how the phase angle difference and impedance varies with the tap step.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_35D1EE00_F393_4e93_A01A_B4E816466033",
           "Name": "TransformerStarImpedance",
           "Description": "Transformer star impedance (Pi-model) that accurately reflects impedance for transformers with 2 or 3 windings. For transformers with 4 or more windings, TransformerMeshImpedance class shall be used.\nFor transmission networks use PowerTransformerEnd impedances (r, r0, x, x0, b, b0, g and g0).",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "r",
@@ -1310,14 +1341,16 @@
           "Id": "EAID_3C7AD112_5779_4f2a_8A87_ABB7FBA99EBF",
           "Name": "SwitchSchedule",
           "Description": "A schedule of switch positions.  If RegularTimePoint.value1 is 0, the switch is open.  If 1, the switch is closed.  ",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_3D50627C_324C_4e9d_AB5C_592E0A1E0AFE",
           "Name": "PowerTransformer",
           "Description": "An electrical device consisting of  two or more coupled windings, with or without a magnetic core, for introducing mutual coupling between electric circuits. Transformers can be used to control voltage and phase shift (active power flow).\nA power transformer may be composed of separate transformer tanks that need not be identical.\nA power transformer can be modelled with or without tanks and is intended for use in both balanced and unbalanced representations.   A power transformer typically has two terminals, but may have one (grounding), three or more terminals.\nThe inherited association ConductingEquipment.BaseVoltage should not be used.  The association from TransformerEnd to BaseVoltage should be used instead.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "beforeShCircuitHighestOperatingCurrent",
@@ -1367,21 +1400,24 @@
           "Id": "EAID_437ABFFA_B6B0_47fd_BFE2_76ACD0B7FFDC",
           "Name": "Ground",
           "Description": "A point where the system is grounded used for connecting conducting equipment to ground. The power system model can have any number of grounds.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_43D9D2B8_DA1E_45c4_B99D_EC28FCAB742B",
           "Name": "Line",
           "Description": "Contains equipment beyond a substation belonging to a power transmission line. ",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_44BDEBB6_4580_4df6_9245_179240EB5058",
           "Name": "NonlinearShuntCompensatorPhasePoint",
           "Description": "A per phase non linear shunt compensator bank or section admittance value. The number of NonlinearShuntCompenstorPhasePoint instances associated with a NonlinearShuntCompensatorPhase shall be equal to ShuntCompensatorPhase.maximumSections. ShuntCompensator.sections shall only be set to one of the NonlinearShuntCompenstorPhasePoint.sectionNumber. There is no interpolation between NonlinearShuntCompenstorPhasePoint-s.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "b",
@@ -1407,14 +1443,16 @@
           "Id": "EAID_48632975_29AC_44f1_AC6C_1C7E7CEDBB0B",
           "Name": "RegulationSchedule",
           "Description": "A pre-established pattern over time for a controlled variable, e.g., busbar voltage.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_49FE2028_1AD5_4550_A55A_FA43C4D07C38",
           "Name": "TransformerMeshImpedance",
           "Description": "Transformer mesh impedance (Delta-model) between transformer ends.\nThe typical case is that this class describes the impedance between two transformer ends pair-wise, i.e. the cardinalities at both transformer end associations are 1. However, in cases where two or more transformer ends are modelled the cardinalities are larger than 1.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "r",
@@ -1446,7 +1484,8 @@
           "Id": "EAID_4BAF4C19_5181_41b2_B690_9758DB9D4F8B",
           "Name": "SwitchPhase",
           "Description": "Single phase of a multi-phase switch when its attributes might be different per phase.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "closed",
@@ -1484,7 +1523,8 @@
           "Id": "EAID_5B656059_8C65_455e_9E02_5A14C2631D6A",
           "Name": "SeriesCompensator",
           "Description": "A Series Compensator is a series capacitor or reactor or an AC transmission line without charging susceptance.  It is a two terminal device.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "r",
@@ -1534,7 +1574,8 @@
           "Id": "EAID_5DE5A24B_B6E5_4f26_890B_6906EB2213C8",
           "Name": "PhaseShuntConnectionKind",
           "Description": "The configuration of phase connections for a single terminal device such as a load or capacitor.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "D",
@@ -1572,17 +1613,20 @@
           "Id": "EAID_5E96862B_1FFF_4fbf_B5D5_919E4DE8A1A9",
           "Name": "PerLengthLineParameter",
           "Description": "Common type for per-length electrical catalogues describing line parameters.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_C4C200C6_DFC4_4bec_AE5E_84B332E79E0C",
               "Name": "PerLengthImpedance",
               "Description": "Common type for per-length impedance electrical catalogues.\n",
+              "StereoType": null,
               "DerivedEntities": [
                 {
                   "Id": "EAID_048ADD31_9C78_4fb8_93AD_0F89496AC846",
                   "Name": "PerLengthPhaseImpedance",
                   "Description": "Impedance and admittance parameters per unit length for n-wire unbalanced lines, in matrix form.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "conductorCount",
@@ -1596,7 +1640,8 @@
                   "Id": "EAID_03E92000_9F13_4deb_B5E1_B3262BEBDE92",
                   "Name": "PerLengthSequenceImpedance",
                   "Description": "Sequence impedance and admittance parameters per unit length, for transposed lines of 1, 2, or 3 phases. For 1-phase lines, define x=x0=xself. For 2-phase lines, define x=xs-xm and x0=xs+xm.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "b0ch",
@@ -1658,7 +1703,8 @@
           "Id": "EAID_601E1E7A_46DB_4d07_95C8_4B61EBFC65C0",
           "Name": "TransformerControlMode",
           "Description": "Control modes for a transformer.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "volt",
@@ -1678,7 +1724,8 @@
           "Id": "EAID_6A5875D8_2294_45a2_BEE1_C33F5FEDF914",
           "Name": "CompositeSwitch",
           "Description": "A model of a set of individual Switches normally enclosed within the same cabinet and possibly with interlocks that restrict the combination of switch positions. These are typically found in medium voltage distribution networks. \nA CompositeSwitch could represent a Ring-Main-Unit (RMU), or pad-mounted switchgear, with primitive internal devices such as an internal bus-bar plus 3 or 4 internal switches each of which may individually be open or closed. A CompositeSwitch and a set of contained Switches can also be used to represent a multi-position switch e.g. a switch that can connect a circuit to Ground, Open or Busbar.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "compositeSwitchType",
@@ -1692,12 +1739,14 @@
           "Id": "EAID_6E6AF445_8CD5_434b_8E74_08970A4E6D95",
           "Name": "TransformerEnd",
           "Description": "A conducting connection point of a power transformer. It corresponds to a physical transformer winding terminal.  In earlier CIM versions, the TransformerWinding class served a similar purpose, but this class is more flexible because it associates to terminal but is not a specialization of ConductingEquipment.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_51A671B1_C546_4106_92F9_ED7C0305A2DB",
               "Name": "PowerTransformerEnd",
               "Description": "A PowerTransformerEnd is associated with each Terminal of a PowerTransformer.\nThe impedance values r, r0, x, and x0 of a PowerTransformerEnd represents a star equivalent as follows.\n1) for a two Terminal PowerTransformer the high voltage (TransformerEnd.endNumber=1) PowerTransformerEnd has non zero values on r, r0, x, and x0 while the low voltage (TransformerEnd.endNumber=2) PowerTransformerEnd has zero values for r, r0, x, and x0.  Parameters are always provided, even if the PowerTransformerEnds have the same rated voltage.  In this case, the parameters are provided at the PowerTransformerEnd which has TransformerEnd.endNumber equal to 1.\n2) for a three Terminal PowerTransformer the three PowerTransformerEnds represent a star equivalent with each leg in the star represented by r, r0, x, and x0 values.\n3) For a three Terminal transformer each PowerTransformerEnd shall have g, g0, b and b0 values corresponding to the no load losses distributed on the three PowerTransformerEnds. The total no load loss shunt impedances may also be placed at one of the PowerTransformerEnds, preferably the end numbered 1, having the shunt values on end 1.  This is the preferred way.\n4) for a PowerTransformer with more than three Terminals the PowerTransformerEnd impedance values cannot be used. Instead use the TransformerMeshImpedance or split the transformer into multiple PowerTransformers.\nEach PowerTransformerEnd must be contained by a PowerTransformer. Because a PowerTransformerEnd (or any other object) can not be contained by more than one parent, a PowerTransformerEnd can not have an association to an EquipmentContainer (Substation, VoltageLevel, etc).",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "b",
@@ -1777,7 +1826,8 @@
               "Id": "EAID_7CAE4704_5B8C_4ad5_B3B1_6ECD141F8A09",
               "Name": "TransformerTankEnd",
               "Description": "Transformer tank end represents an individual winding for unbalanced models or for transformer tanks connected into a bank (and bank is modelled with the PowerTransformer).\n",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "phases",
@@ -1837,14 +1887,16 @@
           "Id": "EAID_709A85C2_97B8_431c_A661_FB83BDEBF933",
           "Name": "VoltageControlZone",
           "Description": "An area of the power system network which is defined for secondary voltage control purposes. A voltage control zone consists of a collection of substations with a designated bus bar section whose voltage will be controlled.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_7AA04AD0_E999_4595_877D_33844C01F860",
           "Name": "RegulatingControlModeKind",
           "Description": "The kind of regulation model.   For example regulating voltage, reactive power, active power, etc.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "voltage",
@@ -1900,7 +1952,8 @@
           "Id": "EAID_7B0758AF_6E8E_438e_BD69_A838A56F256D",
           "Name": "Clamp",
           "Description": "A Clamp is a galvanic connection at a line segment where other equipment is connected. A Clamp does not cut the line segment. \nA Clamp is ConductingEquipment and has one Terminal with an associated ConnectivityNode. Any other ConductingEquipment can be connected to the Clamp ConnectivityNode.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "lengthFromTerminal1",
@@ -1914,7 +1967,8 @@
           "Id": "EAID_84627F88_F666_4f07_890A_62622070CD0F",
           "Name": "ACLineSegmentPhase",
           "Description": "Represents a single wire of an alternating current line segment.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "phase",
@@ -1934,19 +1988,22 @@
           "Id": "EAID_8A7FA923_A193_4c6f_B315_1DF1A13C9AA1",
           "Name": "RatioTapChangerTable",
           "Description": "Describes a curve for how the voltage magnitude and impedance varies with the tap step. ",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_8C28B28D_4735_4033_9F33_7D86F6819922",
           "Name": "RegulatingControl",
           "Description": "Specifies a set of equipment that works together to control a power system quantity such as voltage or flow. \nRemote bus voltage control is possible by specifying the controlled terminal located at some place remote from the controlling equipment.\nThe specified terminal shall be associated with the connectivity node of the controlled point.  The most specific subtype of RegulatingControl shall be used in case such equipment participate in the control, e.g. TapChangerControl for tap changers.\nFor flow control, load sign convention is used, i.e. positive sign means flow out from a TopologicalNode (bus) into the conducting equipment.\nThe attribute minAllowedTargetValue and maxAllowedTargetValue are required in the following cases:\n- For a power generating module operated in power factor control mode to specify maximum and minimum power factor values;\n- Whenever it is necessary to have an off center target voltage for the tap changer regulator. For instance, due to long cables to off shore wind farms and the need to have a simpler setup at the off shore transformer platform, the voltage is controlled from the land at the connection point for the off shore wind farm. Since there usually is a voltage rise along the cable, there is typical and overvoltage of up 3-4 kV compared to the on shore station. Thus in normal operation the tap changer on the on shore station is operated with a target set point, which is in the lower parts of the dead band.\nThe attributes minAllowedTargetValue and maxAllowedTargetValue are not related to the attribute targetDeadband and thus they are not treated as an alternative of the targetDeadband. They are needed due to limitations in the local substation controller. The attribute targetDeadband is used to prevent the power flow from move the tap position in circles (hunting) that is to be used regardless of the attributes minAllowedTargetValue and maxAllowedTargetValue.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_32D5C39A_ABB5_4ac8_8B3F_FBDC00DB19BB",
               "Name": "TapChangerControl",
               "Description": "Describes behaviour specific to tap changers, e.g. how the voltage at the end of a line varies with the load level and compensation of the voltage drop by tap adjustment.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "limitVoltage",
@@ -2048,7 +2105,8 @@
           "Id": "EAID_8D8D03C8_6278_4397_9EFA_EDC98D359BBC",
           "Name": "PhaseImpedanceData",
           "Description": "Impedance and conductance matrix element values. \nThe diagonal elements are described by the elements having the same toPhase and fromPhase value and the off diagonal elements have different toPhase and fromPhase values.  The matrix can also be stored in symmetric lower triangular format using the row and column attributes, which map to ACLineSegmentPhase.sequenceNumber.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "b",
@@ -2104,14 +2162,16 @@
           "Id": "EAID_8FD4114B_3942_4e7c_8E33_9600BA19CF38",
           "Name": "EnergySchedulingType",
           "Description": "Used to define the type of generation for scheduling purposes.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_91BE148F_E7B0_4687_B275_4A9FF1797051",
           "Name": "WireSegmentPhase",
           "Description": "Represents a single wire of an alternating current wire segment.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "phase",
@@ -2131,7 +2191,8 @@
           "Id": "EAID_96F8BB1B_2776_413c_A4AF_63924395C921",
           "Name": "NonlinearShuntCompensatorPoint",
           "Description": "A non linear shunt compensator bank or section admittance value. The number of NonlinearShuntCompenstorPoint instances associated with a NonlinearShuntCompensator shall be equal to ShuntCompensator.maximumSections. ShuntCompensator.sections shall only be set to one of the NonlinearShuntCompenstorPoint.sectionNumber. There is no interpolation between NonlinearShuntCompenstorPoint-s.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "b",
@@ -2169,12 +2230,14 @@
           "Id": "EAID_99B51F43_C935_4382_AB8A_6352DAB082D4",
           "Name": "EarthFaultCompensator",
           "Description": "A conducting equipment used to represent a connection to ground which is typically used to compensate earth faults.   An earth fault compensator device modelled with a single terminal implies a second terminal solidly connected to ground.  If two terminals are modelled, the ground is not assumed and normal connection rules apply.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_5E278FF4_B19F_4c63_8AA5_5DE09E2586DA",
               "Name": "GroundingImpedance",
               "Description": "A fixed impedance device used for grounding.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "x",
@@ -2188,7 +2251,8 @@
               "Id": "EAID_5538A367_14D4_4160_836F_2D049DB218B6",
               "Name": "PetersenCoil",
               "Description": "A variable impedance device normally used to offset line charging during single line faults in an ungrounded section of network.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "mode",
@@ -2248,7 +2312,8 @@
           "Id": "EAID_A46F0441_DB66_4ff2_A892_7C5F9F54FA38",
           "Name": "MutualCoupling",
           "Description": "This class represents the zero sequence line mutual coupling.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "b0ch",
@@ -2304,7 +2369,8 @@
           "Id": "EAID_AB5F986C_93A1_4f1f_A62B_CFB733BEF874",
           "Name": "ReactiveCapabilityCurve",
           "Description": "Reactive power rating envelope versus the synchronous machine's active power, in both the generating and motoring modes. For each active power value there is a corresponding high and low reactive power limit  value. Typically there will be a separate curve for each coolant condition, such as hydrogen pressure.  The Y1 axis values represent reactive minimum and the Y2 axis values represent reactive maximum.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "coolantTemperature",
@@ -2324,12 +2390,14 @@
           "Id": "EAID_ACE2DDBB_536E_489a_A3A8_22589256302D",
           "Name": "Switch",
           "Description": "A generic device designed to close, or open, or both, one or more electric circuits.  All switches are two terminal devices including grounding switches. The ACDCTerminal.connected at the two sides of the switch shall not be considered for assessing switch connectivity, i.e. only Switch.open, .normalOpen and .locked are relevant.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_A7BE7DB8_C02A_427a_95EE_F342693F1590",
               "Name": "Cut",
               "Description": "A cut separates a line segment into two parts. The cut appears as a switch inserted between these two parts and connects them together. As the cut is normally open there is no galvanic connection between the two line segment parts. But it is possible to close the cut to get galvanic connection.\nThe cut terminals are oriented towards the line segment terminals with the same sequence number. Hence the cut terminal with sequence number equal to 1 is oriented to the line segment's terminal with sequence number equal to 1.\nThe cut terminals also act as connection points for jumpers and other equipment, e.g. a mobile generator. To enable this, connectivity nodes are placed at the cut terminals. Once the connectivity nodes are in place any conducting equipment can be connected at them.\n",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "lengthFromTerminal1",
@@ -2343,45 +2411,52 @@
               "Id": "EAID_1B506DF7_CBD6_492a_8C9E_F6752F0F0185",
               "Name": "Disconnector",
               "Description": "A manually operated or motor operated mechanical switching device used for changing the connections in a circuit, or for isolating a circuit or equipment from a source of power. It is required to open or close circuits when negligible current is broken or made. ",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             },
             {
               "Id": "EAID_48B8830C_2798_4c86_8B89_01449EA9D4F6",
               "Name": "Fuse",
               "Description": "An overcurrent protective device with a circuit opening fusible part that is heated and severed by the passage of overcurrent through it. A fuse is considered a switching device because it breaks current.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             },
             {
               "Id": "EAID_39802A96_B06F_4dc2_B805_8DF16C5B398D",
               "Name": "GroundDisconnector",
               "Description": "A manually operated or motor operated mechanical switching device used for isolating a circuit or equipment from ground.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             },
             {
               "Id": "EAID_1D1D3E1A_76FB_4219_90DD_F6AE687989FC",
               "Name": "Jumper",
               "Description": "A short section of conductor with negligible impedance which can be manually removed and replaced if the circuit is de-energized. Note that zero-impedance branches can potentially be modelled by other equipment types.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             },
             {
               "Id": "EAID_BADE2A18_37F4_49bf_87BC_A087E4D2E4F7",
               "Name": "ProtectedSwitch",
               "Description": "A ProtectedSwitch is a switching device that can be operated by ProtectionEquipment.",
+              "StereoType": null,
               "DerivedEntities": [
                 {
                   "Id": "EAID_380D92AA_1D80_4e84_A8EE_843DACEB59DD",
                   "Name": "Breaker",
                   "Description": "A mechanical switching device capable of making, carrying, and breaking currents under normal circuit conditions and also making, carrying for a specified time, and breaking currents under specified abnormal circuit conditions e.g.  those of short circuit.",
+                  "StereoType": null,
                   "DerivedEntities": [
                     {
                       "Id": "EAID_E15222BE_C02A_4417_AED7_A395E55A943A",
                       "Name": "DisconnectingCircuitBreaker",
                       "Description": "A circuit breaking device including disconnecting function, eliminating the need for separate disconnectors.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": []
                     }
                   ],
@@ -2398,14 +2473,16 @@
                   "Id": "EAID_D64FF392_C9F8_4220_8861_1944D504F342",
                   "Name": "LoadBreakSwitch",
                   "Description": "A mechanical switching device capable of making, carrying, and breaking currents under normal operating conditions.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": []
                 },
                 {
                   "Id": "EAID_6408BE78_ED1B_4fcc_9463_EBC827CDFEBB",
                   "Name": "Recloser",
                   "Description": "Pole-mounted fault interrupter with built-in phase and ground relays, current transformer (CT), and supplemental controls.\n",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": []
                 }
               ],
@@ -2422,7 +2499,8 @@
               "Id": "EAID_6F75B963_A39E_4dc7_B75B_E205EE11AE4F",
               "Name": "Sectionaliser",
               "Description": "Automatic switch that will lock open to isolate a faulted section. It may, or may not, have load breaking capability. Its primary purpose is to provide fault sectionalising at locations where the fault current is either too high, or too low, for proper coordination of fuses.\n",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             }
           ],
@@ -2475,7 +2553,8 @@
           "Id": "EAID_B998EE6D_BC68_49d3_813C_F5AB11CF6CFD",
           "Name": "CoolantType",
           "Description": "Method of cooling a machine.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "air",
@@ -2501,12 +2580,14 @@
           "Id": "EAID_C435D1A4_31AE_46ef_BCF8_7932F0785DA9",
           "Name": "Conductor",
           "Description": "Combination of conducting material with consistent electrical characteristics, building a single electrical system, used to carry current between points in the power system.  ",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_625BD764_3907_4d65_8497_7FD09708BD8E",
               "Name": "ACLineSegment",
               "Description": "A wire or combination of wires, with consistent electrical characteristics, building a single electrical system, used to carry alternating current between points in the power system.\nFor symmetrical, transposed three phase lines, it is sufficient to use attributes of the line segment, which describe impedances and admittances for the entire length of the segment.  Additionally impedances can be computed by using length and associated per length impedances.\nThe BaseVoltage at the two ends of ACLineSegments in a Line shall have the same BaseVoltage.nominalVoltage. However, boundary lines may have slightly different BaseVoltage.nominalVoltages and variation is allowed. Larger voltage difference in general requires use of an equivalent branch.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "b0ch",
@@ -2568,7 +2649,8 @@
               "Id": "EAID_56BC76FE_5834_43c3_A34B_B9749293629D",
               "Name": "WireSegment",
               "Description": "A two terminal and power conducting device of negligible impedance and length represented as zero impedance device that can be used to connect auxiliary equipment to its terminals.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             }
           ],
@@ -2585,14 +2667,16 @@
           "Id": "EAID_D10F6D5A_6E2C_4d81_BFE5_9DF925119193",
           "Name": "Plant",
           "Description": "A Plant is a collection of equipment for purposes of generation.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": []
         },
         {
           "Id": "EAID_D7A85068_34C3_4fcd_ABCF_8D0867FEC0FF",
           "Name": "PetersenCoilModeKind",
           "Description": "The mode of operation for a Petersen coil.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "fixed",
@@ -2618,7 +2702,8 @@
           "Id": "EAID_DC90E008_CE3C_4415_960F_D7BFC4EB4693",
           "Name": "SynchronousMachineKind",
           "Description": "Synchronous machine type.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "generator",
@@ -2668,7 +2753,8 @@
           "Id": "EAID_E1CB8A17_1A54_4eff_B918_817872DEA162",
           "Name": "PowerElectronicsConnectionPhase",
           "Description": "A single phase of a power electronics connection.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "p",
@@ -2694,12 +2780,14 @@
           "Id": "EAID_E33769DD_F111_4793_AF11_B4AFE5FDE50F",
           "Name": "Connector",
           "Description": "A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation and are modelled with a single logical terminal.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_0A63A81D_5142_4736_BD22_8C28BA32F233",
               "Name": "BusbarSection",
               "Description": "A conductor, or group of conductors, with negligible impedance, that serve to connect other conducting equipment within a single substation. \nVoltage measurements are typically obtained from voltage transformers that are connected to busbar sections. A bus bar section may have many physical terminals but for analysis is modelled with exactly one logical terminal.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "ipMax",
@@ -2713,7 +2801,8 @@
               "Id": "EAID_BE90EE60_8212_44ec_9F4D_775719E80216",
               "Name": "Junction",
               "Description": "A point where one or more conducting equipments are connected with zero resistance.",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": []
             }
           ],
@@ -2723,17 +2812,20 @@
           "Id": "EAID_F43099C0_90EA_47f1_B038_EDE831744C07",
           "Name": "TapChanger",
           "Description": "Mechanism for changing transformer winding tap positions.",
+          "StereoType": null,
           "DerivedEntities": [
             {
               "Id": "EAID_7CEA69EF_C8A8_4f3d_99B2_9F934CC95BF4",
               "Name": "PhaseTapChanger",
               "Description": "A transformer phase shifting tap model that controls the phase angle difference across the power transformer and potentially the active power flow through the power transformer.  This phase tap model may also impact the voltage magnitude.",
+              "StereoType": null,
               "DerivedEntities": [
                 {
                   "Id": "EAID_BFC68185_DEEC_4665_B2E9_64EC73F18241",
                   "Name": "PhaseTapChangerLinear",
                   "Description": "Describes a tap changer with a linear relation between the tap step and the phase angle difference across the transformer. This is a mathematical model that is an approximation of a real phase tap changer.\nThe phase angle is computed as stepPhaseShiftIncrement times the tap position.\nThe voltage magnitude of both sides is the same.",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": [
                     {
                       "Name": "stepPhaseShiftIncrement",
@@ -2759,12 +2851,14 @@
                   "Id": "EAID_5B26C38F_A09B_439c_B5E2_A9F4ED801883",
                   "Name": "PhaseTapChangerNonLinear",
                   "Description": "The non-linear phase tap changer describes the non-linear behaviour of a phase tap changer. This is a base class for the symmetrical and asymmetrical phase tap changer models. The details of these models can be found in IEC 61970-301.",
+                  "StereoType": null,
                   "DerivedEntities": [
                     {
                       "Id": "EAID_4161A809_7542_4c92_A7D0_99AE5682E89C",
                       "Name": "PhaseTapChangerAsymmetrical",
                       "Description": "Describes the tap model for an asymmetrical phase shifting transformer in which the difference voltage vector adds to the in-phase winding. The out-of-phase winding is the transformer end where the tap changer is located.  The angle between the in-phase and out-of-phase windings is named the winding connection angle. The phase shift depends on both the difference voltage magnitude and the winding connection angle.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": [
                         {
                           "Name": "windingConnectionAngle",
@@ -2778,7 +2872,8 @@
                       "Id": "EAID_4841E53F_1B5B_487b_8F43_2ABA7B1FC93D",
                       "Name": "PhaseTapChangerSymmetrical",
                       "Description": "Describes a symmetrical phase shifting transformer tap model in which the voltage magnitude of both sides is the same. The difference voltage magnitude is the base in an equal-sided triangle where the sides corresponds to the primary and secondary voltages. The phase angle difference corresponds to the top angle and can be expressed as twice the arctangent of half the total difference voltage.",
-                      "DerivedEntities": null,
+                      "StereoType": null,
+                      "DerivedEntities": [],
                       "Attributes": []
                     }
                   ],
@@ -2807,7 +2902,8 @@
                   "Id": "EAID_27778291_3EC1_429b_AD1C_2E9841406540",
                   "Name": "PhaseTapChangerTabular",
                   "Description": "Describes a tap changer with a table defining the relation between the tap step and the phase angle difference across the transformer. ",
-                  "DerivedEntities": null,
+                  "StereoType": null,
+                  "DerivedEntities": [],
                   "Attributes": []
                 }
               ],
@@ -2817,7 +2913,8 @@
               "Id": "EAID_09909286_00A6_451c_B420_2E52ABEB2667",
               "Name": "RatioTapChanger",
               "Description": "A tap changer that changes the voltage ratio impacting the voltage magnitude but not the phase angle across the transformer.\n\nAngle sign convention (general): Positive value indicates a positive phase shift from the winding where the tap is located to the other winding (for a two-winding transformer).",
-              "DerivedEntities": null,
+              "StereoType": null,
+              "DerivedEntities": [],
               "Attributes": [
                 {
                   "Name": "stepVoltageIncrement",
@@ -2901,7 +2998,8 @@
           "Id": "EAID_FD4BEA47_D945_4bc1_A574_5C0618B5C429",
           "Name": "ShortCircuitRotorKind",
           "Description": "Type of rotor, used by short circuit applications.",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "salientPole1",
@@ -2933,7 +3031,8 @@
           "Id": "EAID_FF3816E1_1CFE_4051_9F75_0F3E94DABAFB",
           "Name": "WindingConnection",
           "Description": "Winding connection type.\n",
-          "DerivedEntities": null,
+          "StereoType": null,
+          "DerivedEntities": [],
           "Attributes": [
             {
               "Name": "D",
@@ -2982,4 +3081,4 @@
       ]
     }
   ]
-} 
+}

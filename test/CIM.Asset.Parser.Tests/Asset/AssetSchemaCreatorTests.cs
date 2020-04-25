@@ -37,8 +37,6 @@ namespace CIM.Asset.Parser.Tests.Asset
             var assetSchemaCreator = new AssetSchemaCreator(logger);
             var schema = assetSchemaCreator.Create(cimEntities);
 
-            File.WriteAllText("expected.json", Newtonsoft.Json.JsonConvert.SerializeObject(schema, Newtonsoft.Json.Formatting.Indented));
-
             schema.Should().BeEquivalentTo(expectedSchema);
         }
 
@@ -63,7 +61,7 @@ namespace CIM.Asset.Parser.Tests.Asset
             var assetSchemaCreator = new AssetSchemaCreator(logger);
             var schema = assetSchemaCreator.Create(cimEntities);
 
-            schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault(x => x.Name == "AsynchronousMachineKind").DerivedEntities.Should().BeNull();
+            schema.Namespaces.FirstOrDefault().Entities.FirstOrDefault(x => x.Name == "AsynchronousMachineKind").DerivedEntities.Should().BeEmpty();
         }
 
         [Fact]
