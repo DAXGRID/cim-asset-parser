@@ -24,7 +24,6 @@ namespace CIM.Asset.Parser.Internal
                 .AddTransient<IXmiExtractor, XmiExtractor>()
                 .AddTransient<ICimParser, CimParser>()
                 .AddTransient<IAssetSchemaCreator, AssetSchemaCreator>()
-                .AddScoped<IFileWriter, FileWriter>()
                 .AddScoped<IJsonFileWriter, JsonFileWriter>()
                 .BuildServiceProvider();
 
