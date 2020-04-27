@@ -6,6 +6,7 @@ using CIM.Asset.Parser.FileIO;
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 
 namespace CIM.Asset.Parser.Tests
 {
@@ -16,18 +17,19 @@ namespace CIM.Asset.Parser.Tests
         {
             var cimParser = A.Fake<ICimParser>();
             var assetSchemaCreator = A.Fake<IAssetSchemaCreator>();
-            var fileWriter = A.Fake<IFileWriter>();
             var logger = A.Fake<ILogger<Startup>>();
+            var jsonFileWriter = A.Fake<IJsonFileWriter>();
 
             A.CallTo(() => cimParser.Parse(A<string>._, A<Encoding>._)).Returns(A.Dummy<IEnumerable<CimEntity>>());
             A.CallTo(() => assetSchemaCreator.Create(A<IEnumerable<CimEntity>>._)).Returns(A.Dummy<Schema>());
 
-            var startup = new Startup(cimParser, assetSchemaCreator, fileWriter, logger);
+            var startup = new Startup(cimParser, assetSchemaCreator, logger, jsonFileWriter);
             startup.Start();
 
             A.CallTo(() => cimParser.Parse(A<string>._, A<Encoding>._)).MustHaveHappenedOnceExactly();
             A.CallTo(() => assetSchemaCreator.Create(A<IEnumerable<CimEntity>>._)).MustHaveHappenedOnceExactly();
-            A.CallTo(() => fileWriter.Write(A<string>._, A<string>._)).MustHaveHappenedOnceExactly();
+            A.CallTo(() => jsonFileWriter.Write(A<string>._, A<object>._, A<Formatting>._)).MustHaveHappenedOnceExactly();
+
         }
     }
 }

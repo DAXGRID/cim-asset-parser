@@ -22,7 +22,8 @@ namespace CIM.Asset.Parser.Tests.Config
             serviceProvider.GetService<IXmiExtractor>().Should().NotBeNull();
             serviceProvider.GetService<ICimParser>().Should().NotBeNull();
             serviceProvider.GetService<IAssetSchemaCreator>().Should().NotBeNull();
-            serviceProvider.GetService<IFileWriter>().Should().NotBeNull().Should();
+            serviceProvider.GetService<IFileWriter>().Should().NotBeNull();
+            serviceProvider.GetService<IJsonFileWriter>().Should().NotBeNull();
         }
     }
 }

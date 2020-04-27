@@ -12,17 +12,20 @@ namespace CIM.Asset.Parser
         private readonly ICimParser _cimParser;
         private readonly string _encoding = "windows-1252";
         private readonly IAssetSchemaCreator _assetSchemaCreator;
-        private readonly IFileWriter _fileWriter;
         private readonly ILogger _logger;
+        private readonly IJsonFileWriter _jsonFileWriter;
         private const string _outputPath = "schema.json";
         private const string _inputPath = "../cim-model/cim.xml";
 
-        public Startup(ICimParser cimParser, IAssetSchemaCreator assetSchemaCreator, IFileWriter fileWriter, ILogger<Startup> logger)
+        public Startup(ICimParser cimParser,
+                       IAssetSchemaCreator assetSchemaCreator,
+                       ILogger<Startup> logger,
+                       IJsonFileWriter jsonFileWriter)
         {
             _cimParser = cimParser;
             _assetSchemaCreator = assetSchemaCreator;
-            _fileWriter = fileWriter;
             _logger = logger;
+            _jsonFileWriter = jsonFileWriter;
         }
 
         public void Start()
@@ -34,13 +37,7 @@ namespace CIM.Asset.Parser
             var schema = _assetSchemaCreator.Create(cimEntities);
 
             _logger.LogInformation($"Writing Schema to JSON {_outputPath}");
-            WriteSchemaToDiskAsJson(_outputPath, schema);
-        }
-
-        private void WriteSchemaToDiskAsJson(string path, Schema schema)
-        {
-            var schemaAsJson = JsonConvert.SerializeObject(schema, Formatting.Indented);
-            _fileWriter.Write(path, schemaAsJson);
+            _jsonFileWriter.Write(_outputPath, schema, Formatting.Indented);
         }
 
         private static void RegisterCodePages()
