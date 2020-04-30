@@ -1,5 +1,6 @@
 using System.IO;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 
 namespace CIM.Asset.Parser.FileIO
 {
@@ -7,7 +8,14 @@ namespace CIM.Asset.Parser.FileIO
     {
         public void Write(string path, object content, Formatting jsonFormatting)
         {
-            var json = JsonConvert.SerializeObject(content, jsonFormatting);
+            var serializerSettings = new JsonSerializerSettings
+            {
+                ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                Formatting = jsonFormatting
+            };
+
+            var json = JsonConvert.SerializeObject(content, serializerSettings);
+
             File.WriteAllText(path, json);
         }
     }
