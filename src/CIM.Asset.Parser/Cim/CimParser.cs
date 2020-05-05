@@ -48,6 +48,7 @@ namespace CIM.Asset.Parser.Cim
                     Description = GetDescription(x),
                     Attributes = GetAttributes(x),
                     Namespace = x.Attribute(EnterpriseArchitectConfig.Namespace)?.Value?.ToString(),
+                    NamespaceName = GetPackageName(x),
                     SuperType = GetSuperType(generalizations, x),
                     StereoType = GetStereoType(x)
                 }).ToList();
@@ -68,6 +69,17 @@ namespace CIM.Asset.Parser.Cim
 
             var description = tags
                 .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.Documentation)
+                ?.Attribute(EnterpriseArchitectConfig.Value)?.Value?.ToString();
+
+            return description;
+        }
+
+        private string GetPackageName(XElement xElement)
+        {
+            var tags =  xElement.Descendants().OfType<XElement>().Where(y => y.Name.LocalName == EnterpriseArchitectConfig.TaggedValue);
+
+            var description = tags
+                .FirstOrDefault(y => y.Attribute(EnterpriseArchitectConfig.Tag)?.Value?.ToString() == EnterpriseArchitectConfig.PackageName)
                 ?.Attribute(EnterpriseArchitectConfig.Value)?.Value?.ToString();
 
             return description;

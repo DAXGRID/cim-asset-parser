@@ -19,5 +19,6 @@ namespace CIM.Asset.Parser.Xmi
         public const string Classifier = "Classifier";
         public const string XmiIdRef = "xmi.idref";
         public const string StereoType = "Stereotype";
+        public const string PackageName = "package_name";
     }
 }

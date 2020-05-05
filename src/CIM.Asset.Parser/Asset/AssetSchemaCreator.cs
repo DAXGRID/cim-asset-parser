@@ -52,6 +52,7 @@ namespace CIM.Asset.Parser.Asset
             return lookupNamespaces.AsParallel().Select(x => new Namespace
             {
                 Id = x.Key,
+                Name = cimEntities.FirstOrDefault(y => y.Namespace == x.Key).NamespaceName,
                 Entities = x.Where(x => !(x is null)).ToList()
             }).ToList().OrderBy(x => x.Id).ToList();
         }
