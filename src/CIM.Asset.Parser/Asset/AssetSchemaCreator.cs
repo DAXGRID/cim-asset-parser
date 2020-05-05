@@ -86,6 +86,7 @@ namespace CIM.Asset.Parser.Asset
                 Description = x.Description,
                 DerivedEntities = new List<Entity>(),
                 StereoType = x.StereoType,
+                PackageName = x.NamespaceName,
                 Attributes = x.Attributes.AsParallel().Select(y => new Asset.Attribute {
                         Description = y.Description,
                         Name = y.Name,
